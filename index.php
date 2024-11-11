@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/index.css">
     <link rel="shortcut icon" type="imagex/png" href="dmat.png">
-    <title>Login e Cadastro</title>
+    <title>Login</title>
     <style>
                 .alinhar{
                   display: flex;

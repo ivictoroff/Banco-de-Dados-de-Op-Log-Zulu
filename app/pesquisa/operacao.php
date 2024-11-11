@@ -7,9 +7,9 @@ include('bd.php');
 
 <DOCTYPE html>
     <html> 
-        <head><title>dmat</title>
+        <head><title>colog</title>
           <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-           <link rel="shortcut icon" type="imagex/png" href="/public/img/icon.ico">
+           <link rel="shortcut icon" type="imagex/png" href="./dmat.png">
            <style>
                 .alinhar{
                   display: flex;
@@ -69,15 +69,15 @@ include('bd.php');
     <br>
     <table  class= " border border-slate-600">
         <tr style="margin-right: 150px;" class=" border border-slate-600">
-            <th class=" border border-slate-600">operacao</th>
-            <th class="  border border-slate-600">missao</th>
-            <th class="  border border-slate-600">estado</th>
-            <th class="  border border-slate-600">cma</th>
-            <th class="  border border-slate-600">rm</th>
-            <th class="  border border-slate-600">comando da operacao</th>
-            <th class="  border border-slate-600">comando apoiado</th>
-            <th class="  border border-slate-600">inicio da operacao</th>
-            <th class="  border border-slate-600">fim da operacao</th> 
+            <th class="border border-slate-600">Operação</th>
+            <th class="border border-slate-600">Missão</th>
+            <th class="border border-slate-600">Estado</th>
+            <th class="border border-slate-600">Comando Militar de Área</th>
+            <th class="border border-slate-600">Região Militar</th>
+            <th class="border border-slate-600">Comando da Operação</th>
+            <th class="border border-slate-600">Comando Apoiado</th>
+            <th class="border border-slate-600">Inicio da Operação</th>
+            <th class="border border-slate-600">Fim da Operação</th> 
             <th>completo</th>
 
 
@@ -94,8 +94,8 @@ include('bd.php');
             $sql_code = "SELECT * 
                 FROM operacao 
                 WHERE operacao LIKE '%$pesquisa%' 
-                OR estado LIKE '%$pesquisa%'
                 OR missao LIKE '%$pesquisa%'
+                OR estado LIKE '%$pesquisa%'
                 OR cma LIKE '%$pesquisa%'
                 OR rm LIKE '%$pesquisa%'
                 OR comandoOp LIKE '%$pesquisa%'
@@ -117,8 +117,8 @@ include('bd.php');
                     ?>
                     <tr class=" border border-slate-600 ">
                         <td class=" border border-slate-600"><?php echo $dados['operacao']; ?></td>
-                        <td class=" border border-slate-600 "><?php echo $dados['estado']; ?></td>
                         <td class=" border border-slate-600 "><?php echo $dados['missao']; ?></td>
+                        <td class=" border border-slate-600 "><?php echo $dados['estado']; ?></td>
                         <td class=" border border-slate-600 "><?php echo $dados['cma']; ?></td>
                         <td class=" border border-slate-600 "><?php echo $dados['rm']; ?></td>
                         <td class=" border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>

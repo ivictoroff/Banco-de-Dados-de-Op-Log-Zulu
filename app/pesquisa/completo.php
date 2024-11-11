@@ -29,7 +29,7 @@ $conn->close();
 
 <DOCTYPE html>
     <html> 
-        <head><title>dmat</title>
+        <head><title>colog</title>
           <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
            <link rel="shortcut icon" type="imagex/png" href="../dmat.png">
            <style>
@@ -90,15 +90,15 @@ $conn->close();
     <br>
     <table  class= " border border-slate-600">
         <tr style="margin-right: 150px;" class=" border border-slate-600">
-            <th class=" border border-slate-600">operacao</th>
-            <th class="  border border-slate-600">missao</th>
-            <th class="  border border-slate-600">estado</th>
-            <th class="  border border-slate-600">cma</th>
-            <th class="  border border-slate-600">rm</th>
-            <th class="  border border-slate-600">comando da operacao</th>
-            <th class="  border border-slate-600">comando apoiado</th>
-            <th class="  border border-slate-600">inicio da operacao</th>
-            <th class="  border border-slate-600">fim da operacao</th> 
+            <th class=" border border-slate-600">Operação</th>
+            <th class="  border border-slate-600">Missão</th>
+            <th class="  border border-slate-600">Estado</th>
+            <th class="  border border-slate-600">Comando Militar de Área</th>
+            <th class="  border border-slate-600">Região Militar</th>
+            <th class="  border border-slate-600">Comando da Operação</th>
+            <th class="  border border-slate-600">Comando Apoiado</th>
+            <th class="  border border-slate-600">Inicio da Operação</th>
+            <th class="  border border-slate-600">Fim da Operação</th> 
         </tr>
         <?php
         if (!isset($_GET['id'])) {
@@ -162,15 +162,15 @@ $conn->close();
                         <td class=" border border-slate-600 "><?php echo $dados['fimOp']; ?></td>
                     </tr>
                     <tr>
-                      <th class="border border-slate-600 bg-blend-darken">participantes</th>
-                      <th class="border border-slate-600 bg-blend-darken">participantes exercito</th>
-                      <th class="border border-slate-600 bg-blend-darken">participantes marinha</th>
-                      <th class="border border-slate-600 bg-blend-darken">participantes forca aérea</th>
-                      <th class="border border-slate-600 bg-blend-darken">participantes órgãos de segurança publica</th>
-                      <th class="border border-slate-600 bg-blend-darken">participantes de outras âgencias governamentais</th>
-                      <th class="border border-slate-600 bg-blend-darken">participantes de outras âgencias privadas</th>
-                      <th class="border border-slate-600 bg-blend-darken">participantes de organizações não governamentais</th>
-                      <th class="border border-slate-600 bg-blend-darken">total de participantes</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes do Exército</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes da Marinha</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes da Força Aérea</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes de Órgãos de Segurança Publica</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes de outras Âgencias Governamentais</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes de outras Âgencias Privadas</th>
+                      <th class="border border-slate-600 bg-blend-darken">Participantes de Organizações Não-Governamentais</th>
+                      <th class="border border-slate-600 bg-blend-darken">total de Participantes</th>
                     </tr>
                     <tr>
                         <td class="border border-slate-600 "><?php echo $dados2['participantes']; ?></td>
@@ -186,21 +186,41 @@ $conn->close();
                     <tr style="margin-right: 150px;">
                       <th style="margin-right: 150px;" class="border border-slate-600 bg-blend-darken">operação</th>
                       <th class="border border-slate-600 bg-blend-darken" colspan="2">tipo de ação ou apoio</th>
-                      <th class="border border-slate-600 bg-blend-darken">ação ou apoio desempenhado</th>
-                      <th class="border border-slate-600 bg-blend-darken">anexos</th>
                     </tr>
-                    
                     <tr>
                         <td class="border border-slate-600 "><?php echo $dados3['tipoOp']; ?></td>
                         <td class="border border-slate-600 " colspan="2"><?php echo $dados3['acaoOuApoio']; ?></td>
-                        <td class="border border-slate-600 "><?php echo $dados3['apoioDesempenhado']; ?></td>
-                        <td class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['relatorioFinal'] ?>" target="_blank"><?php echo $dados6['relatorioFinal'] ?></a></td>
+                    </tr>
+
+                    <tr style="margin-right: 150px;">
+                      <th class="border border-slate-600 bg-blend-darken">Transporte</th>
+                      <th class="border border-slate-600 bg-blend-darken">manutenção</th>
+                      <th class="border border-slate-600 bg-blend-darken">Suprimento</th>
+                      <th class="border border-slate-600 bg-blend-darken">Aviação</th>
                     </tr>
                     <tr>
-                      <th class="border border-slate-600 bg-blend-darken">recebidos</th>
-                      <th class="border border-slate-600 bg-blend-darken">descentralizados</th>
-                      <th class="border border-slate-600 bg-blend-darken">empenhados</th>
-                      <th class="border border-slate-600 bg-blend-darken">devolvidos</th>
+                        <td class="border border-slate-600 "><?php echo $dados3['transporte']; ?></td>
+                        <td class="border border-slate-600 "><?php echo $dados3['manutencao']; ?></td>
+                        <td class="border border-slate-600 "><?php echo $dados3['suprimento']; ?></td>
+                        <td class="border border-slate-600 "><?php echo $dados3['aviacao']; ?></td>
+                    </tr>
+                    <tr>
+                      <th class="border border-slate-600 bg-blend-darken">Descrição das atividades de Transporte</th>
+                      <th class="border border-slate-600 bg-blend-darken">Descrição das atividades de Manutenção</th>
+                      <th class="border border-slate-600 bg-blend-darken">Descrição das atividades de Suprimento</th>
+                      <th class="border border-slate-600 bg-blend-darken">Descrição das atividades de Aviação</th>
+                    </tr>
+                    <tr>
+                        <td class="border border-slate-600 "><?php echo $dados3['desTransporte']; ?></td>
+                        <td class="border border-slate-600 "><?php echo $dados3['desManutencao']; ?></td>
+                        <td class="border border-slate-600 "><?php echo $dados3['desSuprimento']; ?></td>
+                        <td class="border border-slate-600 "><?php echo $dados3['desAviacao']; ?></td>
+                    </tr>
+                    <tr>
+                      <th class="border border-slate-600 bg-blend-darken">Recebidos:</th>
+                      <th class="border border-slate-600 bg-blend-darken">Empenhados:</th>
+                      <th class="border border-slate-600 bg-blend-darken">Liquidados:</th>
+                      <th class="border border-slate-600 bg-blend-darken">Devolvidos:</th>
                     </tr>
                     <tr>
                         <td class="border border-slate-600 "><?php echo $dados4['recebidos']; ?></td>
@@ -208,14 +228,25 @@ $conn->close();
                         <td class="border border-slate-600 "><?php echo $dados4['empenhados']; ?></td>
                         <td class="border border-slate-600 "><?php echo $dados4['devolvidos']; ?></td>
                     </tr>
-                    <tr >
-                      <th class="border border-slate-600 bg-blend-darken" colspan="9">outras informações</th>
+                    <tr>
+                      <th class="border border-slate-600 bg-blend-darken">Relatório Final</th>
+                      <th class="border border-slate-600 bg-blend-darken">Relatório do Comando Logístico</th>
+                      <th class="border border-slate-600 bg-blend-darken">Fotos</th>
+                      <th class="border border-slate-600 bg-blend-darken">Outros documentos</th>
                     </tr>
                     <tr>
-                    <td class="border border-slate-600 " colspan="9"><?php echo $dados5['outrasInfos'];?></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['relatorioFinal'] ?>" target="_blank"><?php echo $dados6['relatorioFinal'] ?></a></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['relatorioComando'] ?>" target="_blank"><?php echo $dados6['relatorioComando'] ?></a></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['fotos'] ?>" target="_blank"><?php echo $dados6['fotos'] ?></a></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['outrosDocumentos'] ?>" target="_blank"><?php echo $dados6['outrosDocumentos'] ?></a></td>
                     </tr>
-
                     
+                    <tr >
+                      <th class="border border-slate-600 bg-blend-darken" colspan="9">Outras informações</th>
+                    </tr>
+                    <tr>
+                      <td class="border border-slate-600 "  colspan="9" rowspan="1" ><?php echo $dados5['outrasInfos'];?></td>
+                    </tr>
                     
                     <?php
                   }
@@ -230,8 +261,6 @@ $conn->close();
         <?php
         } ?>
     </table>
-    <footer id="rodape">
-          <h1>Exército Brasileiro Comando Logístico Diretoria de Material SMU, Bloco C, Térreo. CEP: 70630-901 Divisão de Tecnologia e Informação - Ramal 5451</h1>
-        </footer> 
+
 </body>
 </html>  
