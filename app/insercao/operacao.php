@@ -1,5 +1,14 @@
 <?php
+session_start();
 
+if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
+  unset($_SESSION['user']);
+  unset($_SESSION['pass']);
+  header('Location: /index.php');
+} 
+else {
+  $usuario = $_SESSION['user'];
+}
 //anexos
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -9,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $fotos = $_FILES["fotos"];
   $outrasDocumentos = $_FILES["outrasDocumentos"];
 
-  $dirUploads = "../uploads";
+  $dirUploads = "../../uploads";
 
   if (!is_dir($dirUploads)) {
 
@@ -205,6 +214,11 @@ if ($submit) {
         <div id= "area-principal">
             <a href="" id="atual">inserir dados</a>
             <a href="/app/pesquisa/operacao.php">pesquisar</a>
+        </div>
+        <div class="text-white flex gap-2 items-end mx-2">
+          <a href="/acoes/sair.php">
+            <button class="mr-2 text-pink-600"> Log Out <i class="fa-solid fa-user"></i></button>
+          </a>
         </div>
       </header>
 

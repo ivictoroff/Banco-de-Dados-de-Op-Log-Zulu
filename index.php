@@ -1,28 +1,3 @@
-<?php
-
-$conn = new mysqli("localhost", "root", "", "dbmat");
-
-// Verifica se o formulário de login foi submetido
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $usuario = $_POST["user"];
-  $senha = $_POST["pass"];
-
-  // Verifica se o usuário e senha estão corretos
-  $query = "SELECT * FROM usuario WHERE usuario = '$usuario' AND senha = '$senha'";
-  $result = $conn->query($query);
-
-  if ($result->num_rows > 0) {
-      // Login bem-sucedido, redireciona para a página principal
-      header("Location: app/insercao/operacao.php");
-      exit;
-  } else {
-      // Login falhou, exibe mensagem de erro
-      echo "Usuário ou senha incorretos.";
-  }
-}
-
-?>
-    
 <!DOCTYPE html>
 <html>
   <head>
@@ -67,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="#" method="POST">
+    <form class="space-y-6" action="acoes/testLogin.php" method="POST">
       <div>
         <label for="user" class="block text-sm/6 font-medium text-gray-900">nome de usuario</label>
         <div class="mt-2">
@@ -88,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
 
       <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <button name="submit" type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
       </div>
     </form>
 

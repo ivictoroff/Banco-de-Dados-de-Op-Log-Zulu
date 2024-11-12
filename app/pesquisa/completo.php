@@ -1,4 +1,15 @@
 <?php
+session_start();
+
+if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
+  unset($_SESSION['user']);
+  unset($_SESSION['pass']);
+  header('Location: /index.php');
+} 
+else {
+  $usuario = $_SESSION['user'];
+}
+
 include('bd.php');
 // Pega o ID da URL
 $id = $_GET['id'];
@@ -235,10 +246,10 @@ $conn->close();
                       <th class="border border-slate-600 bg-blend-darken">Outros documentos</th>
                     </tr>
                     <tr>
-                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['relatorioFinal'] ?>" target="_blank"><?php echo $dados6['relatorioFinal'] ?></a></td>
-                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['relatorioComando'] ?>" target="_blank"><?php echo $dados6['relatorioComando'] ?></a></td>
-                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['fotos'] ?>" target="_blank"><?php echo $dados6['fotos'] ?></a></td>
-                      <td style="color:blue;" class="border border-slate-600 "><a href="../uploads/<?php echo $dados6['outrosDocumentos'] ?>" target="_blank"><?php echo $dados6['outrosDocumentos'] ?></a></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../../uploads/<?php echo $dados6['relatorioFinal'] ?>" target="_blank"><?php echo $dados6['relatorioFinal'] ?></a></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../../uploads/<?php echo $dados6['relatorioComando'] ?>" target="_blank"><?php echo $dados6['relatorioComando'] ?></a></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../../uploads/<?php echo $dados6['fotos'] ?>" target="_blank"><?php echo $dados6['fotos'] ?></a></td>
+                      <td style="color:blue;" class="border border-slate-600 "><a href="../../uploads/<?php echo $dados6['outrosDocumentos'] ?>" target="_blank"><?php echo $dados6['outrosDocumentos'] ?></a></td>
                     </tr>
                     
                     <tr >
