@@ -251,14 +251,14 @@ $conn->close();
       <td class="border border-slate-600 "  colspan="9" rowspan="1" ><?php echo $dados5['outrasInfos'];?></td>
     </tr>
     <?php
-      }
-        }
-          }
-            }
               }
-                }
-                  }
-                    }
+            }
+          }
+        }
+      }
+    }
+  }
+}
     ?>
   </table>
 

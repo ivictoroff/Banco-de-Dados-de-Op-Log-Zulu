@@ -5,10 +5,10 @@ $ids = null;
 if (isset($_POST['teste'])){
     $ids = $_POST['teste'];
 }
+else{
+  header ('location: /banco/app/pesquisa/operacao.php');
+}
 
-?>
-
-<?php
 session_start();
 
 if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
@@ -22,7 +22,7 @@ else {
 
 include('bd.php');
 // Pega o ID da URL
-$ids;
+
 // Conecta ao banco de dados
 $servername = "localhost";
 $username = "root";
@@ -44,6 +44,62 @@ $efetivoEx =0;
 $efetivoMb = 0;
 $efetivoFab =0;
 $efetivoOutros=0;
+
+foreach ($ids as $id){
+$pesquisa = $mysqli->real_escape_string($id);
+$sql_code = "SELECT * 
+    FROM operacao 
+    WHERE opid LIKE '%$pesquisa%'";
+$sql_code2 = "SELECT * 
+    FROM efetivo 
+    WHERE eid LIKE '%$pesquisa%'";
+$sql_code3 = "SELECT * 
+    FROM tipoOp 
+    WHERE tid LIKE '%$pesquisa%'";
+$sql_code4 = "SELECT * 
+    FROM recursos 
+    WHERE rid LIKE '%$pesquisa%'";
+$sql_code5 = "SELECT * 
+    FROM infos
+    WHERE iid LIKE '%$pesquisa%'";
+$sql_code6 = "SELECT * 
+    FROM anexos
+    WHERE aid LIKE '%$pesquisa%'";
+
+$sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+$sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
+$sql_query3 = $mysqli->query($sql_code3) or die("ERRO ao consultar! " . $mysqli->error); 
+$sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
+$sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
+$sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
+
+while($dados = $sql_query->fetch_assoc()) {
+  while ($dados2 = $sql_query2->fetch_assoc()) {
+    while ($dados3 = $sql_query3->fetch_assoc()) {
+      while ($dados4 = $sql_query4->fetch_assoc()) {
+        while ($dados5 = $sql_query5->fetch_assoc()) {
+          while ($dados6 = $sql_query6->fetch_assoc()) {
+
+           $efetivoEx += $dados2['participantesEb']; 
+           $efetivoMb += $dados2['participantesMb']; 
+           $efetivoFab += $dados2['participantesFab']; 
+           $efetivoOutros += $dados2['participantesOs']; 
+           $efetivoOutros += $dados2['participantesGov']; 
+           $efetivoOutros += $dados2['participantesPv']; 
+           $efetivoOutros += $dados2['participantesCv']; 
+           $recursosRecebidos += $dados4['recebidos']; 
+           $operacoes[] = $dados['operacao'];
+           $comandoArea[] = $dados['cma'];
+           $tipoOp[] = $dados3['tipoOp'];
+           $acao[] = $dados3['desTransporte']. " ". $dados3['desManutencao']. " ". $dados3['desSuprimento']. " ". $dados3['desAviacao'];
+          }
+        }
+      }
+    }
+  }
+}
+}
+
 
 
 // Fecha a conexão com o banco de dados
@@ -109,113 +165,78 @@ $conn->close();
 
   <!-- inicio da tabela --> 
 
-  <table  class= " border border-slate-600">
+  <table  class= "border border-black">
 
-    <?php
-      if (!isset($ids)) {
-    ?>
-    <tr>
-      <td colspan="3">Digite algo para pesquisar...</td>
-    </tr>
-    <?php
-      } 
-      else {
-        foreach ($ids as $id){
-        $pesquisa = $mysqli->real_escape_string($id);
-        $sql_code = "SELECT * 
-            FROM operacao 
-            WHERE opid LIKE '%$pesquisa%'";
-        $sql_code2 = "SELECT * 
-            FROM efetivo 
-            WHERE eid LIKE '%$pesquisa%'";
-        $sql_code3 = "SELECT * 
-            FROM tipoOp 
-            WHERE tid LIKE '%$pesquisa%'";
-        $sql_code4 = "SELECT * 
-            FROM recursos 
-            WHERE rid LIKE '%$pesquisa%'";
-        $sql_code5 = "SELECT * 
-            FROM infos
-            WHERE iid LIKE '%$pesquisa%'";
-        $sql_code6 = "SELECT * 
-            FROM anexos
-            WHERE aid LIKE '%$pesquisa%'";
-
-        $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-        $sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
-        $sql_query3 = $mysqli->query($sql_code3) or die("ERRO ao consultar! " . $mysqli->error); 
-        $sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
-        $sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
-        $sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
-
-      if ($sql_query->num_rows == 0) {
-    ?>
-    <tr>
-        <td colspan="3">Nenhum resultado encontrado...</td>
-    </tr>
-    <?php
-      } 
-      else {
-        while($dados = $sql_query->fetch_assoc()) {
-          while ($dados2 = $sql_query2->fetch_assoc()) {
-            while ($dados3 = $sql_query3->fetch_assoc()) {
-              while ($dados4 = $sql_query4->fetch_assoc()) {
-                while ($dados5 = $sql_query5->fetch_assoc()) {
-                  while ($dados6 = $sql_query6->fetch_assoc()) {
-    ?>
-    <!-- inicio do cabecalho da tabela -->
-
-      <?php $efetivoEx += $dados2['participantesEb']; ?>
-      <?php $efetivoMb += $dados2['participantesMb']; ?>
-      <?php $efetivoFab += $dados2['participantesFab']; ?>
-      <?php $efetivoOutros += $dados2['participantesOs']; ?>
-      <?php $efetivoOutros += $dados2['participantesGov']; ?>
-      <?php $efetivoOutros += $dados2['participantesPv']; ?>
-      <?php $efetivoOutros += $dados2['participantesCv']; ?>
-      <?php $recursosRecebidos += $dados4['recebidos']; ?>
-
-    
- 
-    <?php
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-    ?>
      <!-- inicio do resumo -->
 
-     <tr style="margin-right: 150px;" class=" border border-slate-600">
-      <th class=" border border-slate-600">Total de Operações:</th>
-      <th class=" border border-slate-600">Recursos recebidos:</th>
-      <th class=" border border-slate-600" colspan="4">Efetivo empregado:</th>
-      <th class=" border border-slate-600">Exército</th>
-      <th class=" border border-slate-600">Marinha</th>
-      <th class=" border border-slate-600">Força Áerea Brasileira</th>
-      <th class=" border border-slate-600">Outros</th>
+     <tr>
+      <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes);}?>">Total de Operações</th>
+     </tr>
+    <tr>
+      <td class=" w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes); }?>"><?php echo count($operacoes); ?></td>
     </tr>
-    <tr class="border border-slate-600 ">
-      <td class=" border border-slate-600"><?php echo count($ids); ?></td>
-      <td class=" border border-slate-600"><?php echo $recursosRecebidos ?></td>
-      <td class=" border border-slate-600" colspan="4"><?php echo $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros ?></td>
-      <td class=" border border-slate-600"><?php echo $efetivoEx; ?></td>
-      <td class=" border border-slate-600"><?php echo $efetivoMb; ?></td>
-      <td class=" border border-slate-600"><?php echo $efetivoFab; ?></td>
-      <td class=" border border-slate-600"><?php echo $efetivoOutros; ?></td>
-
+     <tr style="margin-right: 150px;" class=" border border-black">
+      <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes); }?>">Nomes das Operações</th>
     </tr>
-    <!-- script da pesquisa pelo id da query --> 
 
-    <script>
-      function abrirPesquisa(id) {
-        window.open('/banco/app/pesquisa/completo.php?id=' + id, '_blank');
+    <tr class="border border-black ">
+      <?php for ($i=0; $i<count($operacoes); $i++){ ?>
+        <td class=" w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else { }?>"><?php echo $operacoes[$i]; ?></td>
+      <?php
       }
+      ?>
+     
+    </tr>
+    <tr>
+      <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes); }?>"">Comandos Militares de Área</th>
+    </tr>
+    <tr>
+      <?php
+      for ($i=0; $i<count($comandoArea); $i++){ ?>
+      <td class=" w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else { }?>" ><?php echo $comandoArea[$i]; ?></td>
+      <?php
+      }
+      ?>
+    </tr>
+    <tr>
+      <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else {echo count($operacoes); }?>"">Tipo de Operação</th>
+    </tr>
+    <tr>
+    <?php for ($i=0; $i<count($tipoOp); $i++){ 
+        ?>
+      <td class="w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else {}?>"><?php echo $tipoOp[$i]; ?></td>
+      <?php
+      }
+      ?>
+    </tr>
+    <tr>
+    <?php for ($i=0; $i<count($acao); $i++){ 
+      ?>
+      <td class="w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else { }?>"><?php echo $acao[$i]; ?></td>
+      <?php
+      }
+      ?>
+    </tr>
+    </tr>
+    <tr colspan="<?php echo count($operacoes)+1; ?>">
+      <th class=" border border-black">Efetivo empregado</th>
+      <th class="border border-black">Exército</th>
+      <th class="border border-black">Marinha</th>
+      <th class="border border-black">Força Áerea</th>
+      <th class="border border-black">Outros</th>
 
-    </script>
+    </tr>
+
+    <tr>
+      <td class="w-1/12 border border-black"><?php echo $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros ?></td>
+      <td class="w-1/12 border border-black"><?php echo $efetivoEx; ?></td>
+      <td class="w-1/12 border border-black"><?php echo $efetivoMb; ?></td>
+      <td class="w-1/12 border border-black"><?php echo $efetivoFab; ?></td>
+      <td class="w-1/12 border border-black"><?php echo $efetivoOutros; ?></td>
+    </tr>
+    
+      
+    <!-- script da pesquisa pelo id da query --> 
 
   </table>
 

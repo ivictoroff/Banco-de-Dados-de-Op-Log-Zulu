@@ -85,6 +85,7 @@ include ("bd.php");
 
     <tr style="margin-right: 150px;" class=" border border-slate-600">
       <th class="border border-slate-600">Selecione</th>
+      <th class="border border-slate-600">Operador</th>
       <th class="border border-slate-600">Operação</th>
       <th class="border border-slate-600">Missão</th>
       <th class="border border-slate-600">Estado</th>
@@ -94,7 +95,8 @@ include ("bd.php");
       <th class="border border-slate-600">Comando Apoiado</th>
       <th class="border border-slate-600">Inicio da Operação</th>
       <th class="border border-slate-600">Fim da Operação</th> 
-      <th>completo</th>
+      <th class="border border-slate-600">Completo</th>
+      <th class="border border-slate-600">Editar</th>
     </tr>
     <?php
       if (!isset($_GET['busca'])) {
@@ -133,7 +135,8 @@ include ("bd.php");
     ?>
     <form action="salva.php" method="post">
     <tr class=" border border-slate-600 ">
-    <td class=" border border-slate-600"><input type="checkbox" name="teste[]" value="<?php echo $dados['opid']; ?>"></td>
+      <td class=" border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="<?php echo $dados['opid']; ?>"></td>
+      <td class=" border border-slate-600"><?php echo $dados['operador']; ?></td>
       <td class=" border border-slate-600"><?php echo $dados['operacao']; ?></td>
       <td class=" border border-slate-600 "><?php echo $dados['missao']; ?></td>
       <td class=" border border-slate-600 "><?php echo $dados['estado']; ?></td>
@@ -144,13 +147,14 @@ include ("bd.php");
       <td class=" border border-slate-600 "><?php echo $dados['inicioOp']; ?></td>
       <td class=" border border-slate-600 "><?php echo $dados['fimOp']; ?></td>
       <td><a style="cursor: pointer;" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > abrir </a> </td>
+      <td><a style="cursor: pointer;" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > editar </a> </td>
     </tr>
     <?php
-      }
-        }
           }
+        }
+      }
     ?>
-    <input type="submit" value="Gerar resumo">
+    <input type="submit" class="border-2 rounded-lg border-slate-800" value="Gerar resumo">
     </form>
 
 
