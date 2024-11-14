@@ -147,7 +147,7 @@ include ("bd.php");
       <td class=" border border-slate-600 "><?php echo $dados['inicioOp']; ?></td>
       <td class=" border border-slate-600 "><?php echo $dados['fimOp']; ?></td>
       <td><a style="cursor: pointer;" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > abrir </a> </td>
-      <td><a style="cursor: pointer;" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > editar </a> </td>
+      <td><a style="cursor: pointer;" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > editar </a> </td>
     </tr>
     <?php
           }
@@ -164,6 +164,9 @@ include ("bd.php");
     <script>
       function abrirPesquisa(id) {
         window.open('/banco/app/pesquisa/completo.php?id=' + id, '_blank');
+      }
+      function abrirEdicao(id) {
+        window.open('/banco/app/insercao/update.php?id=' + id, '_blank');
       }
 
     </script>

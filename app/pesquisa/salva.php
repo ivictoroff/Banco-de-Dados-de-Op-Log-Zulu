@@ -100,8 +100,6 @@ while($dados = $sql_query->fetch_assoc()) {
 }
 }
 
-
-
 // Fecha a conexão com o banco de dados
 $conn->close();
 
@@ -234,16 +232,13 @@ $conn->close();
       <td class="w-1/12 border border-black"><?php echo $efetivoFab; ?></td>
       <td class="w-1/12 border border-black"><?php echo $efetivoOutros; ?></td>
     </tr>
-    
-      
-    <!-- script da pesquisa pelo id da query --> 
 
   </table>
 
   <!-- rodape -->
    
-  <!-- <footer id="rodape">
+   <footer id="rodape">
     <h1>Exército Brasileiro Comando Logístico Diretoria de Material SMU, Bloco C, Térreo. CEP: 70630-901 Divisão de Tecnologia e Informação - Ramal 5451</h1>
-  </footer> --> 
+  </footer>
 </body>
 </html>  
