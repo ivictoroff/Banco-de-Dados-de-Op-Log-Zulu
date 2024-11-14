@@ -16,16 +16,16 @@ include_once ("bd.php");
             unset($_SESSION['user']);
             unset($_SESSION['pass']);
             echo "<script>alert('Usuário e/ou senha inválido(s), Tente novamente!');</script>";
-            header('Location: /index.php');
+            header('Location: /banco/index.php');
 
         }
         else {
             $_SESSION["user"] = $user;
             $_SESSION["pass"] = $pass;
-            header("Location: /app/insercao/operacao.php");
+            header("Location: /banco/app/insercao/operacao.php");
         }
     }
     else {
-        header('Location: /index.php');
+        header('Location: /banco/index.php');
     }
 ?>

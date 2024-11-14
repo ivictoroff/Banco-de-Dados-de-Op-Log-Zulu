@@ -4,7 +4,7 @@
   <html lang="pt-br">
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/index.css">
-    <link rel="shortcut icon" type="imagex/png" href="dmat.png">
+    <link rel="shortcut icon" type="imagex/png" href="/banco/img/dmat.png">
     <title>Login</title>
     <style>
                 .alinhar{
@@ -37,7 +37,7 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img class="mx-auto h-15 w-auto" src="dmat.png" alt="DMAT">
+    <img class="mx-auto h-15 w-auto" src="/banco/img/dmat.png" alt="DMAT">
     <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900"></h2>
   </div>
 
