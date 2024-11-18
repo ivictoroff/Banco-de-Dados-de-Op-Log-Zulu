@@ -64,7 +64,7 @@ include ("bd.php");
       <a href="/banco/app/pesquisa/operacao.php"><img src="/banco/img/lupaAtual.png"></a>
     </div>
     <div class="text-white flex gap-2 items-end mx-2">
-      <a href="/acoes/sair.php">
+      <a href="/banco/acoes/sair.php">
         <button class="mr-2 text-pink-600"> Log Out <i class="fa-solid fa-user"></i></button>
       </a>
     </div>
@@ -173,10 +173,6 @@ include ("bd.php");
 
   </table>
 
-  <!-- rodape -->
    
-  <footer id="rodape">
-    <h1>Exército Brasileiro Comando Logístico Diretoria de Material SMU, Bloco C, Térreo. CEP: 70630-901 Divisão de Tecnologia e Informação - Ramal 5451</h1>
-  </footer> 
 </body>
 </html>  

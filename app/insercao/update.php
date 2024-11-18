@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
@@ -9,6 +10,8 @@ if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
 else {
   $usuario = $_SESSION['user'];
 }
+
+$oper = @$_REQUEST['operador'];
 
 include('bd.php');
 // Pega o ID da URL
@@ -31,7 +34,7 @@ $missao = @$_REQUEST['missao'];
 $cma = @$_REQUEST['cma'];
 $rm = @$_REQUEST['rm'];
 $comandoOp = @$_REQUEST['comandoOp'];
-$comandoApoio = @$_REQUEST['comandoApoiado'];
+$comandoApoio = @$_REQUEST['comandoApoio'];
 $inicioOp = @$_REQUEST['inicioOp'];
 $fimOp = @$_REQUEST['fimOp'];
 
@@ -67,9 +70,7 @@ $descentralizados = @$_REQUEST['descentralizados'];
 $empenhados = @$_REQUEST['empenhados'];
 $devolvidos = @$_REQUEST['devolvidos'];
 
-$idd = 0;
-
-$idd = $_REQUEST['iddd'];
+$idd = @$_REQUEST['idd'];
 
 //outras infos
 
@@ -90,17 +91,82 @@ if ($submit) {
 
   /* insere os dados das operacoes */
 
-  
-  $sql = "UPDATE operacao SET operacao= :OPERACAO  WHERE opid=:ID";
-  $as = 1;
-  $stmt = $conn->prepare ($sql);
-
+  $sqlOp = "UPDATE operacao SET operacao= :OPERACAO, estado= :ESTADO, missao= :MISSAO, cma= :CMA, rm= :RM, comandoOp=:COMANDOOP, comandoApoio=:COMANDOAPOIO,inicioOp=:INICIOOP,fimOp=:FIMOP   WHERE opid=:ID";
+  $stmt = $conn->prepare ($sqlOp);
   $stmt -> bindParam(":OPERACAO", $operacao);
-
+  $stmt -> bindParam(":ESTADO", $estado);
+  $stmt -> bindParam(":MISSAO", $missao);
+  $stmt -> bindParam(":CMA", $cma);
+  $stmt -> bindParam(":RM", $rm);
+  $stmt -> bindParam(":COMANDOOP", $comandoOp);
+  $stmt -> bindParam(":COMANDOAPOIO", $comandoApoio);
+  $stmt -> bindParam(":INICIOOP", $inicioOp);
+  $stmt -> bindParam(":FIMOP", $fimOp);
 
   $stmt -> bindParam(":ID", $idd);
 
   $stmt->execute();
+
+
+  $sqlE = "UPDATE efetivo SET participantes= :PARTICIPANTES, participantesEb= :PARTICIPANTESEB, participantesMb= :PARTICIPANTESMB, participantesFab= :PARTICIPANTESFAB, participantesOs= :PARTICIPANTESOS, participantesGov=:PARTICIPANTESGOV, participantesPv=:PARTICIPANTESPV,participantesCv=:PARTICIPANTESCV  WHERE eid=:ID";
+  
+  $stmt = $conn->prepare ($sqlE);
+  $stmt -> bindParam(":PARTICIPANTES", $participantes);
+  $stmt -> bindParam(":PARTICIPANTESEB", $participantesEb);
+  $stmt -> bindParam(":PARTICIPANTESMB", $participantesMb);
+  $stmt -> bindParam(":PARTICIPANTESFAB", $participantesFab);
+  $stmt -> bindParam(":PARTICIPANTESOS", $participantesOs);
+  $stmt -> bindParam(":PARTICIPANTESGOV", $participantesGov);
+  $stmt -> bindParam(":PARTICIPANTESPV", $participantesPv);
+  $stmt -> bindParam(":PARTICIPANTESCV", $participantesCv);
+
+  $stmt -> bindParam(":ID", $idd);
+
+  $stmt->execute();
+
+
+  $sqlT = "UPDATE tipoOp SET tipoOp= :TIPOOP, acaoOuApoio= :ACAOOUAPOIO, transporte= :TRANSPORTE, manutencao= :MANUTENCAO, suprimento= :SUPRIMENTO, aviacao=:AVIACAO, desTransporte=:DESTRANSPORTE,desManutencao=:DESMANUTENCAO, desSuprimento =:DESSUPRIMENTO, desAviacao= :DESAVIACAO  WHERE tid=:ID";
+  $stmt = $conn->prepare ($sqlT);
+
+  $stmt -> bindParam(":TIPOOP", $tipoOp);
+  $stmt -> bindParam(":ACAOOUAPOIO", $acaoOuApoio);
+  $stmt -> bindParam(":TRANSPORTE", $transporte);
+  $stmt -> bindParam(":MANUTENCAO",$manutencao);
+  $stmt -> bindParam(":SUPRIMENTO",$suprimento);
+  $stmt -> bindParam(":AVIACAO",$aviacao);
+  $stmt -> bindParam(":DESTRANSPORTE", $desTransporte);
+  $stmt -> bindParam(":DESMANUTENCAO",$desManutencao);
+  $stmt -> bindParam(":DESSUPRIMENTO",$desSuprimento);
+  $stmt -> bindParam(":DESAVIACAO",$desAviacao);
+
+  $stmt -> bindParam(":ID", $idd);
+
+  $stmt->execute();
+
+
+  $sqlr = "UPDATE recursos SET recebidos= :RECEBIDOS, descentralizados= :DESCENTRALIZADO, empenhados= :EMPENHADOS, devolvidos= :DEVOLVIDOS WHERE rid=:ID";
+  $stmt = $conn->prepare ($sqlr);
+  
+  $stmt -> bindParam(":RECEBIDOS", $recebidos);
+  $stmt -> bindParam(":DESCENTRALIZADO", $descentralizados);
+  $stmt -> bindParam(":EMPENHADOS", $empenhados);
+  $stmt -> bindParam(":DEVOLVIDOS", $devolvidos);
+
+  $stmt -> bindParam(":ID", $idd);
+
+  $stmt->execute();
+
+
+  $sqlr = "UPDATE infos SET outrasInfos= :OUTRASINFOS WHERE iid=:ID";
+  $stmt = $conn->prepare ($sqlr);
+  
+  $stmt -> bindParam(":OUTRASINFOS", $outrasInfos);
+
+  $stmt -> bindParam(":ID", $idd);
+
+  $stmt->execute();
+
+
 
   header("Location: /banco/app/pesquisa/operacao.php");
 }
@@ -143,7 +209,7 @@ if ($submit) {
       <a href="/banco/app/pesquisa/operacao.php"><img src="/banco/img/lupaAtual.png"></a>
     </div>
     <div class="text-white flex gap-2 items-end mx-2">
-      <a href="/acoes/sair.php">
+      <a href="/banco/acoes/sair.php">
         <button class="mr-2 text-pink-600"> Log Out <i class="fa-solid fa-user"></i></button>
       </a>
     </div>
@@ -216,8 +282,8 @@ if ($submit) {
     ?>
     <div class="conteudo ativo" id="conteudo-1">
       <form>
-      <input type="text" name="iddd" value="<?php echo $dados['opid'];?>"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">a. Nome da Operação</label>
+      <input type="text" class="conteudo" name="idd" value="<?php echo $dados['opid'];?>"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+      <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">a. Nome da Operação</label>
       <input type="text"  value="<?php echo $dados['operacao'];?>" name="operacao" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
       <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">b. Estado(UF):</label>
       <input type="text" name="estado" value="<?php echo $dados['estado'];?>"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
@@ -238,55 +304,69 @@ if ($submit) {
     </div>
 
     <div class="conteudo" id="conteudo-2">
-      <input type="text" value="<?php echo $dados2['participantes']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados2['participantesEb']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados2['participantesMb']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados2['participantesFab']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados2['participantesOs']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados2['participantesGov']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados2['participantesPv']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados2['participantesCv']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    </div>
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">a. Participantes:</label>  
+      <input type="text" name="participantes" value="<?php echo $dados2['participantes']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">b. Participantes do Exército:</label>
+      <input type="text" name="participantesEb" value="<?php echo $dados2['participantesEb']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">c. Participantes da Marinha:</label>
+      <input type="text" name="participantesMb" value="<?php echo $dados2['participantesMb']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">d. Participantes da Força Aérea:</label>
+      <input type="text" name="participantesFab" value="<?php echo $dados2['participantesFab']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">e. Participantes de Órgãos de Segurança e Ordenamento Pública:</label>
+      <input type="text" name="participantesOs" value="<?php echo $dados2['participantesOs']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">f. Participantes de outras Agências Governamentais:</label>
+      <input type="text" name="participantesGov" value="<?php echo $dados2['participantesGov']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">g. Participantes de outras Agências Privadas:</label>
+      <input type="text" name="participantesPv" value="<?php echo $dados2['participantesPv']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">h. Participantes de Organizações Não-Governamentais:</label>
+      <input type="text" name="participantesCv" value="<?php echo $dados2['participantesCv']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </div>
 
     <div class="conteudo" id="conteudo-3">
-      <input type="text" value="<?php echo $dados3['tipoOp']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['acaoOuApoio']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['transporte']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['manutencao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['suprimento']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['aviacao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['desTransporte']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['desManutencao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['desSuprimento']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados3['desAviacao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">a. operacao</label>
+      <input type="text" name="tipoOp" value="<?php echo $dados3['tipoOp']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">b. Tipo de Ação ou Apoio: </label>
+      <input type="text" name="acaoOuApoio" value="<?php echo $dados3['acaoOuApoio']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">1) Transporte</label>
+      <input type="text" name="transporte" value="<?php echo $dados3['transporte']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">2) Manutenção</label>
+      <input type="text" name="manutencao" value="<?php echo $dados3['manutencao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">3) Suprimento</label>
+      <input type="text" name="suprimento" value="<?php echo $dados3['suprimento']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">4) Aviação</label>
+      <input type="text" name="aviacao" value="<?php echo $dados3['aviacao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">Descrição Transportes </label>
+      <input type="text" name="desTransporte" value="<?php echo $dados3['desTransporte']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">Descrição Manutenção</label>
+      <input type="text" name="desManutencao" value="<?php echo $dados3['desManutencao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">Descrição Suprimentos</label>
+      <input type="text" name="desSuprimento" value="<?php echo $dados3['desSuprimento']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">Descrição Aviação</label>
+      <input type="text" name="desAviacao" value="<?php echo $dados3['desAviacao']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
     </div>
 
     <div class="conteudo" id="conteudo-4">
-      <input type="text" value="<?php echo $dados4['recebidos']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados4['descentralizados']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados4['empenhados']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <input type="text" value="<?php echo $dados4['devolvidos']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">a. recebidos</label>
+      <input type="text" name="recebidos" value="<?php echo $dados4['recebidos']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">b. Descentralizaddos</label>
+      <input type="text" name="descentralizados" value="<?php echo $dados4['descentralizados']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">c. Liquidados</label>
+      <input type="text" name="empenhados" value="<?php echo $dados4['empenhados']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">d. Devolvidos</label>
+      <input type="text" name="devolvidos" value="<?php echo $dados4['devolvidos']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      
     </div>
 
     <div class="conteudo" id="conteudo-5">
-      <input type="text" value="<?php echo $dados5['outrasInfos']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    </div>
-
-        <!-- otras informacoes --> 
-        <div class="conteudo" id="conteudo-6">       
-      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">a. Relatório Final:</label>
-        <input value="<?php echo $dados6['relatorioFinal']; ?>" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="relatorioFinal" type="file">
-      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">b. Relatório do Comando Logístico:</label>
-        <input value="<?php echo $dados6['relatorioComando']; ?>" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="relatorioComando" type="file">
-      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">c. Fotos:</label>
-        <input value="<?php echo $dados6['fotos']; ?>" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="fotos" type="file">
-      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">d. Outros documentos:</label>
-        <input value="<?php echo $dados6['outrosDocumentos']; ?>" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="outrasDocumentos" type="file">
-      <div class="mt-2">
-          
+    <div style="text-align:center;" class="content-center">
+      <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Outras informações:</label>
+          <input type="text" name="outrasInfos" value="<?php echo $dados5['outrasInfos']; ?>" class=" border-2 rounded-lg border-slate-950 w-10/12 h-36" name="outrasInfos" id="" placeholder="outras informações"></textarea>
       </div>
     </div>
-    <input type="submit" name="submit" value="SALVAR" class=" flex w-12/6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"/>
+    <div class="mt-2">
+          <input type="submit" name="submit" value="SALVAR" class=" flex w-12/6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"/>
+      </div>
+    
   </form>
 
     <?php

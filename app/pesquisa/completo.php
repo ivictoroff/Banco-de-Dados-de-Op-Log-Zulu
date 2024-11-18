@@ -79,7 +79,7 @@ $conn->close();
       <a href="/banco/app/pesquisa/operacao.php"><img src="/banco/img/lupaAtual.png"></a>
     </div>
     <div class="text-white flex gap-2 items-end mx-2">
-      <a href="/acoes/sair.php">
+      <a href="/banco/acoes/sair.php">
         <button class="mr-2 text-pink-600"> Log Out <i class="fa-solid fa-user"></i></button>
       </a>
     </div>
@@ -227,10 +227,10 @@ $conn->close();
       <th class="border border-slate-600 bg-blend-darken">Devolvidos:</th>
     </tr>
     <tr>
-        <td class="border border-slate-600 "><?php echo $dados4['recebidos']; ?></td>
-        <td class="border border-slate-600 "><?php echo $dados4['descentralizados']; ?></td>
-        <td class="border border-slate-600 "><?php echo $dados4['empenhados']; ?></td>
-        <td class="border border-slate-600 "><?php echo $dados4['devolvidos']; ?></td>
+        <td class="border border-slate-600 "><?php echo "R$:". $dados4['recebidos']; ?></td>
+        <td class="border border-slate-600 "><?php echo "R$:". $dados4['descentralizados']; ?></td>
+        <td class="border border-slate-600 "><?php echo "R$:". $dados4['empenhados']; ?></td>
+        <td class="border border-slate-600 "><?php echo "R$:". $dados4['devolvidos']; ?></td>
     </tr>
     <tr>
       <th class="border border-slate-600 bg-blend-darken">Relatório Final</th>
