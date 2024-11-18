@@ -87,6 +87,14 @@ $submit= @$_REQUEST['submit'];
 
 $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
+$sql = "SELECT * FROM operacao WHERE opid = '$id' and operador = '$usuario'";
+
+$result = $mysqli -> query($sql);
+
+if (mysqli_num_rows($result) < 1) {
+    header('Location: /banco/app/pesquisa/operacao.php');
+}
+
 if ($submit) {
 
   /* insere os dados das operacoes */
@@ -169,6 +177,8 @@ if ($submit) {
 
 
   header("Location: /banco/app/pesquisa/operacao.php");
+
+
 }
 
 // Fecha a conexão com o banco de dados
@@ -282,6 +292,7 @@ if ($submit) {
     ?>
     <div class="conteudo ativo" id="conteudo-1">
       <form>
+        <?php $operador = $dados['operador']; ?>
       <input type="text" class="conteudo" name="idd" value="<?php echo $dados['opid'];?>"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
       <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">a. Nome da Operação</label>
       <input type="text"  value="<?php echo $dados['operacao'];?>" name="operacao" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />

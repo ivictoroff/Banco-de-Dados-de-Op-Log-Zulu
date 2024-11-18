@@ -213,7 +213,7 @@ if ($submit) {
 <head>
   <title>colog</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="shortcut icon" href="/banco/img/dmat.ico" type="favicon.ico">
+  <link rel="shortcut icon" href="../../img/dmat.ico" type="favicon.ico">
   <style>
     #atual {
       color: #f7b600;

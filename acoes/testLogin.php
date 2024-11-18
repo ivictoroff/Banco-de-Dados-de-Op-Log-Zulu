@@ -15,7 +15,7 @@ include_once ("bd.php");
         if (mysqli_num_rows($result) < 1) {
             unset($_SESSION['user']);
             unset($_SESSION['pass']);
-            echo "<script>alert('Usuário e/ou senha inválido(s), Tente novamente!');</script>";
+            $_SESSION['login'] = 'nao';
             header('Location: /banco/index.php');
 
         }
