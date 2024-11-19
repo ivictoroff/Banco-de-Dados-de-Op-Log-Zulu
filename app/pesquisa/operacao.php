@@ -1,10 +1,10 @@
 <?php
 session_start();
-
+date_default_timezone_set('America/Sao_Paulo');
 if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
   unset($_SESSION['user']);
   unset($_SESSION['pass']);
-  header('Location: /index.php');
+  header('Location: /banco/index.php');
 } 
 else {
   $usuario = $_SESSION['user'];
@@ -219,8 +219,8 @@ include ("bd.php");
       <td class=" border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
       <td class=" border border-slate-600 "><?php echo $dados['inicioOp']; ?></td>
       <td class=" border border-slate-600 "><?php echo $dados['fimOp']; ?></td>
-      <td><a style="cursor: pointer;" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > abrir </a> </td>
-      <td><a style="cursor: pointer;" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > editar </a> </td>
+      <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
+      <td><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > Editar </a> </td>
     </tr>
     <?php
           }
