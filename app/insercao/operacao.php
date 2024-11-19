@@ -259,7 +259,7 @@ if ($submit) {
           <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">  
           <li>
             <a href="#" onclick="mostrarConteudo(1)" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+               <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 17">
                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
                <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
               </svg>
@@ -591,24 +591,7 @@ if ($submit) {
   </form>
 
   <!-- script da navbar --> 
-  <script>
-    // Função para mostrar o conteúdo
-    function mostrarConteudo(pagina) {
-      // Esconde todos os conteúdos
-      document.querySelectorAll('.conteudo').forEach(conteudo => {
-        conteudo.classList.remove('ativo');
-      });
-      
-      // Mostra o conteúdo selecionado
-      document.getElementById(`conteudo-${pagina}`).classList.add('ativo');
-      
-      // Adiciona classe active ao tab selecionado
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      document.querySelector(`.tab:nth-child(${pagina})`).classList.add('active');
-    }
-  </script>
+  <script src="/banco/src/navbar.js"></script>
 
 </body>
 </html>  
