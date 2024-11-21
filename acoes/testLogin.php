@@ -6,6 +6,7 @@ include_once ("bd.php");
     if (isset($_POST['submit'])&& isset($_POST['user']) && isset($_POST['pass'])) {
         $user = $_POST["user"];
         $pass = $_POST["pass"];
+        print_r($user);
 
 
         $sql = "SELECT * FROM usuario WHERE usuario = '$user' and senha = '$pass'";
@@ -22,7 +23,7 @@ include_once ("bd.php");
         else {
             $_SESSION["user"] = $user;
             $_SESSION["pass"] = $pass;
-            header("Location: /banco/app/insercao/operacao.php");
+            header("Location: /banco/app/pesquisa/operacao.php");
         }
     }
     else {
