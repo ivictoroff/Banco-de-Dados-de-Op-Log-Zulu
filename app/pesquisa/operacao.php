@@ -226,7 +226,6 @@ include ("bd.php");
 
       <tr style="margin-right: 150px;" class=" border border-slate-600">
         <th class="border border-slate-600">Selecione</th>
-        <th class="border border-slate-600">Operador</th>
         <th class="border border-slate-600">Operação</th>
         <th class="border border-slate-600">Missão</th>
         <th class="border border-slate-600">Estado</th>
@@ -260,7 +259,6 @@ include ("bd.php");
       <form action="salva.php" method="post">
       <tr class=" border border-slate-600 ">
         <td class="px-6 py-4 border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="<?php echo $dados['opid']; ?>"></td>
-        <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operador']; ?></td>
         <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
         <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['missao']; ?></td>
         <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['estado']; ?></td>
