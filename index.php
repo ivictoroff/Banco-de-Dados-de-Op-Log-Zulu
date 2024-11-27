@@ -16,31 +16,14 @@ if (@$_SESSION['login'] == 'nao') {
     <link rel="shortcut icon" type="imagex/png" href="/banco/img/colog.png">
     <title>Login</title>
     <style>
-                .alinhar{
-                  display: flex;
-                }
-                
-                .produto{
-                    border: 1px solid #ccc;
-                    padding: 20px;
-                    margin: 5px;
-                    float: left; 
-                    width: 200px; 
-                }
-
-                #rodape {
-                  background-color: #f0f0f0;
-                  padding: 20px;
-                  text-align: center;
-                  position: fixed;
-                  bottom: 0;
-                  width: 100%;
-                }
-                #atual {
-	                color: #f7b600;
-                }
-             
-            </style> 
+      #rodape {
+        background-color: #f0f0f0;
+        padding: 20px;
+        text-align: center;
+        bottom: 0;
+        width: 100%;
+      }
+  </style> 
   </head>
   <body>
 
@@ -49,6 +32,10 @@ if (@$_SESSION['login'] == 'nao') {
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           <img class="w-auto h-15 mr-2" src="/banco/img/colog.png" alt="logo">
       </a>
+      <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+        Banco de Dados de Op Log Zulu
+      </h1>
+      <br>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -68,7 +55,7 @@ if (@$_SESSION['login'] == 'nao') {
                       </div>
                       <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Esqueceu sua senha?</a>
                   </div>
-                  <input type="submit" name="submit" value="CADASTRAR" class="w-full text-white bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"/>
+                  <input type="submit" name="submit" value="ENTRAR" class="w-full text-white bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"/>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Não tem conta? <a href="cadastro.php" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Cadastrar</a>
                   </p>

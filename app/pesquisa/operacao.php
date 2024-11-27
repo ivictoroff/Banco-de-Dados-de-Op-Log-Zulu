@@ -23,16 +23,6 @@ include ("bd.php");
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="shortcut icon" type="imagex/png" href="/img/dmat.png">
   <style>
-    .alinhar{
-      display: flex;
-    }
-    .produto{
-        border: 1px solid #ccc;
-        padding: 20px;
-        margin: 5px;
-        float: left; 
-        width: 200px; 
-    }
     #rodape {
       background-color: #f0f0f0;
       padding: 20px;
@@ -65,6 +55,10 @@ include ("bd.php");
 
   <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+      <a href="#" class="flex items-center ps-1 mb-1">
+        <img src="/banco/img/colog.png" class="h-3 me-2 sm:h-16" alt="Flowbite Logo" />
+        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">B D Op Log ZULU</span>
+      </a>
       <ul class="space-y-2 font-medium">
       <li>
         <a href="/banco/app/insercao/operacao.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

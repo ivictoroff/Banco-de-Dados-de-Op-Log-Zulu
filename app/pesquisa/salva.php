@@ -3,7 +3,7 @@
 $ids = null;
 
 if (isset($_POST['teste'])){
-    $ids = $_POST['teste'];
+  $ids = $_POST['teste'];
 }
 else{
   header ('location: /banco/app/pesquisa/operacao.php');
@@ -33,11 +33,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Executa a consulta SQL
 for ($i=0; $i < count($ids); $i++) { 
-    $query = "SELECT * FROM operacao WHERE opid = '$ids[$i]'";
+  $query = "SELECT * FROM operacao WHERE opid = '$ids[$i]'";
 }
 
 $result = $conn->query($query);
 
+$recursos = 0;
 $recursosRecebidos = 0;
 $efetivo;
 $efetivoEx =0;
@@ -46,58 +47,60 @@ $efetivoFab =0;
 $efetivoOutros=0;
 
 foreach ($ids as $id){
-$pesquisa = $mysqli->real_escape_string($id);
-$sql_code = "SELECT * 
+  $pesquisa = $mysqli->real_escape_string($id);
+  $sql_code = "SELECT * 
     FROM operacao 
     WHERE opid LIKE '%$pesquisa%'";
-$sql_code2 = "SELECT * 
+  $sql_code2 = "SELECT * 
     FROM efetivo 
     WHERE eid LIKE '%$pesquisa%'";
-$sql_code3 = "SELECT * 
+  $sql_code3 = "SELECT * 
     FROM tipoOp 
     WHERE tid LIKE '%$pesquisa%'";
-$sql_code4 = "SELECT * 
+  $sql_code4 = "SELECT * 
     FROM recursos 
     WHERE rid LIKE '%$pesquisa%'";
-$sql_code5 = "SELECT * 
+  $sql_code5 = "SELECT * 
     FROM infos
     WHERE iid LIKE '%$pesquisa%'";
-$sql_code6 = "SELECT * 
+  $sql_code6 = "SELECT * 
     FROM anexos
     WHERE aid LIKE '%$pesquisa%'";
 
-$sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-$sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
-$sql_query3 = $mysqli->query($sql_code3) or die("ERRO ao consultar! " . $mysqli->error); 
-$sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
-$sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
-$sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query3 = $mysqli->query($sql_code3) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
 
-while($dados = $sql_query->fetch_assoc()) {
-  while ($dados2 = $sql_query2->fetch_assoc()) {
-    while ($dados3 = $sql_query3->fetch_assoc()) {
-      while ($dados4 = $sql_query4->fetch_assoc()) {
-        while ($dados5 = $sql_query5->fetch_assoc()) {
-          while ($dados6 = $sql_query6->fetch_assoc()) {
+  while($dados = $sql_query->fetch_assoc()) {
+    while ($dados2 = $sql_query2->fetch_assoc()) {
+      while ($dados3 = $sql_query3->fetch_assoc()) {
+        while ($dados4 = $sql_query4->fetch_assoc()) {
+          while ($dados5 = $sql_query5->fetch_assoc()) {
+            while ($dados6 = $sql_query6->fetch_assoc()) {
 
-           $efetivoEx += $dados2['participantesEb']; 
-           $efetivoMb += $dados2['participantesMb']; 
-           $efetivoFab += $dados2['participantesFab']; 
-           $efetivoOutros += $dados2['participantesOs']; 
-           $efetivoOutros += $dados2['participantesGov']; 
-           $efetivoOutros += $dados2['participantesPv']; 
-           $efetivoOutros += $dados2['participantesCv']; 
-           $recursosRecebidos += $dados4['recebidos']; 
-           $operacoes[] = $dados['operacao'];
-           $comandoArea[] = $dados['cma'];
-           $tipoOp[] = $dados3['tipoOp'];
-           $acao[] = $dados3['desTransporte']. " ". $dados3['desManutencao']. " ". $dados3['desSuprimento']. " ". $dados3['desAviacao'];
+            $recursos += $dados4['empenhados'];
+
+            $efetivoEx += $dados2['participantesEb']; 
+            $efetivoMb += $dados2['participantesMb']; 
+            $efetivoFab += $dados2['participantesFab']; 
+            $efetivoOutros += $dados2['participantesOs']; 
+            $efetivoOutros += $dados2['participantesGov']; 
+            $efetivoOutros += $dados2['participantesPv']; 
+            $efetivoOutros += $dados2['participantesCv']; 
+            $recursosRecebidos += $dados4['recebidos']; 
+            $operacoes[] = $dados['operacao'];
+            $comandoArea[] = $dados['cma'];
+            $tipoOp[] = $dados3['tipoOp'];
+            $acao[] = $dados3['desTransporte']. " ". $dados3['desManutencao']. " ". $dados3['desSuprimento']. " ". $dados3['desAviacao'];
+            }
           }
         }
       }
     }
   }
-}
 }
 
 // Fecha a conexão com o banco de dados
@@ -113,16 +116,6 @@ $conn->close();
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="shortcut icon" type="imagex/png" href="/img/dmat.png">
   <style>
-    .alinhar{
-      display: flex;
-    }
-    .produto{
-        border: 1px solid #ccc;
-        padding: 20px;
-        margin: 5px;
-        float: left; 
-        width: 200px; 
-    }
     #rodape {
       background-color: #f0f0f0;
       padding: 20px;
@@ -155,6 +148,10 @@ $conn->close();
   <div class="conteudo ativo" id="conteudo-1">
   <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+      <a href="#" class="flex items-center ps-1 mb-1">
+        <img src="/banco/img/colog.png" class="h-3 me-2 sm:h-16" alt="Flowbite Logo" />
+        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">B D Op Log ZULU</span>
+      </a>
       <ul class="space-y-2 font-medium">
       <li>
         <a href="/banco/app/insercao/operacao.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -214,46 +211,46 @@ $conn->close();
       <!-- inicio do resumo -->
 
       <tr>
-        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes);}?>">Total de Operações</th>
+        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "6";} else { echo count($operacoes);}?>">Total de Operações</th>
       </tr>
 
       <tr>
-        <td class="w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes); }?>"><?php echo count($operacoes); ?></td>
+        <td class="w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "6";} else { echo count($operacoes); }?>"><?php echo count($operacoes); ?></td>
       </tr>
 
       <tr style="margin-right: 150px;" class=" border border-black">
-        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes); }?>">Nomes das Operações</th>
+        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 6){ echo "6";} else { echo count($operacoes); }?>">Nomes das Operações</th>
       </tr>
 
       <tr class="border border-black">
         <?php for ($i=0; $i<count($operacoes); $i++){ ?>
-          <td class="px-6 py-4  w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else { }?>"><?php echo $operacoes[$i]; ?></td>
+          <td class="px-6 py-4  w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 6){ echo 6/count($operacoes);} else { }?>"><?php echo $operacoes[$i]; ?></td>
         <?php
         }
         ?>
       </tr>
 
       <tr>
-        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else { echo count($operacoes); }?>"">Comandos Militares de Área</th>
+        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "6";} else { echo count($operacoes); }?>"">Comandos Militares de Área</th>
       </tr>
 
       <tr>
         <?php
         for ($i=0; $i<count($comandoArea); $i++){ ?>
-        <td class="px-6 py-4  w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else { }?>" ><?php echo $comandoArea[$i]; ?></td>
+        <td class="px-6 py-4  w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 6){ echo 6/count($operacoes);} else { }?>" ><?php echo $comandoArea[$i]; ?></td>
         <?php
         }
         ?>
       </tr>
 
       <tr>
-        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 5){ echo "5";} else {echo count($operacoes); }?>"">Tipo de Operação</th>
+        <th class=" border border-black" colspan="<?php if(count($operacoes) <= 6){ echo "6";} else {echo count($operacoes); }?>"">Tipo de Operação</th>
       </tr>
 
       <tr>
       <?php for ($i=0; $i<count($tipoOp); $i++){ 
       ?>
-        <td class="px-6 py-4 w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else {}?>"><?php echo $tipoOp[$i]; ?></td>
+        <td class="px-6 py-4 w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 6){ echo 6/count($operacoes);} else {}?>"><?php echo $tipoOp[$i]; ?></td>
       <?php
         }
       ?>
@@ -262,13 +259,14 @@ $conn->close();
       <tr>
       <?php for ($i=0; $i<count($acao); $i++){ 
       ?>
-        <td class="px-6 py-4 w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 5){ echo 6/count($operacoes);} else { }?>"><?php echo $acao[$i]; ?></td>
+        <td class="px-6 py-4 w-1/12 border border-black" colspan="<?php if(count($operacoes) <= 6){ echo 6/count($operacoes);} else { }?>"><?php echo $acao[$i]; ?></td>
       <?php
         }
       ?>
       </tr>
 
       <tr colspan="<?php echo count($operacoes)+1; ?>">
+        <th class=" border border-black">Recursos liquidados</th>
         <th class=" border border-black">Efetivo empregado</th>
         <th class="border border-black">Exército</th>
         <th class="border border-black">Marinha</th>
@@ -277,6 +275,7 @@ $conn->close();
       </tr>
 
       <tr>
+        <td class="px-6 py-4 w-1/12 border border-black"><?php echo "R$: ". $recursos; ?></td>
         <td class="px-6 py-4 w-1/12 border border-black"><?php echo $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros ?></td>
         <td class="px-6 py-4 w-1/12 border border-black"><?php echo $efetivoEx; ?></td>
         <td class="px-6 py-4 w-1/12 border border-black"><?php echo $efetivoMb; ?></td>

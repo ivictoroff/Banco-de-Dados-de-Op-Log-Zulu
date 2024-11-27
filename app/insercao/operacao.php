@@ -1,5 +1,10 @@
 <?php
 
+/** 
+* NOTA!: não usar PDO para enviar dados para o banco de dados (somente *mysqli*) ;
+**/
+
+
 include ("bd.php");
 
 // inicia a seçao
@@ -22,7 +27,7 @@ $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' and adm = 'Administrado
 $result = $mysqli -> query($sql);
 
 if (mysqli_num_rows($result) < 1) {
-    header('Location: /banco/app/pesquisa/operacao.php');
+  header('Location: /banco/app/pesquisa/operacao.php');
 }
 
 //anexos
@@ -37,48 +42,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $dirUploads = "../../uploads";
 
   if (!is_dir($dirUploads)) {
-
-      mkdir($dirUploads);
-
+    mkdir($dirUploads);
   }
   if (!empty($_FILES['relatorioFinal']['name'][0])) {
     
     if (move_uploaded_file($relatorioFinal["tmp_name"], $dirUploads . DIRECTORY_SEPARATOR . $relatorioFinal["name"])) {
-        echo "Upload realizado com sucesso!";
-        $relatorioFinalName = $relatorioFinal["name"];
+      echo "Upload realizado com sucesso!";
+      $relatorioFinalName = $relatorioFinal["name"];
     } else {
-        throw new Exception("Não foi possível reaizar o upload.");
-  
+      throw new Exception("Não foi possível reaizar o upload.");
     }
   }
   if (!empty($_FILES['relatorioComando']['name'][0])) {
     
     if (move_uploaded_file($relatorioComando["tmp_name"], $dirUploads . DIRECTORY_SEPARATOR . $relatorioComando["name"])) {
-        echo "Upload realizado com sucesso!";
-        $relatorioComandoName = $relatorioComando["name"];
+      echo "Upload realizado com sucesso!";
+      $relatorioComandoName = $relatorioComando["name"];
     } else {
-        throw new Exception("Não foi possível reaizar o upload.");
+      throw new Exception("Não foi possível reaizar o upload.");
   
     }
   }
   if (!empty($_FILES['fotos']['name'][0])) {
     
     if (move_uploaded_file($fotos["tmp_name"], $dirUploads . DIRECTORY_SEPARATOR . $fotos["name"])) {
-        echo "Upload realizado com sucesso!";
-        $fotosName = $fotos["name"];
+      echo "Upload realizado com sucesso!";
+      $fotosName = $fotos["name"];
     } else {
-        throw new Exception("Não foi possível reaizar o upload.");
-  
+      throw new Exception("Não foi possível reaizar o upload.");
     }
   }
   if (!empty($_FILES['outrasDocumentos']['name'][0])) {
     
     if (move_uploaded_file($outrasDocumentos["tmp_name"], $dirUploads . DIRECTORY_SEPARATOR . $outrasDocumentos["name"])) {
-        echo "Upload realizado com sucesso!";
-        $outrasDocumentosName = $outrasDocumentos["name"];
+      echo "Upload realizado com sucesso!";
+      $outrasDocumentosName = $outrasDocumentos["name"];
     } else {
-        throw new Exception("Não foi possível reaizar o upload.");
-  
+      throw new Exception("Não foi possível reaizar o upload.");
     }
   }
 }
@@ -136,83 +136,43 @@ $outrasInfos = @$_REQUEST['outrasInfos'];
 
 $submit= @$_REQUEST['submit'];
 
-$conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
-
 if ($submit) {
 
   /* insere os dados das operacoes */
 
-  $stmt = $conn->prepare("INSERT INTO operacao (operador, operacao,estado, missao, cma, rm, comandoOp, comandoApoio, inicioOp, fimOp) VALUES (:OPERADOR, :OPERACAO, :ESTADO, :MISSAO, :CMA, :RM, :COMANDOOP, :COMANDOAPOIO, :INICIOOP, :FIMOP)");
+  $sql = "INSERT INTO operacao (operador, operacao,estado, missao, cma, rm, comandoOp, comandoApoio, inicioOp, fimOp) VALUES ('$usuario', '$operacao', '$estado', '$missao','$cma', '$rm', '$comandoOp', '$comandoApoio', '$inicioOp', '$fimOp')";
 
-  $stmt -> bindParam(":OPERADOR", $usuario);
-  $stmt -> bindParam(":OPERACAO", $operacao);
-  $stmt -> bindParam(":ESTADO", $estado);
-  $stmt -> bindParam(":MISSAO", $missao);
-  $stmt -> bindParam(":CMA", $cma);
-  $stmt -> bindParam(":RM", $rm);
-  $stmt -> bindParam(":COMANDOOP", $comandoOp);
-  $stmt -> bindParam(":COMANDOAPOIO", $comandoApoio);
-  $stmt -> bindParam(":INICIOOP", $inicioOp);
-  $stmt -> bindParam(":FIMOP", $fimOp);
-
-  $stmt->execute();
+  $mysqli->query($sql);
 
   /* insere os dados do efetivo */
 
-  $stmt = $conn->prepare("INSERT INTO efetivo (participantes,participantesEb, participantesMb,participantesFab,participantesOs,participantesGov,participantesPv,participantesCv) VALUES (:PARTICIPANTES, :PARTICIPANTESEB, :PARTICIPANTESMB, :PARTICIPANTESFAB, :PARTICIPANTESOS, :PARTICIPANTESGOV, :PARTICIPANTESPV, :PARTICIPANTESCV)");
-  $stmt -> bindParam(":PARTICIPANTES", $participantes);
-  $stmt -> bindParam(":PARTICIPANTESEB", $participantesEb);
-  $stmt -> bindParam(":PARTICIPANTESMB", $participantesMb);
-  $stmt -> bindParam(":PARTICIPANTESFAB", $participantesFab);
-  $stmt -> bindParam(":PARTICIPANTESOS", $participantesOs);
-  $stmt -> bindParam(":PARTICIPANTESGOV", $participantesGov);
-  $stmt -> bindParam(":PARTICIPANTESPV", $participantesPv);
-  $stmt -> bindParam(":PARTICIPANTESCV", $participantesCv);
+  $sql = "INSERT INTO efetivo (participantes,participantesEb, participantesMb,participantesFab,participantesOs,participantesGov,participantesPv,participantesCv) VALUES ('$participantes','$participantesEb', '$participantesMb', '$participantesFab', '$participantesOs', '$participantesGov', '$participantesPv', '$participantesCv')";
 
-  $stmt -> execute();
+  $mysqli->query($sql);
 
   /* insere os dados dos tipos de operacoes */
 
-  $stmt = $conn->prepare("INSERT INTO tipoOp (tipoOp,acaoOuApoio, transporte, manutencao, suprimento, aviacao, desTransporte, desManutencao, desSuprimento, desAviacao) VALUES (:TIPOOP, :ACAOOUAPOIO, :TRANSPORTE, :MANUTENCAO, :SUPRIMENTO, :AVIACAO, :DESTRANSPORTE, :DESMANUTENCAO, :DESSUPRIMENTO, :DESAVIACAO)");
-  $stmt -> bindParam(":TIPOOP", $tipoOp);
-  $stmt -> bindParam(":ACAOOUAPOIO", $acaoOuApoio);
-  $stmt -> bindParam(":TRANSPORTE", $transporte);
-  $stmt -> bindParam(":MANUTENCAO",$manutencao);
-  $stmt -> bindParam(":SUPRIMENTO",$suprimento);
-  $stmt -> bindParam(":AVIACAO",$aviacao);
-  $stmt -> bindParam(":DESTRANSPORTE", $desTransporte);
-  $stmt -> bindParam(":DESMANUTENCAO",$desManutencao);
-  $stmt -> bindParam(":DESSUPRIMENTO",$desSuprimento);
-  $stmt -> bindParam(":DESAVIACAO",$desAviacao);
+  $sql = "INSERT INTO tipoOp (tipoOp,acaoOuApoio, transporte, manutencao, suprimento, aviacao, desTransporte, desManutencao, desSuprimento, desAviacao) VALUES ('$tipoOp', '$acaoOuApoio', '$transporte', '$manutencao', '$suprimento', '$aviacao', '$desTransporte','$desManutencao', '$desSuprimento', '$desAviacao')";
 
-  $stmt -> execute();
+  $mysqli->query($sql);
 
   /* insere os dados dos recursos aprovisionados */
 
-  $stmt = $conn->prepare("INSERT INTO recursos (recebidos,descentralizados, empenhados, devolvidos) VALUES (:RECEBIDOS, :DESCENTRALIZADO, :EMPENHADOS, :DEVOLVIDOS)");
-  $stmt -> bindParam(":RECEBIDOS", $recebidos);
-  $stmt -> bindParam(":DESCENTRALIZADO", $descentralizados);
-  $stmt -> bindParam(":EMPENHADOS", $empenhados);
-  $stmt -> bindParam(":DEVOLVIDOS", $devolvidos);
+  $sql = "INSERT INTO recursos (recebidos,descentralizados, empenhados, devolvidos) VALUES ('$recebidos', '$descentralizados', '$empenhados', '$devolvidos')";
 
-  $stmt -> execute();
+  $mysqli->query($sql);
 
   /* insere os dados de outras informacoes */
 
-  $stmt = $conn->prepare("INSERT INTO infos (outrasInfos) VALUES (:OUTRASINFOS)");
-  $stmt -> bindParam(":OUTRASINFOS", $outrasInfos);
+  $sql = "INSERT INTO infos (outrasInfos) VALUES ('$outrasInfos')";
 
-  $stmt -> execute();
+  $mysqli->query($sql);
 
     /* insere os dados dos anexos */
 
-  $stmt = $conn->prepare("INSERT INTO anexos (relatorioFinal,relatorioComando,fotos,outrosDocumentos) VALUES (:RELATORIOFINAL,:RELATORIOCOMANDO,:FOTOS,:OUTROSDOCUMENTOS)");
-  $stmt -> bindParam(":RELATORIOFINAL", $relatorioFinalName);
-  $stmt -> bindParam(":RELATORIOCOMANDO", $relatorioComandoName);
-  $stmt -> bindParam(":FOTOS", $fotosName);
-  $stmt -> bindParam(":OUTROSDOCUMENTOS", $outrasDocumentosName);
+  $sql = "INSERT INTO anexos (relatorioFinal,relatorioComando,fotos,outrosDocumentos) VALUES ('$relatorioFinalName','$relatorioComandoName','$fotosName','$outrasDocumentosName')";
 
-  $stmt -> execute();
+  $mysqli->query($sql);
 
   header("Location: /banco/app/pesquisa/operacao.php");
 }
@@ -230,11 +190,9 @@ if ($submit) {
     #atual {
       color: #f7b600;
     }
-    
     .conteudo {
       display: none;
     }
-    
     .conteudo.ativo {
       display: block;
     }
@@ -249,6 +207,10 @@ if ($submit) {
 
   <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+    <a href="#" class="flex items-center ps-1 mb-1">
+          <img src="/banco/img/colog.png" class="h-3 me-2 sm:h-16" alt="Flowbite Logo" />
+          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">B D Op Log ZULU</span>
+        </a>
       <ul class="space-y-2 font-medium">
       <li>
         <a href="/banco/app/insercao/operacao.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -434,17 +396,17 @@ if ($submit) {
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Participantes do Exército brasileiro:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="number" name="participantesEb" placeholder="participantes do exercito Brasileiro">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">c. Participantes da Marinha do Brasil:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesMb" placeholder="participantes da marinha do Brasil">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesMb" placeholder="participantes da marinha do Brasil">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">d. Participantes da Força Aérea Brasileira:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesFab" placeholder="participantes da forca aérea Brasileira">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesFab" placeholder="participantes da forca aérea Brasileira">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">e. Participantes de Órgãos de Segurança e Ordenamento Pública:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesOs" placeholder="participantes de orgãos de Segurança e Ordem Pública">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesOs" placeholder="participantes de orgãos de Segurança e Ordem Pública">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">f. Participantes de outras Agências Governamentais:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesGov" placeholder="participantes de outras agências governamentais">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesGov" placeholder="participantes de outras agências governamentais">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">g. Participantes de outras Agências Privadas:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesPv" placeholder="participantes de outras agências privadas">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesPv" placeholder="participantes de outras agências privadas">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">h. Participantes de Organizações Não-Governamentais:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesCv" placeholder="participantes de organizações não governamentais">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesCv" placeholder="participantes de organizações não governamentais">
         </div>
       </div>
     </div>
@@ -459,16 +421,17 @@ if ($submit) {
               <option value="">Selecione o tipo de operação</option>
               <option value="Preparo">Preparo</option>
               <option value="Emprego">Emprego</option>
+              <option value="Transporte">Transporte</option>
             </select>
           <label for="acaoOuApoio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Tipo de de Ação ou Apoio:</label>
             <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required id="acaoOuApoio" name="acaoOuApoio">
               <option value="">Selecione o tipo de Ação ou Apoio</option>
-              <option value="logística para Operações de Garantia da Soberania">logística para Operações de Garantia da Soberania</option>
-              <option value="logística de apoio a operacoes garantia da lei e da ordem">logística de apoio a operacoes garantia da lei e da ordem</option>
-              <option value="logística de apoio a garantia da votação e apuração">logística de apoio a garantia da votação e apuração </option>
-              <option value="logística de apoio a defesa civil">logística de apoio a defesa civil</option>
-              <option value="logística de apoio as ações subsidiarias">logística de apoio as ações subsidiarias</option>
-              <option value="logística de apoio a operacoes internacionais">logística de apoio a operacoes internacionais</option>
+              <option value="Logística para Operações de Garantia da Soberania">Logística para Operações de Garantia da Soberania</option>
+              <option value="Logística de apoio a operacoes garantia da lei e da ordem">Logística de apoio a operacoes garantia da lei e da ordem</option>
+              <option value="Logística de apoio a garantia da votação e apuração">Logística de apoio a garantia da votação e apuração </option>
+              <option value="Logística de apoio a defesa civil">Logística de apoio a defesa civil</option>
+              <option value="Logística de apoio as ações subsidiarias">Logística de apoio as ações subsidiarias</option>
+              <option value="Logística de apoio a operacoes internacionais">Logística de apoio a operacoes internacionais</option>
             </select>
           <label for="apoioDesempenhado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">c. Ação ou Apoio Desempenhado:</label>
           <label for="Transporte" class="block mb-2 text-sm text-gray-900 dark:text-white">1) Transporte:</label>
@@ -549,28 +512,28 @@ if ($submit) {
               <div class="absolute text-sm text-sm inset-y-0 start-0 top-0 flex items-center ps-0 pointer-events-none">
                   <p>R$</p>
               </div>
-              <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Recebidos" name="recebidos" />
+              <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Recebidos" name="recebidos" />
             </div>
           <label for="empenhados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Empenhados:</label>
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Empenhados" name="empenhados" />
+            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Empenhados" name="empenhados" />
             </div>
           <label for="liquidados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">c. Liquidados:</label>  
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Liquidados" name="descentralizados" />
+            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Liquidados" name="descentralizados" />
             </div>
           <label for="devolvidos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">d. Devolvidos:</label>
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Devolvido" name="devolvidos" />
+            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Devolvido" name="devolvidos" />
             </div>
 
         </div>
