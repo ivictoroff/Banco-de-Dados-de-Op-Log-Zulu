@@ -3,20 +3,23 @@ create database dbmat;
 use dbmat;
 
 create table usuario(
+uid  int PRIMARY KEY  auto_increment,
+pg varchar (255),
 usuario varchar (255),
-senha varchar (255)
+senha varchar (255),
+adm varchar (255)
 );
 
 create table efetivo (
 eid  int PRIMARY KEY  auto_increment,
 participantes varchar (225),
-participantesEb bool,
-participantesMb bool,
-participantesFab bool,
-participantesOs bool,
-participantesGov bool,
-participantesPv bool,
-participantesCv bool
+participantesEb varchar (255),
+participantesMb varchar (255),
+participantesFab varchar (255),
+participantesOs varchar (255),
+participantesGov varchar (255),
+participantesPv varchar (255),
+participantesCv varchar (255)
 );
 
 create table operacao (
@@ -49,10 +52,10 @@ create table operacao (
     
 create table recursos (
 	rid  int PRIMARY KEY  auto_increment,
-	recebidos bool,
-    descentralizados bool,
-    empenhados bool,
-    devolvidos bool
+	recebidos varchar (255),
+    descentralizados varchar (255),
+    empenhados varchar (255),
+    devolvidos varchar (255)
     );
     
 create table infos (

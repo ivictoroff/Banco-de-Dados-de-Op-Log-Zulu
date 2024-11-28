@@ -1,59 +1,14 @@
-<?php
-session_start();
-date_default_timezone_set('America/Sao_Paulo');
-if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
-  unset($_SESSION['user']);
-  unset($_SESSION['pass']);
-  header('Location: /banco/index.php');
-} 
-else {
-  $usuario = $_SESSION['user'];
-}
-include ("bd.php");
-
-
-
-?>
-
-<DOCTYPE html>
-<html> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-  <title>colog</title>
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="shortcut icon" type="imagex/png" href="/img/dmat.png">
-  <style>
-    #rodape {
-      background-color: #f0f0f0;
-      padding: 20px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    #atual {
-      color: #f7b600;
-    }
-    td {
-      background-color: #DFDFDF;
-      text-align:center;
-    }
-    tr {
-      background-color: #C3C3C3;
-    }
-    .conteudo {
-      display: none;
-    }
-    
-    .conteudo.ativo {
-      display: block;
-    }
-  </style> 
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Document</title>
 </head>
 <body>
 
-  <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+<aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
       <a href="#" class="flex items-center ps-1 mb-1">
         <img src="/banco/img/colog.png" class="h-3 me-2 sm:h-16" alt="Flowbite Logo" />
@@ -116,175 +71,156 @@ include ("bd.php");
       </ul>
    </div>
   </aside>
+  <form action="operacao.php" method="get">
+      <div class="p-4 sm:ml-64">
+        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+            <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Nome da Operação:</label>
+              <input type="text" placeholder="Nome da Operação" name="operacao" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <label for="estado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Estado (UF):</label>
+              <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="estado" name="estado" placeholder="estados">
+                <option value="">Selecione o estado</option>
+                <option value="Acre">Acre</option>
+                <option value="Alagoas">Alagoas</option>
+                <option value="Amapá">Amapá</option>
+                <option value="Amazonas">Amazonas</option>
+                <option value="Bahia">Bahia</option>
+                <option value="Ceará">Ceará</option>
+                <option value="Distrito Federal">Distrito Federal</option>
+                <option value="Espírito Santo">Espírito Santo</option>
+                <option value="Goiás">Goiás</option>
+                <option value="Maranhão">Maranhão</option>
+                <option value="Mato Grosso">Mato Grosso</option>
+                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                <option value="Minas Gerais">Minas Gerais</option>
+                <option value="Pará">Pará</option>
+                <option value="Paraíba">Paraíba</option>
+                <option value="Paraná">Paraná</option>
+                <option value="Pernambuco">Pernambuco</option>
+                <option value="Piauí">Piauí</option>
+                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                <option value="Rondônia">Rondônia</option>
+                <option value="Roraima">Roraima</option>
+                <option value="Santa Catarina">Santa Catarina</option>
+                <option value="São Paulo">São Paulo</option>
+                <option value="Sergipe">Sergipe</option>
+                <option value="Tocantins">Tocantins</option>
+                <option value="Internacional">Internacional</option>
+              </select>
+            <label for="missao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">d. Missão:</label>
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="missao" placeholder="missão">
+              
+            <label for="cma" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">e. Comando Militar de Área:</label>
+              <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="cma" name="cma" placeholder="comando militar de area">
+                  <option value="">Selecione o Comando Militar de Área</option>
+                  <option value="Comando Militar da Amazônia">Comando Militar da Amazônia</option>
+                  <option value="Comando Militar do Leste">Comando Militar do Leste</option>
+                  <option value="Comando Militar do Planalto">Comando Militar do Planalto</option>
+                  <option value="Comando Militar do Norte">Comando Militar do Norte</option>
+                  <option value="Comando Militar do Nordeste">Comando Militar do Nordeste</option>
+                  <option value="Comando Militar do Oeste">Comando Militar do Oeste</option>
+                  <option value="Comando Militar do Sudeste">Comando Militar do Sudeste</option>
+                  <option value="Comando Militar do Sul">Comando Militar do Sul</option>
+                  </select>
+            <label for="rm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">f. Região Militar (RM):</label>
+              <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="rm" name="rm">
+                <option value=""> Selecione a Região Militar</option>
+                <option value="1ª região militar">1ª região militar</option>
+                <option value="2ª região militar">2ª região militar</option>
+                <option value="3ª região militar">3ª região militar</option>
+                <option value="4ª região militar">4ª região militar</option>
+                <option value="5ª região militar">5ª região militar</option>
+                <option value="6ª região militar">6ª região militar</option>
+                <option value="7ª região militar">7ª região militar</option>
+                <option value="8ª região militar">8ª região militar</option>
+                <option value="9ª região militar">9ª região militar</option>
+                <option value="10ª região militar">10ª região militar</option>
+                <option value="11ª região militar">11ª região militar</option>
+                <option value="12ª região militar">12ª região militar</option>
+              </select>
 
-  
-
-  <!-- inicio da tabela --> 
-  <div class="conteudo ativo" id="conteudo-1">
-    <div class="p-4 sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
-          <!-- campo de pesquisa --> 
-        <form action="">
-          <input class="border-2 rounded-lg border-slate-800" name="busca" value="<?php if(isset($_GET['busca'])) echo $_GET['busca']; ?>" placeholder="Digite os termos de pesquisa" type="text">
-          <button class="border-2 rounded-lg border-slate-800" type="submit">Pesquisar</button>
-        </form> <br>
-
-        <table  class= " border border-slate-600">
-
-          <!-- inicio do cabecalho da tabela -->
-
-          <tr style="margin-right: 150px;" class=" border border-slate-600">
-            <th class="border border-slate-600">Selecione</th>
-            <th class="border border-slate-600">Operador</th>
-            <th class="border border-slate-600">Operação</th>
-            <th class="border border-slate-600">Missão</th>
-            <th class="border border-slate-600">Estado</th>
-            <th class="border border-slate-600">Comando Militar de Área</th>
-            <th class="border border-slate-600">Região Militar</th>
-            <th class="border border-slate-600">Comando da Operação</th>
-            <th class="border border-slate-600">Comando Apoiado</th>
-            <th class="border border-slate-600">Inicio da Operação</th>
-            <th class="border border-slate-600">Fim da Operação</th> 
-            <th class="border border-slate-600">Completo</th>
-          </tr>
-          <?php
-            if (!isset($_GET['busca'])) {
-          ?>
-          <tr>
-            <td colspan="3">Digite algo para pesquisar...</td>
-          </tr>
-          <?php
-            } 
-            else {
-              $pesquisa = $mysqli->real_escape_string($_GET['busca']);
-              $sql_code = "SELECT * 
-                FROM operacao 
-                WHERE operacao LIKE '%$pesquisa%' 
-                OR missao LIKE '%$pesquisa%'
-                OR estado LIKE '%$pesquisa%'
-                OR cma LIKE '%$pesquisa%'
-                OR rm LIKE '%$pesquisa%'
-                OR comandoOp LIKE '%$pesquisa%'
-                OR comandoApoio LIKE '%$pesquisa%'
-                OR inicioOp LIKE '%$pesquisa%'
-                OR fimOp LIKE '%$pesquisa%'
-                or opid LIKE '%$pesquisa%'";
-
-                $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-                
-            if ($sql_query->num_rows == 0) {
-          ?>
-          <tr>
-              <td colspan="3">Nenhum resultado encontrado...</td>
-          </tr>
-          <?php
-            } 
-            else {
-              while($dados = $sql_query->fetch_assoc()) {
-          ?>
-          <form action="salva.php" method="post">
-          <tr class=" border border-slate-600 ">
-            <td class="px-6 py-4 border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="<?php echo $dados['opid']; ?>"></td>
-            <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operador']; ?></td>
-            <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['missao']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['estado']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['cma']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['rm']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['inicioOp']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['fimOp']; ?></td>
-            <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
-          </tr>
-          <?php
-                }
-              }
-            }
-          ?>
-          <input type="submit" class="border-2 rounded-lg border-slate-800" value="Gerar resumo">
-          </form>
-
-        </table>
-      </div>
+            <label for="ComandoOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">g. Comando da Operação:</label>
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="comandoOp" placeholder="comando da operação">
+            <label for="comandoApoiado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">h. Organização apoiada:</label>
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="comandoApoiado" placeholder="Organização apoiada">
+            <label for="ini" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">i. Início da Operação:</label>
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date" id="ini" name="inicioOp" placeholder="inicio da operação">
+            <label for="fimOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">j. Término da Operação:</label>                 
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date" id="fim" name="fimOp" placeholder="término da operação">
+            <button type="submit">Pesquisar</button>
+            </div>
     </div>
-  </div>
-
-  <div class="conteudo" id="conteudo-2">
-    <div class="p-4 sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-      <table  class= " border border-slate-600">
-
-      <!-- inicio do cabecalho da tabela -->
-
-      <tr style="margin-right: 150px;" class=" border border-slate-600">
-        <th class="border border-slate-600">Selecione</th>
-        <th class="border border-slate-600">Operação</th>
-        <th class="border border-slate-600">Missão</th>
-        <th class="border border-slate-600">Estado</th>
-        <th class="border border-slate-600">Comando Militar de Área</th>
-        <th class="border border-slate-600">Região Militar</th>
-        <th class="border border-slate-600">Comando da Operação</th>
-        <th class="border border-slate-600">Comando Apoiado</th>
-        <th class="border border-slate-600">Inicio da Operação</th>
-        <th class="border border-slate-600">Fim da Operação</th> 
-        <th class="border border-slate-600">Completo</th>
-        <th class="border border-slate-600">Editar</th>
-      </tr>
-      <?php
-          $pesquisa = $mysqli->real_escape_string($usuario);
-          $sql_code = "SELECT * 
-            FROM operacao 
-            WHERE operador LIKE '%$pesquisa%'";
-
-            $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-            
-        if ($sql_query->num_rows == 0) {
-      ?>
-      <tr>
-          <td colspan="3">Nenhum resultado encontrado...</td>
-      </tr>
-      <?php
-        } 
-        else {
-          while($dados = $sql_query->fetch_assoc()) {
-      ?>
-      <form action="salva.php" method="post">
-      <tr class=" border border-slate-600 ">
-        <td class="px-6 py-4 border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="<?php echo $dados['opid']; ?>"></td>
-        <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['missao']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['estado']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['cma']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['rm']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['inicioOp']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['fimOp']; ?></td>
-        <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
-        <td class="px-6 py-4"><a style="cursor: pointer; " class="content-center font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > Editar </a> </td>
-      </tr>
-  <?php
-      }
-    }
-  ?>
-  <input type="submit" class="border-2 rounded-lg border-slate-800" value="Gerar resumo">
   </form>
-
-        <!-- script da pesquisa pelo id da query --> 
-
-        <script>
-      function abrirPesquisa(id) {
-        window.open('/banco/app/pesquisa/completo.php?id=' + id, '_blank');
-      }
-      function abrirEdicao(id) {
-        window.open('/banco/app/insercao/update.php?id=' + id, '_blank');
-      }
-
-    </script>
-    
-  <script src="/banco/src/navbar.js"></script>
-
 </body>
-</html>  
+</html>
+
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+
+        <?php
+
+        // Conecta ao banco de dados
+
+        $servername = "localhost";
+        $username = "root";
+        $password = "@160l0nc3t";
+        $dbname = "dbmat";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Verifica se a conexão foi bem-sucedida
+        if ($conn->connect_error) {
+            die("Conexão falhou: " . $conn->connect_error);
+        }
+
+        // Define os campos de pesquisa
+        $campos = array('operacao', 'estado', 'missao', 'cma', 'rm', 'comandoOp', 'comandoApoio', 'inicioOp', 'fimOp');
+
+        // Define a consulta SQL
+        $query = "SELECT * FROM operacao WHERE ";
+
+        // Verifica se as datas estão preenchidas
+        foreach ($campos as $campo) {
+          if (isset($campo)){
+            @$query .= "$campo LIKE '%".$_GET[$campo]."%' AND ";
+            
+          }
+      }
+
+      if (!empty($_GET['inicioOp']) && !empty($_GET['fimOp'])) {
+        $data_inicial =  $_GET['inicioOp'];
+        $data_final =  $_GET['fimOp'];
+        
+        $query .= "inicioOp >= '".$data_inicial."' AND fimOp <= '".$data_final."'";
+        
+      }
+      else{
+        // Remove o último "OR"
+        $query = substr($query, 0, -4);
+
+      }
+        // Executa a consulta
+        $result = $conn->query($query);
+
+        // Exibe os resultados
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "ID: " . $row["opid"] . "<br>";
+                echo "operacao: " . $row["operacao"] . "<br>";
+                echo "rm: " . $row["rm"] . "<br>";
+                echo "missao: " . $row["missao"] . "<br>";
+                echo "estado: " . $row["estado"] . "<br>";
+                echo "cma: " . $row["cma"] . "<br><br>";
+            }
+        } else {
+            echo "Nenhum resultado encontrado.";
+        }
+
+        // Fecha a conexão
+        $conn->close();
+
+        ?>
+
+    </div>
+</div>
