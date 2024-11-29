@@ -71,7 +71,7 @@
       </ul>
    </div>
   </aside>
-  <form action="operacao.php" method="get">
+  <form action="pesquisa.php" method="post">
       <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Nome da Operação:</label>
@@ -147,80 +147,10 @@
             <label for="ini" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">i. Início da Operação:</label>
               <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date" id="ini" name="inicioOp" placeholder="inicio da operação">
             <label for="fimOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">j. Término da Operação:</label>                 
-              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date" id="fim" name="fimOp" placeholder="término da operação">
-            <button type="submit">Pesquisar</button>
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date" id="fim" name="fimOp" placeholder="término da operação"> <br>
+              <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">PESQUISAR</button>
             </div>
     </div>
   </form>
 </body>
 </html>
-
-<div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
-        <?php
-
-        // Conecta ao banco de dados
-
-        $servername = "localhost";
-        $username = "root";
-        $password = "@160l0nc3t";
-        $dbname = "dbmat";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Verifica se a conexão foi bem-sucedida
-        if ($conn->connect_error) {
-            die("Conexão falhou: " . $conn->connect_error);
-        }
-
-        // Define os campos de pesquisa
-        $campos = array('operacao', 'estado', 'missao', 'cma', 'rm', 'comandoOp', 'comandoApoio', 'inicioOp', 'fimOp');
-
-        // Define a consulta SQL
-        $query = "SELECT * FROM operacao WHERE ";
-
-        // Verifica se as datas estão preenchidas
-        foreach ($campos as $campo) {
-          if (isset($campo)){
-            @$query .= "$campo LIKE '%".$_GET[$campo]."%' AND ";
-            
-          }
-      }
-
-      if (!empty($_GET['inicioOp']) && !empty($_GET['fimOp'])) {
-        $data_inicial =  $_GET['inicioOp'];
-        $data_final =  $_GET['fimOp'];
-        
-        $query .= "inicioOp >= '".$data_inicial."' AND fimOp <= '".$data_final."'";
-        
-      }
-      else{
-        // Remove o último "OR"
-        $query = substr($query, 0, -4);
-
-      }
-        // Executa a consulta
-        $result = $conn->query($query);
-
-        // Exibe os resultados
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "ID: " . $row["opid"] . "<br>";
-                echo "operacao: " . $row["operacao"] . "<br>";
-                echo "rm: " . $row["rm"] . "<br>";
-                echo "missao: " . $row["missao"] . "<br>";
-                echo "estado: " . $row["estado"] . "<br>";
-                echo "cma: " . $row["cma"] . "<br><br>";
-            }
-        } else {
-            echo "Nenhum resultado encontrado.";
-        }
-
-        // Fecha a conexão
-        $conn->close();
-
-        ?>
-
-    </div>
-</div>
