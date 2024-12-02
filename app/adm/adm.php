@@ -9,7 +9,7 @@ if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
 else {
   $usuario = $_SESSION['user'];
 }
-include ("bd.php");
+require '../../acoes/bd.php';
 
 $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' and adm = 'Administrador'";
 
@@ -192,8 +192,8 @@ if (mysqli_num_rows($result) < 1) {
             <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['rm']; ?></td>
             <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>
             <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['inicioOp']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['fimOp']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
             <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
             <td class="px-6 py-4"><a style="cursor: pointer; " class="content-center font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > Editar </a> </td>
           </tr>

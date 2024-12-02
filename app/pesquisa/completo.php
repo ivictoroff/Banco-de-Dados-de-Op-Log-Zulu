@@ -10,7 +10,7 @@ else {
   $usuario = $_SESSION['user'];
 }
 
-include('bd.php');
+require '../../acoes/bd.php';
 // Pega o ID da URL
 $id = $_GET['id'];
 
@@ -267,14 +267,14 @@ $conn->close();
     </tr>
     <tr>
       <th class="border border-slate-600 bg-blend-darken">Recebidos:</th>
-      <th class="border border-slate-600 bg-blend-darken">Empenhados:</th>
+      <th class="border border-slate-600 bg-blend-darken">liquidados:</th>
       <th class="border border-slate-600 bg-blend-darken">Liquidados:</th>
       <th class="border border-slate-600 bg-blend-darken">Devolvidos:</th>
     </tr>
     <tr>
         <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['recebidos']; ?></td>
         <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['descentralizados']; ?></td>
-        <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['empenhados']; ?></td>
+        <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['liquidados']; ?></td>
         <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['devolvidos']; ?></td>
     </tr>
     <tr>

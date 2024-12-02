@@ -125,7 +125,7 @@ $desAviacao = @$_REQUEST['desAviacao'];
 
 $recebidos = @$_REQUEST['recebidos'];
 $descentralizados = @$_REQUEST['descentralizados'];
-$empenhados = @$_REQUEST['empenhados'];
+$liquidados = @$_REQUEST['liquidados'];
 $devolvidos = @$_REQUEST['devolvidos'];
 
 //outras infos
@@ -158,7 +158,7 @@ if ($submit) {
 
   /* insere os dados dos recursos aprovisionados */
 
-  $sql = "INSERT INTO recursos (recebidos,descentralizados, empenhados, devolvidos) VALUES ('$recebidos', '$descentralizados', '$empenhados', '$devolvidos')";
+  $sql = "INSERT INTO recursos (recebidos,descentralizados, liquidados, devolvidos) VALUES ('$recebidos', '$descentralizados', '$liquidados', '$devolvidos')";
 
   $mysqli->query($sql);
 
@@ -514,19 +514,19 @@ if ($submit) {
               </div>
               <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Recebidos" name="recebidos" />
             </div>
-          <label for="empenhados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Empenhados:</label>
+          <label for="liquidados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. liquidados:</label>
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Empenhados" name="empenhados" />
+            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="liquidados" name="liquidados" />
             </div>
           <label for="liquidados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">c. Liquidados:</label>  
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Liquidados" name="descentralizados" />
+            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Liquidados" name="liquidados" />
             </div>
           <label for="devolvidos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">d. Devolvidos:</label>
             <div class="relative">

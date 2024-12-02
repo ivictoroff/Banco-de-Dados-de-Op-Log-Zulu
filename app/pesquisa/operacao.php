@@ -1,10 +1,53 @@
+<?php
+
+session_start();
+date_default_timezone_set('America/Sao_Paulo');
+if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
+  unset($_SESSION['user']);
+  unset($_SESSION['pass']);
+  header('Location: /banco/index.php');
+} 
+else {
+  $usuario = $_SESSION['user'];
+}
+  // Conecta ao banco de dados
+  require '../../acoes/bd.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <title>Document</title>
+    <title>colog</title>
+    <style>
+    #rodape {
+      background-color: #f0f0f0;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    #atual {
+      color: #f7b600;
+    }
+    td {
+      background-color: #DFDFDF;
+      text-align:center;
+    }
+    tr {
+      background-color: #C3C3C3;
+    }
+    .conteudo {
+      display: none;
+    }
+    .conteudo.ativo {
+      display: block;
+    }
+  </style> 
 </head>
 <body>
 
@@ -71,6 +114,8 @@
       </ul>
    </div>
   </aside>
+
+  <div class="conteudo ativo" id="conteudo-1">
   <form action="pesquisa.php" method="post">
       <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
@@ -151,6 +196,85 @@
               <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">PESQUISAR</button>
             </div>
     </div>
+  </div>
   </form>
+  <!-- script da navbar --> 
+  <script src="/banco/src/navbar.js"></script>
+  <!-- inicio da tabela --> 
+  <div class="conteudo" id="conteudo-2">
+    <div class="p-4 sm:ml-64">
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <table  class= " border border-slate-600">
+
+          <!-- inicio do cabecalho da tabela -->
+
+          <tr style="margin-right: 150px;" class=" border border-slate-600">
+            <th class="border border-slate-600">Operação</th>
+            <th class="border border-slate-600">Missão</th>
+            <th class="border border-slate-600">Estado</th>
+            <th class="border border-slate-600">Comando Militar de Área</th>
+            <th class="border border-slate-600">Região Militar</th>
+            <th class="border border-slate-600">Comando da Operação</th>
+            <th class="border border-slate-600">Comando Apoiado</th>
+            <th class="border border-slate-600">Inicio da Operação</th>
+            <th class="border border-slate-600">Fim da Operação</th> 
+            <th class="border border-slate-600">Completo</th>
+            <th class="border border-slate-600">Editar</th>
+          </tr>
+          <?php
+              $pesquisa = $mysqli->real_escape_string($usuario);
+              $sql_code = "SELECT * 
+                FROM operacao 
+                WHERE operador LIKE '%$pesquisa%'";
+
+                $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+                
+            if ($sql_query->num_rows == 0) {
+          ?>
+          <tr>
+              <td colspan="3">Nenhum resultado encontrado...</td>
+          </tr>
+          <?php
+            } 
+            else {
+              while($dados = $sql_query->fetch_assoc()) {
+          ?>
+          <form action="#" method="post">
+          <tr class=" border border-slate-600 ">
+            <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['missao']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['estado']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['cma']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['rm']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
+            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
+            <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
+            <td class="px-6 py-4"><a style="cursor: pointer; " class="content-center font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > Editar </a> </td>
+          </tr>
+          <?php
+              }
+            }
+          ?>
+          </form>
+
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+        <!-- script da pesquisa pelo id da query --> 
+
+        <script>
+      function abrirPesquisa(id) {
+        window.open('/banco/app/pesquisa/completo.php?id=' + id, '_blank');
+      }
+      function abrirEdicao(id) {
+        window.open('/banco/app/insercao/update.php?id=' + id, '_blank');
+      }
+
+    </script>
 </body>
 </html>

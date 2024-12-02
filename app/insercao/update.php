@@ -67,7 +67,7 @@ $desAviacao = @$_REQUEST['desAviacao'];
 
 $recebidos = @$_REQUEST['recebidos'];
 $descentralizados = @$_REQUEST['descentralizados'];
-$empenhados = @$_REQUEST['empenhados'];
+$liquidados = @$_REQUEST['liquidados'];
 $devolvidos = @$_REQUEST['devolvidos'];
 
 $idd = @$_REQUEST['idd'];
@@ -156,12 +156,12 @@ if ($submit) {
   $stmt->execute();
 
 
-  $sqlr = "UPDATE recursos SET recebidos= :RECEBIDOS, descentralizados= :DESCENTRALIZADO, empenhados= :EMPENHADOS, devolvidos= :DEVOLVIDOS WHERE rid=:ID";
+  $sqlr = "UPDATE recursos SET recebidos= :RECEBIDOS, descentralizados= :DESCENTRALIZADO, liquidados= :liquidados, devolvidos= :DEVOLVIDOS WHERE rid=:ID";
   $stmt = $conn->prepare ($sqlr);
   
   $stmt -> bindParam(":RECEBIDOS", $recebidos);
   $stmt -> bindParam(":DESCENTRALIZADO", $descentralizados);
-  $stmt -> bindParam(":EMPENHADOS", $empenhados);
+  $stmt -> bindParam(":liquidados", $liquidados);
   $stmt -> bindParam(":DEVOLVIDOS", $devolvidos);
 
   $stmt -> bindParam(":ID", $idd);
@@ -441,7 +441,7 @@ if ($submit) {
     <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">b. Descentralizaddos</label>
       <input type="text" name="descentralizados" value="<?php echo $dados4['descentralizados']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
     <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">c. Liquidados</label>
-      <input type="text" name="empenhados" value="<?php echo $dados4['empenhados']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <input type="text" name="liquidados" value="<?php echo $dados4['liquidados']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
     <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">d. Devolvidos</label>
       <input type="text" name="devolvidos" value="<?php echo $dados4['devolvidos']; ?>"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       
