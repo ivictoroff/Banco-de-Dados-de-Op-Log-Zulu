@@ -9,6 +9,8 @@ if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
 else {
   $usuario = $_SESSION['user'];
 }
+
+// Conecta ao banco de dados
 require '../../acoes/bd.php';
 
 $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' and adm = 'Administrador'";

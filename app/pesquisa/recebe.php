@@ -1,17 +1,6 @@
 <?php
 // Conecta ao banco de dados
-
-$servername = "localhost";
-$username = "root";
-$password = "@160l0nc3t";
-$dbname = "dbmat";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verifica se a conexão foi bem-sucedida
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
+require '../../acoes/bd.php';
 
 if (!isset($_POST['pg'])) {
 

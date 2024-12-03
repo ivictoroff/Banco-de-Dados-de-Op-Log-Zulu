@@ -5,7 +5,8 @@
 **/
 
 
-include ("bd.php");
+// Conecta ao banco de dados
+require '../../acoes/bd.php';
 
 // inicia a seçao
 

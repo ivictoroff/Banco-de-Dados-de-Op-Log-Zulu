@@ -90,39 +90,41 @@
       <?php
 
       // Define os campos de pesquisa
-      $campos = array('operacao', 'estado', 'missao', 'cma', 'rm', 'comandoOp', 'comandoApoio', 'inicioOp', 'fimOp');
+      $campos = array('operacao', 'estado', 'missao', 'cma', 'rm', 'comandoOp', 'comandoApoio');
 
-      // Define a consulta SQL
       $query = "SELECT * FROM operacao WHERE ";
 
-      // Verifica se as datas estão preenchidas
-      foreach ($campos as $campo) {
-        if (isset($campo)){
-          @$query .= "$campo LIKE '%".$_POST[$campo]."%' AND ";
+      if (!empty($_POST['inicioOp']) && !empty($_POST['fimOp'])) {
+        $data_inicial =  $_POST['inicioOp'];
+        $data_final = $_POST['fimOp'];
+        
+        $query .= "inicioOp >= '".$data_inicial."' AND fimOp <= '".$data_final."'";
+        
+        if (!empty($_POST['operacao'])||!empty($_POST['estado'])||!empty($_POST['missao'])||!empty($_POST['cma'])||!empty($_POST['rm'])||!empty($_POST['comandoOp'])||!empty($_POST['comandoApoio'])) {
+          foreach ($campos as $campo) {
+          $query .= " AND $campo LIKE '%".$_POST[$campo]."%'";
+          }
         }
-    }
-    if (!empty($_POST['inicioOp']) && !empty($_POST['fimOp'])) {
-      $data_inicial =  $_POST['inicioOp'];
-      $data_final =  $_POST['fimOp'];
-      
-      $query .= "inicioOp >= '".$data_inicial."' AND fimOp <= '".$data_final."'";
-      
-    }
-    else{
+    } else {
+        // Busca sem datas
+        foreach ($campos as $campo) {
+          if (isset($campo)){
+            @$query .= "$campo LIKE '%".$_POST[$campo]."%' AND ";
+          }
+      }
       // Remove o último "OR"
       $query = substr($query, 0, -4);
-
     }
-            // Executa a consulta
-            $result = $mysqli->query($query);
-            // Exibe os resultados
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $ids[] = $row['opid'];
-                }
-            } else {
-                echo "Nenhum resultado encontrado.";
-            }
+    
+    //print_r($query);
+    
+      // Executa a consulta
+      $result = $mysqli->query($query);
+      // Exibe os resultados
+      if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+              $ids[] = $row['opid'];
+          }
       
       foreach ($ids as $id){
           $pesquisa = $mysqli->real_escape_string($id);
@@ -293,11 +295,27 @@
 
         $mysqli->close();
         ?>
-        <input type="submit" value="Gerar PDF">
+        <button type="submit">Enviar</button>
         </form>
-        <a href="/banco/src/pdf/gerar_pdf.php">Gerar PDF</a>
-        <script src="/banco/src/pdf.js"></script>
-        
+        <?php
+        }else {
+          echo "Nenhum resultado encontrado.";
+        }
+        ?>
 
+        <script src="/banco/src/pdf.js"></script>
+
+        
+        <!-- script da pesquisa pelo id da query --> 
+
+        <script>
+      function abrirPesquisa(id) {
+        window.open('/banco/app/pesquisa/completo.php?id=' + id, '_blank');
+      }
+      function abrirEdicao(id) {
+        window.open('/banco/app/insercao/update.php?id=' + id, '_blank');
+      }
+
+    </script>
     </div>
 </div>

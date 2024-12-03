@@ -13,7 +13,9 @@ else {
 
 $oper = @$_REQUEST['operador'];
 
-include('bd.php');
+// Conecta ao banco de dados
+require '../../acoes/bd.php';
+
 // Pega o ID da URL
 $id = $_GET['id'];
 
