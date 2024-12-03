@@ -132,12 +132,10 @@ foreach ($array as $id){
     $dados .= "Operação:" . $row_usuario['operacao'] . "<br>";
     $dados .= "missão:" . $row_usuario['missao'] . "<br>"; 
     $dados .= "estado:" . $row_usuario['estado'] . "<br>"; 
-    $dados .= "inicioOp:" . $row_usuario['inicioOp'] . "<br>";
-    $dados .= "fimOp:" . $row_usuario['fimOp'] . "<br>";
+    $dados .= "inicioOp:" . date_format(date_create_from_format('Y-m-d', $row_usuario["inicioOp"]), 'd/m/Y') . "<br>";
+    $dados .= "fimOp:" . date_format(date_create_from_format('Y-m-d', $row_usuario["fimOp"]), 'd/m/Y') . "<br>";
     $dados .= "cma:" . $row_usuario['cma'] . "<br>"; 
-
-    //echo $row_usuario['cma'];
-
+    
     $dados .= "<hr>";
 }
 

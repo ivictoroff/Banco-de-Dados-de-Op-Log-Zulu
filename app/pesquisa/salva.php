@@ -20,23 +20,18 @@ else {
   $usuario = $_SESSION['user'];
 }
 
-include('bd.php');
+// Conecta ao banco de dados
+require '../../acoes/bd.php';
+
 // Pega o ID da URL
 
-// Conecta ao banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "@160l0nc3t";
-$dbname = "dbmat";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Executa a consulta SQL
 for ($i=0; $i < count($ids); $i++) { 
   $query = "SELECT * FROM operacao WHERE opid = '$ids[$i]'";
 }
 
-$result = $conn->query($query);
+$result = $mysqli->query($query);
 
 $recursos = 0;
 $recursosRecebidos = 0;
@@ -81,7 +76,7 @@ foreach ($ids as $id){
           while ($dados5 = $sql_query5->fetch_assoc()) {
             while ($dados6 = $sql_query6->fetch_assoc()) {
 
-            $recursos += $dados4['empenhados'];
+            $recursos += $dados4['liquidados'];
 
             $efetivoEx += $dados2['participantesEb']; 
             $efetivoMb += $dados2['participantesMb']; 
@@ -104,7 +99,7 @@ foreach ($ids as $id){
 }
 
 // Fecha a conexão com o banco de dados
-$conn->close();
+$mysqli->close();
 
 ?>
 
