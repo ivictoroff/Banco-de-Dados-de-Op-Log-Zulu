@@ -131,7 +131,7 @@ $conn->close();
   </div>
   
   <!-- id da query sendo pesquisado -->
-  <div class="vai p-4 sm:ml-64">
+  <div class="vai sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
   <form action="" class="conteudo ativo" id="conteudo-1">
     <input disabled class="border-2 rounded-lg border-slate-800" name="busca" value="<?php if(isset($id)) echo $id; ?>" placeholder="Digite os termos de pesquisa" type="text">

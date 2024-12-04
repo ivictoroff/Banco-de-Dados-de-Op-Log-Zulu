@@ -308,7 +308,7 @@ if ($submit) {
 
     <!-- dados das operacoes -->
     <div class="conteudo ativo" id="conteudo-1">
-      <div class="p-4 sm:ml-64">
+      <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Nome da Operação:</label>
               <input type="text" placeholder="Nome da Operação" name="operacao" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
@@ -390,7 +390,7 @@ if ($submit) {
     
     <!-- efetivo -->
     <div class="conteudo" id="conteudo-2">
-      <div class="p-4 sm:ml-64">
+      <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Participantes:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="participantes" placeholder="participantes">
@@ -414,7 +414,7 @@ if ($submit) {
 
     <!-- tipos de operacoes -->
     <div class="conteudo" id="conteudo-3">
-      <div class="p-4 sm:ml-64">
+      <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
 
           <label for="tipoOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Operação:</label>
@@ -506,7 +506,7 @@ if ($submit) {
 
     <!-- recursos aprovisionados --> 
     <div class="conteudo" id="conteudo-4">
-      <div class="p-4 sm:ml-64">
+      <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <label for="recebidos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Recebidos:</label>
             <div class="relative">
@@ -543,7 +543,7 @@ if ($submit) {
 
     <!-- otras informacoes --> 
     <div class="conteudo" id="conteudo-5">
-      <div class="p-4 sm:ml-64">
+      <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <div style="text-align:center;" class="content-center">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Outras informações:</label>
@@ -555,7 +555,7 @@ if ($submit) {
 
     <!-- otras informacoes --> 
     <div class="conteudo" id="conteudo-6"> 
-      <div class="p-4 sm:ml-64">
+      <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">      
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">a. Relatório Final:</label>
             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="relatorioFinal" type="file">

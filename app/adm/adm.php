@@ -120,7 +120,7 @@ if (mysqli_num_rows($result) < 1) {
 
   <!-- inicio da tabela --> 
   <div class="conteudo ativo" id="conteudo-1">
-    <div class="p-4 sm:ml-64">
+    <div class="sm:ml-64">
       <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
 
           <!-- campo de pesquisa --> 
@@ -215,7 +215,7 @@ if (mysqli_num_rows($result) < 1) {
   <div class="conteudo" id="conteudo-2">
 
   
-  <div class="p-4 sm:ml-64">
+  <div class="sm:ml-64">
   <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
   
   <form action="/banco/acoes/permissao.php" method="post">
@@ -235,7 +235,7 @@ if (mysqli_num_rows($result) < 1) {
 
     <!-- tela de adm -->
 
-    <div class="p-4 sm:ml-64">
+    <div class="sm:ml-64">
       <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
       <table  class= " border border-slate-600">
 
@@ -279,7 +279,7 @@ if (mysqli_num_rows($result) < 1) {
   </div>
   </div>
 
-      <div class="p-4 sm:ml-64">
+      <div class="sm:ml-64">
       <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
 
       <form action="">
