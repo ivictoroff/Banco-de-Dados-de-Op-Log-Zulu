@@ -3,7 +3,7 @@
 // Carregar o Composer
 require './vendor/autoload.php';
 
-$array = $_POST['ids'];
+$id = $_POST['id'];
 
 // Referenciar o namespace Dompdf
 use Dompdf\Dompdf;
@@ -22,7 +22,7 @@ $dompdf = new Dompdf($options);
 
 
 ob_start();
-require_once('relatorio.php');
+require_once('completo.php');
 $html = ob_get_contents();
 ob_end_clean();
 $dompdf->load_html($html);
@@ -32,9 +32,9 @@ $options = new Options();
 
 // Configurar o tamanho e a orientacao do papel
 // landscape - Imprimir no formato paisagem
-//$dompdf->setPaper('A4', 'landscape');
+$dompdf->setPaper('A4', 'landscape');
 // portrait - Imprimir no formato retrato
-$dompdf->setPaper('A4', 'portrait');
+//$dompdf->setPaper('A4', 'portrait');
 
 // Renderizar o HTML como PDF
 $dompdf->render();

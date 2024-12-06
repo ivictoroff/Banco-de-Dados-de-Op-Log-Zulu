@@ -206,7 +206,7 @@ else {
   <div class="conteudo" id="conteudo-2">
     <div class="sm:ml-64">
       <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <table  class= " border border-slate-600">
+        <table  class= "w-full text-center border border-slate-600">
 
           <!-- inicio do cabecalho da tabela -->
 
@@ -234,7 +234,7 @@ else {
             if ($sql_query->num_rows == 0) {
           ?>
           <tr>
-              <td colspan="3">Nenhum resultado encontrado...</td>
+              <td colspan="11">Nenhuma Operação registrada por <?php echo $usuario ?>...</td>
           </tr>
           <?php
             } 

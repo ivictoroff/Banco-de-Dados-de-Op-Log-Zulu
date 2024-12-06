@@ -218,7 +218,7 @@
 
         <!-- inicio do cabecalho da tabela -->
 
-        <tr style="margin-right: 150px;" class=" border border-slate-600">
+        <tr style="margin-right: 150px;" class=" border border-slate-600 ">
           <th class="border border-slate-600">Operação</th>
           <th class="border border-slate-600">Missão</th>
           <th class="border border-slate-600">Estado</th>
@@ -268,7 +268,7 @@
                     ?>
 
                     <form action="/banco/src/pdf/gerar_pdf.php" method="post">
-                    <tr class=" border border-slate-600 ">
+                    <tr class="border border-slate-600">
                       <?php
                       foreach ($ids as $chave => $valor) { ?>
                         <input type="hidden" name="ids[<?= $chave ?>]" value="<?= $valor ?>">
