@@ -128,10 +128,10 @@ foreach ($array as $id){
 </head>
 <body>
   
-<table border="1">
-  <tr class="">
-    <th class=" border border-slate-600"> <?php echo "Total de operações: " . count($array) ; ?></th>
-    <th class=" border border-slate-600"> <?php echo "Recursos Liquidados: " . $recursosLiquidados ; ?> </th>
+<table>
+  <tr>
+    <th class="border border-slate-600"> <?php echo "Total de operações: " . count($array) ; ?></th>
+    <th class="border border-slate-600"> <?php echo "Recursos Liquidados: " . $recursosLiquidados ; ?> </th>
   </tr>
   <tr>
     <td class="border border-slate-600"> <?php echo "Efetivo empregado: " . $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros . "<br>"; ?>
@@ -152,12 +152,12 @@ echo "<hr>";
 
 while($row_usuario = $result_usuarios->fetch_assoc()) {
   //var_dump ($row_usuario);
-  echo "Operação:" . $row_usuario['operacao'] . "<br>";
-  echo "missão:" . $row_usuario['missao'] . "<br>"; 
-  echo "estado:" . $row_usuario['estado'] . "<br>"; 
-  echo "inicioOp:" . date_format(date_create_from_format('Y-m-d', $row_usuario["inicioOp"]), 'd/m/Y') . "<br>";
-  echo "fimOp:" . date_format(date_create_from_format('Y-m-d', $row_usuario["fimOp"]), 'd/m/Y') . "<br>";
-  echo "cma:" . $row_usuario['cma'] . "<br>"; 
+  echo "Operação: " . $row_usuario['operacao'] . "<br>";
+  echo "Missão: " . $row_usuario['missao'] . "<br>"; 
+  echo "Estado: " . $row_usuario['estado'] . "<br>"; 
+  echo "Início da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["inicioOp"]), 'd/m/Y') . "<br>";
+  echo "Fim da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["fimOp"]), 'd/m/Y') . "<br>";
+  echo "Comando Militar de Área: " . $row_usuario['cma'] . "<br>"; 
   
   echo "<hr>";
 }

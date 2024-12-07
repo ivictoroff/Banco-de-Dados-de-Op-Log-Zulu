@@ -44,7 +44,7 @@ $dompdf->render();
 //echo $dompdf->output();
 
 // Gerar o PDF
-$dompdf->stream('Relatorio.pdf');
+$dompdf->stream($nomeOp. '.pdf');
 
 ?>
 

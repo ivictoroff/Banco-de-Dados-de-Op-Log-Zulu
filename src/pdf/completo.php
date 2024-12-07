@@ -10,11 +10,31 @@ include_once '../../acoes/bd.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+    table {
+      background-color:#fefefe;
+      border-radius: 5px;
+      border: 1px solod #ccc;
+      text-align: center;
+      width: 100%;
+    }
+    table td,
+    table th{
+      border:1px solid #ccc;
+    }
+    table th{
+      font-weight:bold;
+      background-color:#bbbbbb;
+    }
+    hr{
+      border:1px solid #ccc;
+      margin: 20px;
+    }
+  </style>
 </head>
 <body>
 
-<table border="1">
+<table>
     <tr style="margin-right: 150px;" class="border border-slate-600">
       <th class="border border-slate-600">Operação</th>
       <th class=" border border-slate-600">Missão</th>
@@ -27,13 +47,13 @@ include_once '../../acoes/bd.php';
       <th class=" border border-slate-600">Fim da Operação</th> 
     </tr>
     <?php
+    $nomeOp;
     ?>
     <?php
         $pesquisa = $mysqli->real_escape_string($id);
         $sql_code = "SELECT * 
             FROM operacao 
             WHERE opid LIKE '%$pesquisa%'";
-
         $sql_code2 = "SELECT * 
             FROM efetivo 
             WHERE eid LIKE '%$pesquisa%'";
@@ -71,6 +91,7 @@ include_once '../../acoes/bd.php';
               while ($dados4 = $sql_query4->fetch_assoc()) {
                 while ($dados5 = $sql_query5->fetch_assoc()) {
                   while ($dados6 = $sql_query6->fetch_assoc()) {
+                    $nomeOp =  $dados['operacao'];
     ?>
     <tr class=" px-6 py-4 border border-slate-600 ">
       <td class=" px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
@@ -106,8 +127,8 @@ include_once '../../acoes/bd.php';
       <td class="px-6 py-4 border border-slate-600 "><?php echo $dados2['participantesCv'] + $dados2['participantesPv']+ $dados2['participantesEb'] + $dados2['participantesMb'] + $dados2['participantesFab'] + $dados2['participantesOs'] + $dados2['participantesGov']; ?></td>
     </tr>
     <tr style="margin-right: 150px;">
-      <th style="margin-right: 150px;" class=" border border-slate-600 bg-blend-darken">operação</th>
-      <th class=" border border-slate-600 bg-blend-darken" colspan="2">tipo de ação ou apoio</th>
+      <th style="margin-right: 150px;" class=" border border-slate-600 bg-blend-darken">Operação</th>
+      <th class=" border border-slate-600 bg-blend-darken" colspan="2">Tipo de ação ou apoio</th>
     </tr>
     <tr>
         <td class="px-6 py-4 border border-slate-600 "><?php echo $dados3['tipoOp']; ?></td>
@@ -139,7 +160,7 @@ include_once '../../acoes/bd.php';
     </tr>
     <tr>
       <th class="border border-slate-600 bg-blend-darken">Recebidos:</th>
-      <th class="border border-slate-600 bg-blend-darken">liquidados:</th>
+      <th class="border border-slate-600 bg-blend-darken">Descentralizados:</th>
       <th class="border border-slate-600 bg-blend-darken">Liquidados:</th>
       <th class="border border-slate-600 bg-blend-darken">Devolvidos:</th>
     </tr>
@@ -148,18 +169,6 @@ include_once '../../acoes/bd.php';
         <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['descentralizados']; ?></td>
         <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['liquidados']; ?></td>
         <td class="px-6 py-4 border border-slate-600 "><?php echo "R$:". $dados4['devolvidos']; ?></td>
-    </tr>
-    <tr>
-      <th class=" border border-slate-600 bg-blend-darken">Relatório Final</th>
-      <th class=" border border-slate-600 bg-blend-darken">Relatório do Comando Logístico</th>
-      <th class=" border border-slate-600 bg-blend-darken">Fotos</th>
-      <th class=" border border-slate-600 bg-blend-darken">Outros documentos</th>
-    </tr>
-    <tr>
-      <td style="color:blue;" class="px-6 py-4 border border-slate-600 "><a href="../../uploads/<?php echo $dados6['relatorioFinal'] ?>" target="_blank"><?php echo $dados6['relatorioFinal'] ?></a></td>
-      <td style="color:blue;" class="px-6 py-4 border border-slate-600 "><a href="../../uploads/<?php echo $dados6['relatorioComando'] ?>" target="_blank"><?php echo $dados6['relatorioComando'] ?></a></td>
-      <td style="color:blue;" class="px-6 py-4 border border-slate-600 "><a href="../../uploads/<?php echo $dados6['fotos'] ?>" target="_blank"><?php echo $dados6['fotos'] ?></a></td>
-      <td style="color:blue;" class="px-6 py-4 border border-slate-600 "><a href="../../uploads/<?php echo $dados6['outrosDocumentos'] ?>" target="_blank"><?php echo $dados6['outrosDocumentos'] ?></a></td>
     </tr>
     <tr >
       <th class=" border border-slate-600 bg-blend-darken" colspan="9">Outras informações</th>

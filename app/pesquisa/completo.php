@@ -133,8 +133,8 @@ $conn->close();
   <!-- id da query sendo pesquisado -->
   <div class="vai sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-  <form action="/banco/src/pdf/pdfCompleto.php" class="conteudo ativo" id="conteudo-1">
-    <input disabled class="border-2 rounded-lg border-slate-800" name="busca" value="<?php if(isset($id)) echo $id; ?>" placeholder="Digite os termos de pesquisa" type="text">
+  <form action="/banco/src/pdf/pdfCompleto.php" class="conteudo ativo" id="conteudo-1"  method="post">
+    <input class="border-2 rounded-lg border-slate-800" name="id" value="<?php if(isset($id)) echo $id; ?>" placeholder="Digite os termos de pesquisa" type="text">
     <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Gerar PDF</button>
   </form> <br>
 
@@ -237,8 +237,8 @@ $conn->close();
       <td class="px-6 py-4 border border-slate-600 "><?php echo $dados2['participantesCv'] + $dados2['participantesPv']+ $dados2['participantesEb'] + $dados2['participantesMb'] + $dados2['participantesFab'] + $dados2['participantesOs'] + $dados2['participantesGov']; ?></td>
     </tr>
     <tr style="margin-right: 150px;">
-      <th style="margin-right: 150px;" class=" border border-slate-600 bg-blend-darken">operação</th>
-      <th class=" border border-slate-600 bg-blend-darken" colspan="2">tipo de ação ou apoio</th>
+      <th style="margin-right: 150px;" class=" border border-slate-600 bg-blend-darken">Operação</th>
+      <th class=" border border-slate-600 bg-blend-darken" colspan="2">Tipo de ação ou apoio</th>
     </tr>
     <tr>
         <td class="px-6 py-4 border border-slate-600 "><?php echo $dados3['tipoOp']; ?></td>
