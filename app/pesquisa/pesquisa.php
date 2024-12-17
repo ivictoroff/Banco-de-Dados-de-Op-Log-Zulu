@@ -23,7 +23,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <title>colog</title>
+  <title>Pesquisa</title>
+  <style>
+    a.disabled {
+      pointer-events: none;
+      cursor: default;
+      color: #cccccc;
+    }
+  </style>
 </head>
 <body>
 
@@ -229,6 +236,7 @@
           <th class="border border-slate-600">Inicio da Operação</th>
           <th class="border border-slate-600">Fim da Operação</th> 
           <th class="border border-slate-600">Completo</th>
+          <th class="border border-slate-600">Editar</th>
         </tr>
         <?php
         foreach ($ids as $id){
@@ -251,6 +259,9 @@
           $sql_code6 = "SELECT * 
             FROM anexos
             WHERE aid LIKE '%$pesquisa%'";
+          $sql_code7 = "SELECT * 
+            FROM usuario 
+            WHERE usuario ='$usuario' and adm ='administrador'";
         
           $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
           $sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
@@ -258,7 +269,6 @@
           $sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
           $sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
           $sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
-        
           while($dados = $sql_query->fetch_assoc()) {
             while ($dados2 = $sql_query2->fetch_assoc()) {
               while ($dados3 = $sql_query3->fetch_assoc()) {
@@ -283,6 +293,11 @@
                       <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
                       <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
                       <td class="px-6 py-4 border border-slate-600 "><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
+                      <td class="px-6 py-4"><a style="cursor: pointer; " class="" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                        </svg> </a> </td>
                     </tr>
                   <?php
                     }

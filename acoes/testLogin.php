@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+date_default_timezone_set("america/sao_paulo");
+
 include_once ("bd.php");
 
     if (isset($_POST['submit'])&& isset($_POST['user']) && isset($_POST['pass'])) {
@@ -21,9 +23,13 @@ include_once ("bd.php");
 
         }
         else {
+            $data = date('y-m-d H:i:s');
             $_SESSION["user"] = $user;
             $_SESSION["pass"] = $pass;
+            $sql = "INSERT INTO logLogin (usuario, data) VALUES ('$user', '$data')";
+            $mysqli->query($sql);
             header("Location: /banco/app/pesquisa/operacao.php");
+
         }
     }
     else {

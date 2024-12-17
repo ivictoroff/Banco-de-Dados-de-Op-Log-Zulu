@@ -28,7 +28,7 @@ if (mysqli_num_rows($result) < 1) {
 <html> 
 <head>
 
-  <title>colog</title>
+  <title>Administrador</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="shortcut icon" type="imagex/png" href="/img/dmat.png">
   <style>
@@ -122,92 +122,30 @@ if (mysqli_num_rows($result) < 1) {
   <div class="conteudo ativo" id="conteudo-1">
     <div class="sm:ml-64">
       <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
-          <!-- campo de pesquisa --> 
-        <form action="">
-          <input class="border-2 rounded-lg border-slate-800" name="busca" value="<?php if(isset($_GET['busca'])) echo $_GET['busca']; ?>" placeholder="Digite os termos de pesquisa" type="text">
-          <button class="border-2 rounded-lg border-slate-800" type="submit">Pesquisar</button>
-        </form> <br>
-
-        <table  class= " border border-slate-600">
-
-          <!-- inicio do cabecalho da tabela -->
-
-          <tr style="margin-right: 150px;" class=" border border-slate-600">
-            <th class="border border-slate-600">Selecione</th>
-            <th class="border border-slate-600">Operador</th>
-            <th class="border border-slate-600">Operação</th>
-            <th class="border border-slate-600">Missão</th>
-            <th class="border border-slate-600">Estado</th>
-            <th class="border border-slate-600">Comando Militar de Área</th>
-            <th class="border border-slate-600">Região Militar</th>
-            <th class="border border-slate-600">Comando da Operação</th>
-            <th class="border border-slate-600">Comando Apoiado</th>
-            <th class="border border-slate-600">Inicio da Operação</th>
-            <th class="border border-slate-600">Fim da Operação</th> 
-            <th class="border border-slate-600">Completo</th>
-            <th class="border border-slate-600">Editar</th>
+        <table  class= "w-full text-center border border-slate-600">
+          <tr class="border border-slate-600">
+            <th class="border border-slate-600">Usuário </th>
+            <th class="border border-slate-600">Horário de Login</th>
           </tr>
-          <?php
-            if (!isset($_GET['busca'])) {
+
+        <?php 
+        
+        $sql_code = "SELECT * 
+            FROM logLogin";
+        $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+        while($dados = $sql_query->fetch_assoc()) {
           ?>
           <tr>
-            <td colspan="3">Digite algo para pesquisar...</td>
+            <td class="border border-slate-600"><?php echo $dados['usuario'] ?></td>
+            <td class="border border-slate-600"><?php echo date_format(date_create_from_format('Y-m-d H:i:s', $dados["data"]), 'd/m/Y H:i:s'); ?></td>
           </tr>
           <?php
-            } 
-            else {
-              $pesquisa = $mysqli->real_escape_string($_GET['busca']);
-              $sql_code = "SELECT * 
-                FROM operacao 
-                WHERE operacao LIKE '%$pesquisa%' 
-                OR missao LIKE '%$pesquisa%'
-                OR estado LIKE '%$pesquisa%'
-                OR cma LIKE '%$pesquisa%'
-                OR rm LIKE '%$pesquisa%'
-                OR comandoOp LIKE '%$pesquisa%'
-                OR comandoApoio LIKE '%$pesquisa%'
-                OR inicioOp LIKE '%$pesquisa%'
-                OR fimOp LIKE '%$pesquisa%'
-                or opid LIKE '%$pesquisa%'";
+        }
 
-                $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-                
-            if ($sql_query->num_rows == 0) {
-          ?>
-          <tr>
-              <td colspan="3">Nenhum resultado encontrado...</td>
-          </tr>
-          <?php
-            } 
-            else {
-              while($dados = $sql_query->fetch_assoc()) {
-          ?>
-          <form action="/banco/app/pesquisa/salva.php" method="post">
-          <tr class=" border border-slate-600 ">
-            <td class="px-6 py-4 border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="<?php echo $dados['opid']; ?>"></td>
-            <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operador']; ?></td>
-            <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['missao']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['estado']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['cma']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['rm']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
-            <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
-            <td class="px-6 py-4"><a style="cursor: pointer; " class="content-center font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > Editar </a> </td>
-          </tr>
-          <?php
-                }
-              }
-            }
-          ?>
-          <input type="submit" class="border-2 rounded-lg border-slate-800" value="Gerar resumo">
-          </form>
+        ?>
+          
+          </table>
 
-        </table>
       </div>
     </div>
   </div>

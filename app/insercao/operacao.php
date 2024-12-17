@@ -184,7 +184,7 @@ if ($submit) {
 <DOCTYPE html>
 <html> 
 <head>
-  <title>colog</title>
+  <title>Inserção</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="../../img/dmat.ico" type="favicon.ico">
   <style>

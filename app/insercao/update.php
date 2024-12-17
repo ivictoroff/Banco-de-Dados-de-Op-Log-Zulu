@@ -89,16 +89,21 @@ $submit= @$_REQUEST['submit'];
 
 $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
-$sql = "SELECT * FROM operacao WHERE opid = '$id' and operador = '$usuario'";
+$tip = "SELECT tipoOp FROM tipoop WHERE tid = '$id'";
 
-$result = $mysqli -> query($sql);
+$aa = $mysqli -> query($tip);
+
+while ($pqp = $aa->fetch_assoc()){
+  $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' and funcao = '$pqp[tipoOp]'";
+  $result = $mysqli -> query($sql);
+}
 
 $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' and adm = 'Administrador'";
 
 $result2 = $mysqli -> query($sql);
 
-if (mysqli_num_rows($result) < 1 && mysqli_num_rows($result2)<1 ) {
-    header('Location: /banco/app/pesquisa/operacao.php');
+if (mysqli_num_rows($result)<1 && mysqli_num_rows($result2)<1 ) {
+  echo "<script>window.close();</script>";
 }
 
 if ($submit) {
@@ -195,7 +200,7 @@ if ($submit) {
 <html> 
 <head>
   
-  <title>colog</title>
+  <title>Atualização</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   
   <style>
