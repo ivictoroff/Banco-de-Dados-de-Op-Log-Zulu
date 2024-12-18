@@ -9,6 +9,8 @@ else{
   header ('location: /banco/app/pesquisa/operacao.php');
 }
 
+var_dump($ids);
+
 session_start();
 
 if ((!isset($_SESSION['user'])== true) and (!isset($_SESSION['pass'])==true)){
@@ -141,6 +143,7 @@ $mysqli->close();
 </head>
 <body>
   <div class="conteudo ativo" id="conteudo-1">
+    <!--
   <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
       <a href="#" class="flex items-center ps-1 mb-1">
@@ -196,7 +199,7 @@ $mysqli->close();
          </li>
       </ul>
    </div>
-  </aside>
+  </aside> -->
   </div>
 
   <div class="vai p-4 sm:ml-64">

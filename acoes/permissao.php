@@ -6,7 +6,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
     if (isset($_POST['administrador'])) {
 
         $uid = $_POST["uid"];
-        $adm = "administrador";
+        $adm = "Administrador";
 
         $sql = "UPDATE usuario SET adm=:ADM  WHERE uid = :ID";
 
@@ -24,7 +24,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
     if (isset($_POST['gerente'])) {
 
         $uid = $_POST["uid"];
-        $adm = "gerente";
+        $adm = "Gerente";
 
         $sql = "UPDATE usuario SET adm=:ADM  WHERE uid = :ID";
 
@@ -45,6 +45,60 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
         $adm = "";
 
         $sql = "UPDATE usuario SET adm=:ADM  WHERE uid = :ID";
+
+        $stmt = $conn->prepare ($sql);
+
+        $stmt -> bindParam(":ADM", $adm);
+
+        $stmt -> bindParam(":ID", $uid);
+
+        $stmt->execute();
+
+        header ("location: /banco/app/adm/adm.php");
+
+    }
+    if (isset($_POST['Preparo'])) {
+
+        $uid = $_POST["uid"];
+        $adm = "Preparo";
+
+        $sql = "UPDATE usuario SET funcao=:ADM  WHERE uid = :ID";
+
+        $stmt = $conn->prepare ($sql);
+
+        $stmt -> bindParam(":ADM", $adm);
+
+        $stmt -> bindParam(":ID", $uid);
+
+        $stmt->execute();
+
+        header ("location: /banco/app/adm/adm.php");
+
+    }
+    if (isset($_POST['Emprego'])) {
+
+        $uid = $_POST["uid"];
+        $adm = "Emprego";
+
+        $sql = "UPDATE usuario SET funcao=:ADM  WHERE uid = :ID";
+
+        $stmt = $conn->prepare ($sql);
+
+        $stmt -> bindParam(":ADM", $adm);
+
+        $stmt -> bindParam(":ID", $uid);
+
+        $stmt->execute();
+
+        header ("location: /banco/app/adm/adm.php");
+
+    }
+    if (isset($_POST['Transporte'])) {
+
+        $uid = $_POST["uid"];
+        $adm = "Transporte";
+
+        $sql = "UPDATE usuario SET funcao=:ADM  WHERE uid = :ID";
 
         $stmt = $conn->prepare ($sql);
 

@@ -213,8 +213,15 @@
               echo "Recursos Descentralizados: " . $recursosDescentralizados . "<br>";
             ?></td>
           </tr>
+          
         </table>
         <br>
+        <form action="/banco/src/pdf/gerar_pdf.php" method="post">
+
+          <input type="submit" class="border-2 rounded-lg border-slate-800" value="Gerar resumo">
+        </form>
+        
+        
         <?php
 
         echo '<br>' . '2. Operações Relacionadas' . "<br>";
@@ -277,7 +284,7 @@
                     while ($dados6 = $sql_query6->fetch_assoc()) {
                     ?>
 
-                    <form action="/banco/src/pdf/relatorio.php" method="post">
+                    <form action="/banco/src/pdf/gerar_pdf.php" method="post">
                     <tr class="border border-slate-600">
                       <?php
                       foreach ($ids as $chave => $valor) { ?>
@@ -310,6 +317,17 @@
 
         $mysqli->close();
         ?>
+                <label for="">recurso</label>
+          <td class=" border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="recurso"></td>
+          <label for="">efetivo</label>
+          <td class=" border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="efetivo"></td>
+          <label for="">cma</label>
+          <td class=" border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="cma"></td>
+          <label for="">as</label>
+          <td class=" border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="as"></td>
+          <label for="">bd</label>
+          <td class=" border border-slate-600"><input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="bd"></td>
+
         <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Gerar PDF</button>
         </form>
         <?php

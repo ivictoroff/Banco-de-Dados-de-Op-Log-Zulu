@@ -25,17 +25,15 @@ foreach ($array as $campo) {
 
 }
 
-
 // Remove o último "OR"
 if (count($array) > 1){
 $query_usuarios = substr($query_usuarios, 0, -1);
 $query_usuarios .= ")";
 }
-//print_r($query_usuarios);
+print_r($query_usuarios);
 
 // Prepara a QUERY
 $result_usuarios = $mysqli->query($query_usuarios);
-
 
 foreach ($array as $id){
   $pesquisa = $mysqli->real_escape_string($id);
@@ -150,17 +148,71 @@ foreach ($array as $id){
 
 echo "<hr>";
 
-while($row_usuario = $result_usuarios->fetch_assoc()) {
-  //var_dump ($row_usuario);
-  echo "Operação: " . $row_usuario['operacao'] . "<br>";
-  echo "Missão: " . $row_usuario['missao'] . "<br>"; 
-  echo "Estado: " . $row_usuario['estado'] . "<br>"; 
-  echo "Início da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["inicioOp"]), 'd/m/Y') . "<br>";
-  echo "Fim da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["fimOp"]), 'd/m/Y') . "<br>";
-  echo "Comando Militar de Área: " . $row_usuario['cma'] . "<br>"; 
+foreach ($array as $id){
+  $pesquisa = $mysqli->real_escape_string($id);
+  $sql_code = "SELECT * 
+    FROM operacao 
+    WHERE opid LIKE '%$pesquisa%'";
+  $sql_code2 = "SELECT * 
+    FROM efetivo 
+    WHERE eid LIKE '%$pesquisa%'";
+  $sql_code3 = "SELECT * 
+    FROM tipoOp 
+    WHERE tid LIKE '%$pesquisa%'";
+  $sql_code4 = "SELECT * 
+    FROM recursos 
+    WHERE rid LIKE '%$pesquisa%'";
+  $sql_code5 = "SELECT * 
+    FROM infos
+    WHERE iid LIKE '%$pesquisa%'";
+  $sql_code6 = "SELECT * 
+    FROM anexos
+    WHERE aid LIKE '%$pesquisa%'";
+
+  $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query3 = $mysqli->query($sql_code3) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
+  $sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
+
+  while($dados = $sql_query->fetch_assoc()) {
+    while ($dados2 = $sql_query2->fetch_assoc()) {
+      while ($dados3 = $sql_query3->fetch_assoc()) {
+        while ($dados4 = $sql_query4->fetch_assoc()) {
+          while ($dados5 = $sql_query5->fetch_assoc()) {
+            while ($dados6 = $sql_query6->fetch_assoc()) {
+
+              while($row_usuario = $result_usuarios->fetch_assoc()) {
   
-  echo "<hr>";
+                foreach ($campos as $campo) {
+                  if($campo == 'recurso') {
+                    //var_dump ($row_usuario);
+                    echo 
+                    //echo "Operação: " . $row_usuario['operacao'] . "<br>";
+                    //echo "Missão: " . $row_usuario['missao'] . "<br>"; 
+                    //echo "Estado: " . $row_usuario['estado'] . "<br>"; 
+                    //echo "Início da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["inicioOp"]), 'd/m/Y') . "<br>";
+                    //echo "Fim da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["fimOp"]), 'd/m/Y') . "<br>";
+                    //echo "Comando Militar de Área: " . $row_usuario['cma'] . "<br>"; 
+                
+                    }
+                
+                  if ($campo == 'efetivo'){
+                    echo "efetivo" . "<br>";
+                  }
+                }
+                echo "<hr>";
+                }       
+
+            }
+          }
+        }
+      }
+    }
+  }
 }
+
 
 ?>
 

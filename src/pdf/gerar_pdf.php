@@ -5,6 +5,15 @@ require './vendor/autoload.php';
 
 $array = $_POST['ids'];
 
+if (isset($_POST['teste'])){
+    $campos = $_POST['teste'];
+  }
+  else{
+    header ('location: /banco/app/pesquisa/operacao.php');
+  }
+  
+  //var_dump($campos);
+
 // Referenciar o namespace Dompdf
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -39,12 +48,12 @@ $dompdf->setPaper('A4', 'portrait');
 // Renderizar o HTML como PDF
 $dompdf->render();
 
-//header('Content-type:application/pdf');
+header('Content-type:application/pdf');
 
-//echo $dompdf->output();
+echo $dompdf->output();
 
 // Gerar o PDF
-$dompdf->stream('Relatorio.pdf');
+//$dompdf->stream('Relatorio.pdf');
 
 ?>
 
