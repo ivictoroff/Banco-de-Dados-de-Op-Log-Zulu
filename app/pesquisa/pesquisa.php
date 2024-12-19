@@ -21,9 +21,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <title>Pesquisa</title>
+ <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+ <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+ <title>Pesquisa</title>
   <style>
     a.disabled {
       pointer-events: none;
@@ -37,7 +37,7 @@
 <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
       <a href="#" class="flex items-center ps-1 mb-1">
-        <img src="/banco/img/colog.png" class="h-3 me-2 sm:h-16" alt="Flowbite Logo" />
+        <img src="/banco/img/colog.png" class="h-10 me-2 sm:h-16" alt="Flowbite Logo" />
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">B D Op Log ZULU</span>
       </a>
       <ul class="space-y-2 font-medium">
@@ -214,7 +214,6 @@
             ?></td>
           </tr>
         </table>
-        <br>
         <?php
 
         echo '<br>' . '2. Operações Relacionadas' . "<br>";
@@ -277,7 +276,7 @@
                     while ($dados6 = $sql_query6->fetch_assoc()) {
                     ?>
 
-                    <form action="/banco/src/pdf/relatorio.php" method="post">
+                    <form action="/banco/src/pdf/gerar_pdf.php" method="post">
                     <tr class="border border-slate-600">
                       <?php
                       foreach ($ids as $chave => $valor) { ?>
@@ -311,6 +310,48 @@
         $mysqli->close();
         ?>
         <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Gerar PDF</button>
+         
+          <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 inline-flex items-center focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-1 text-center me-1 mb-1 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" type="button"> Selecione os campos <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+              <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center ps-3">
+                  <input id="operacao" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="operacao">
+                      <label for="operacao" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Operação</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center ps-3">
+                  <input id="efetivo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="efetivo">
+                      <label for="efetivo" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Efetivo</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center ps-3">
+                  <input id="tipoop" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="tipoop">
+                      <label for="tipoop" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipos de Operações</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center ps-3">
+                  <input id="recurso" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="recurso">
+                      <label for="recurso" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Recursos</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center ps-3">
+                  <input id="resumo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="resumo">
+                      <label for="resumo" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Resumo</label>
+                  </div>
+              </li>
+              </ul>
+          </div>
+
         </form>
         <?php
         }else {

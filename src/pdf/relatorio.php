@@ -93,6 +93,7 @@ foreach ($array as $id){
     }
   }
 }
+$efetivoTotal = $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros;
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +133,7 @@ foreach ($array as $id){
     <th class="border border-slate-600"> <?php echo "Recursos Liquidados: " . $recursosLiquidados ; ?> </th>
   </tr>
   <tr>
-    <td class="border border-slate-600"> <?php echo "Efetivo empregado: " . $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros . "<br>"; ?>
+    <td class="border border-slate-600"> <?php echo "Efetivo empregado: " . $efetivoTotal . "<br>"; ?>
     <?php echo "Exército: " . $efetivoEx . "<br>"; ?>
     <?php echo "Marinha: " . $efetivoMb . "<br>"; ?>
     <?php echo "Força áerea: " . $efetivoFab . "<br>"; ?>
@@ -182,36 +183,51 @@ foreach ($array as $id){
         while ($dados4 = $sql_query4->fetch_assoc()) {
           while ($dados5 = $sql_query5->fetch_assoc()) {
             while ($dados6 = $sql_query6->fetch_assoc()) {
-
-              while($row_usuario = $result_usuarios->fetch_assoc()) {
-  
-                foreach ($campos as $campo) {
-                  if($campo == 'recurso') {
-                    //var_dump ($row_usuario);
-                    echo 
-                    //echo "Operação: " . $row_usuario['operacao'] . "<br>";
-                    //echo "Missão: " . $row_usuario['missao'] . "<br>"; 
-                    //echo "Estado: " . $row_usuario['estado'] . "<br>"; 
-                    //echo "Início da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["inicioOp"]), 'd/m/Y') . "<br>";
-                    //echo "Fim da Operação: " . date_format(date_create_from_format('Y-m-d', $row_usuario["fimOp"]), 'd/m/Y') . "<br>";
-                    //echo "Comando Militar de Área: " . $row_usuario['cma'] . "<br>"; 
-                
-                    }
-                
-                  if ($campo == 'efetivo'){
-                    echo "efetivo" . "<br>";
-                  }
+              foreach ($campos as $campo) {
+                if ($campo == 'operacao'){
+                    echo "<strong>" . "Operação: " . "</strong>" . $dados['operacao'] . "<br>";
+                    echo "<strong>" . "Missão: " . "</strong>" . $dados['missao'] . "<br>"; 
+                    echo "<strong>" . "Estado: " . "</strong>" . $dados['estado'] . "<br>"; 
+                    echo "<strong>" . "Início da Operação: " . "</strong>" . date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y') . "<br>";
+                    echo "<strong>" . "Fim da Operação: " . "</strong>" . date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y') . "<br>";
+                    echo "<strong>" . "Comando da Operação: " . "</strong>" . $dados['comandoOp'] . "<br>"; 
+                  echo "<br>"; 
+                }                
+                if ($campo == 'efetivo'){
+                  echo "<strong>" . "Efetivo Empregado: " . "</strong>" . $dados2['participantesEb'] + $dados2['participantesMb'] + $dados2['participantesFab'] + $dados2['participantesOs'] + $dados2['participantesGov'] + $dados2['participantesPv'] + $dados2['participantesCv'] . "<br>"; 
+                  echo "<strong>" . "Exército: " . "</strong>" . $dados2['participantesEb'] . "<br>"; 
+                  echo "<strong>" . "Força Aérea: " . "</strong>" . $dados2['participantesFab'] . "<br>"; 
+                  echo "<strong>" . "Marinha: " . "</strong>" . $dados2['participantesMb'] . "<br>"; 
+                  echo "<strong>" ."Outras forças: " . "</strong>" . $dados2['participantesOs'] + $dados2['participantesGov'] + $dados2['participantesPv'] + $dados2['participantesCv'] . "<br>"; 
+                  echo "<br>"; 
                 }
-                echo "<hr>";
-                }       
+                if ($campo == 'tipoop'){
+                  echo "<strong>" . "Tipo de Operação: " . "</strong>" . $dados3['tipoOp'] .  "<br>"; 
+                  echo "<strong>" . "Tipo de Ação ou Apoio: " . "</strong>" . $dados3['acaoOuApoio'] . "<br>"; 
+                  echo "<br>"; 
+                }
+                if($campo == 'recurso') {
+                  //var_dump ($row_usuario);
+                  echo "<strong>" . "Recursos Liquidados: " . "</strong>" . $dados4['liquidados'] . "<br>"; 
+                  echo "<strong>" . "Recursos Recebidos: " . "</strong>" . $dados4['recebidos'] . "<br>"; 
+                  echo "<strong>" . "Recursos Devolvidos: " . "</strong>" . $dados4['devolvidos'] . "<br>"; 
+                  echo "<strong>" . "Recursos Descentralizados: " . "</strong>" . $dados4['descentralizados'] . "<br>"; 
+                  echo "<br>"; 
+                }
+                if ($campo == 'resumo') {
+                  echo '<strong>' . "Resumo da Operação: " . "</strong>" . $dados5['outrasInfos'];
+                }
+              }
+              echo "<hr>";
+              }       
 
-            }
           }
         }
       }
     }
   }
 }
+
 
 
 ?>

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+echo "asda";
+
 $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
     if (isset($_POST['administrador'])) {
@@ -110,6 +112,9 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         header ("location: /banco/app/adm/adm.php");
 
+    }
+    else {
+        header ("location: /banco/app/adm/adm.php");
     }
 
 ?>

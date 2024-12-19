@@ -10,7 +10,7 @@ include_once ("bd.php");
         $pass = $_POST["pass"];
         print_r($user);
 
-
+        header('Location: /banco/index.php');
         $sql = "SELECT * FROM usuario WHERE usuario = '$user' and senha = '$pass'";
 
         $result = $mysqli -> query($sql);
