@@ -48,12 +48,12 @@ $dompdf->setPaper('A4', 'portrait');
 // Renderizar o HTML como PDF
 $dompdf->render();
 
-header('Content-type:application/pdf');
+//header('Content-type:application/pdf');
 
-echo $dompdf->output();
+//echo $dompdf->output();
 
 // Gerar o PDF
-//$dompdf->stream('Relatorio.pdf');
+$dompdf->stream('Relatorio.pdf');
 
 ?>
 

@@ -105,7 +105,7 @@ if ($submit) {
 
   /* insere os dados das operacoes */
 
-  $sqlOp = "UPDATE operacao SET operacao= :OPERACAO, estado= :ESTADO, missao= :MISSAO, cma= :CMA, rm= :RM, comandoOp=:COMANDOOP, comandoApoio=:COMANDOAPOIO,inicioOp=:INICIOOP,fimOp=:FIMOP   WHERE opid=:ID";
+  $sqlOp = "UPDATE operacao SET operacao= :OPERACAO, estado= :ESTADO, missao= :MISSAO, cma= :CMA, rm= :RM, comandoOp=:COMANDOOP, comandoApoio=:COMANDOAPOIO,inicioOp=:INICIOOP,fimOp=:FIMOP, tipoop=:TIPOOP   WHERE opid=:ID";
   $stmt = $conn->prepare ($sqlOp);
   $stmt -> bindParam(":OPERACAO", $operacao);
   $stmt -> bindParam(":ESTADO", $estado);
@@ -116,6 +116,7 @@ if ($submit) {
   $stmt -> bindParam(":COMANDOAPOIO", $comandoApoio);
   $stmt -> bindParam(":INICIOOP", $inicioOp);
   $stmt -> bindParam(":FIMOP", $fimOp);
+  $stmt -> bindParam(":TIPOOP", $tipoOp);
 
   $stmt -> bindParam(":ID", $idd);
 

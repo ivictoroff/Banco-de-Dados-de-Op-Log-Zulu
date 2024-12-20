@@ -141,7 +141,7 @@ if ($submit) {
 
   /* insere os dados das operacoes */
 
-  $sql = "INSERT INTO operacao (operador, operacao,estado, missao, cma, rm, comandoOp, comandoApoio, inicioOp, fimOp) VALUES ('$usuario', '$operacao', '$estado', '$missao','$cma', '$rm', '$comandoOp', '$comandoApoio', '$inicioOp', '$fimOp')";
+  $sql = "INSERT INTO operacao (operador, operacao,estado, missao, cma, rm, comandoOp, comandoApoio, inicioOp, fimOp, tipoop) VALUES ('$usuario', '$operacao', '$estado', '$missao','$cma', '$rm', '$comandoOp', '$comandoApoio', '$inicioOp', '$fimOp', '$tipoOp')";
 
   $mysqli->query($sql);
 
@@ -377,13 +377,13 @@ if ($submit) {
               </select>
 
             <label for="ComandoOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">g. Comando da Operação:</label>
-              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="comandoOp" placeholder="comando da operação">
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="comandoOp" placeholder="Comando da Operação">
             <label for="comandoApoiado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">h. Organização apoiada:</label>
-              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="comandoApoiado" placeholder="Organização apoiada">
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="comandoApoiado" placeholder="Organização Apoiada">
             <label for="ini" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">i. Início da Operação:</label>
-              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="date" id="ini" name="inicioOp" placeholder="inicio da operação">
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="date" id="ini" name="inicioOp">
             <label for="fimOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">j. Término da Operação:</label>
-              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="date" id="fim" name="fimOp" placeholder="término da operação">
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="date" id="fim" name="fimOp">
             </div>
           </div>
     </div>
@@ -393,21 +393,21 @@ if ($submit) {
       <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Participantes:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="participantes" placeholder="participantes">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="participantes" placeholder="Participantes">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Participantes do Exército brasileiro:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="number" name="participantesEb" placeholder="participantes do exercito Brasileiro">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="number" name="participantesEb" placeholder="Participantes do Exército Brasileiro">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">c. Participantes da Marinha do Brasil:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesMb" placeholder="participantes da marinha do Brasil">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesMb" placeholder="Participantes da Marinha do Brasil">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">d. Participantes da Força Aérea Brasileira:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesFab" placeholder="participantes da forca aérea Brasileira">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesFab" placeholder="Participantes da Forca Aérea Brasileira">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">e. Participantes de Órgãos de Segurança e Ordenamento Pública:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesOs" placeholder="participantes de orgãos de Segurança e Ordem Pública">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesOs" placeholder="Participantes de Orgãos de Segurança e Ordem Pública">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">f. Participantes de outras Agências Governamentais:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesGov" placeholder="participantes de outras agências governamentais">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesGov" placeholder="Participantes de Outras Agências Governamentais">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">g. Participantes de outras Agências Privadas:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesPv" placeholder="participantes de outras agências privadas">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesPv" placeholder="Participantes de Outras Agências Privadas">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">h. Participantes de Organizações Não-Governamentais:</label>
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" value="0" name="participantesCv" placeholder="participantes de organizações não governamentais">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesCv" placeholder="Participantes de Organizações Não-Governamentais">
         </div>
       </div>
     </div>
@@ -428,11 +428,11 @@ if ($submit) {
             <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required id="acaoOuApoio" name="acaoOuApoio">
               <option value="">Selecione o tipo de Ação ou Apoio</option>
               <option value="Logística para Operações de Garantia da Soberania">Logística para Operações de Garantia da Soberania</option>
-              <option value="Logística de apoio a operacoes garantia da lei e da ordem">Logística de apoio a operacoes garantia da lei e da ordem</option>
-              <option value="Logística de apoio a garantia da votação e apuração">Logística de apoio a garantia da votação e apuração </option>
-              <option value="Logística de apoio a defesa civil">Logística de apoio a defesa civil</option>
-              <option value="Logística de apoio as ações subsidiarias">Logística de apoio as ações subsidiarias</option>
-              <option value="Logística de apoio a operacoes internacionais">Logística de apoio a operacoes internacionais</option>
+              <option value="Logística de Apoio a Operações Garantia da Lei e da Ordem (GLO)">Logística de Apoio a Operações Garantia da Lei e da Ordem (GLO)</option>
+              <option value="Logística de Apoio a Garantia da Votação e Apuração (GVA)">Logística de Apoio a Garantia da Votação e Apuração (GVA)</option>
+              <option value="Logística de Apoio a Defesa Civil">Logística de Apoio a Defesa Civil</option>
+              <option value="Logística de Apoio as Ações Aubsidiárias">Logística de Apoio as Ações Aubsidiárias</option>
+              <option value="Logística de Apoio a Operações Internacionais">Logística de Apoio a Operações Internacionais</option>
             </select>
           <label for="apoioDesempenhado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">c. Ação ou Apoio Desempenhado:</label>
           <label for="Transporte" class="block mb-2 text-sm text-gray-900 dark:text-white">1) Transporte:</label>
@@ -513,28 +513,28 @@ if ($submit) {
               <div class="absolute text-sm text-sm inset-y-0 start-0 top-0 flex items-center ps-0 pointer-events-none">
                   <p>R$</p>
               </div>
-              <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Recebidos" name="recebidos" />
+              <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Recebidos" name="recebidos" />
             </div>
           <label for="liquidados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Descentralizados:</label>
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="descentralizados" name="descentralizados" />
+            <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="descentralizados" name="descentralizados" />
             </div>
           <label for="liquidados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">c. Liquidados:</label>  
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Liquidados" name="liquidados" />
+            <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Liquidados" name="liquidados" />
             </div>
           <label for="devolvidos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">d. Devolvidos:</label>
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>
               </div>
-            <input type="number" value="0" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Devolvido" name="devolvidos" />
+            <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Devolvido" name="devolvidos" />
             </div>
 
         </div>

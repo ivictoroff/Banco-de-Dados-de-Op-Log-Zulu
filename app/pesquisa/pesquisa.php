@@ -97,7 +97,7 @@
       <?php
 
       // Define os campos de pesquisa
-      $campos = array('operacao', 'estado', 'missao', 'cma', 'rm', 'comandoOp', 'comandoApoio');
+      $campos = array('operacao', 'estado', 'missao', 'cma', 'rm', 'comandoOp', 'comandoApoio', 'tipoOp');
 
       $query = "SELECT * FROM operacao WHERE ";
 

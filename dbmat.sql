@@ -7,19 +7,25 @@ uid  int PRIMARY KEY  auto_increment,
 pg varchar (255),
 usuario varchar (255),
 senha varchar (255),
-adm varchar (255)
+adm varchar (255),
+funcao varchar (255)
+);
+
+create table loglogin ( 
+usuario varchar (255),
+data datetime 
 );
 
 create table efetivo (
 eid  int PRIMARY KEY  auto_increment,
-participantes varchar (225),
-participantesEb varchar (255),
-participantesMb varchar (255),
-participantesFab varchar (255),
-participantesOs varchar (255),
-participantesGov varchar (255),
-participantesPv varchar (255),
-participantesCv varchar (255)
+participantes BIGINT,
+participantesEb BIGINT,
+participantesMb BIGINT,
+participantesFab BIGINT,
+participantesOs BIGINT,
+participantesGov BIGINT,
+participantesPv BIGINT,
+participantesCv BIGINT
 );
 
 create table operacao (
@@ -32,8 +38,9 @@ create table operacao (
     rm varchar (50),
     comandoOp varchar (199),
     comandoApoio varchar (200),
+	tipoop varchar (255),
     inicioOp date ,
-    fimOp date 
+    fimOp date
     );
     
     create table tipoOp (
@@ -52,10 +59,10 @@ create table operacao (
     
 create table recursos (
 	rid  int PRIMARY KEY  auto_increment,
-	recebidos varchar (255),
-    descentralizados varchar (255),
-    empenhados varchar (255),
-    devolvidos varchar (255)
+	recebidos float (255, 2),
+    descentralizados float (255, 2),
+    liquidados float (255, 2),
+    devolvidos float (255, 2)
     );
     
 create table infos (

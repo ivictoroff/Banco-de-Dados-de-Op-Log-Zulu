@@ -270,7 +270,7 @@ $conn->close();
     </tr>
     <tr>
       <th class="border border-slate-600 bg-blend-darken">Recebidos:</th>
-      <th class="border border-slate-600 bg-blend-darken">liquidados:</th>
+      <th class="border border-slate-600 bg-blend-darken">Descentralizados:</th>
       <th class="border border-slate-600 bg-blend-darken">Liquidados:</th>
       <th class="border border-slate-600 bg-blend-darken">Devolvidos:</th>
     </tr>
