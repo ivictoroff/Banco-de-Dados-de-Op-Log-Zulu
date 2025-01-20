@@ -10,7 +10,6 @@ include_once ("bd.php");
         $pass = $_POST["pass"];
         print_r($user);
 
-        header('Location: /banco/index.php');
         $sql = "SELECT * FROM usuario WHERE usuario = '$user' and senha = '$pass'";
 
         $result = $mysqli -> query($sql);
@@ -26,10 +25,9 @@ include_once ("bd.php");
             $data = date('y-m-d H:i:s');
             $_SESSION["user"] = $user;
             $_SESSION["pass"] = $pass;
-            $sql = "INSERT INTO logLogin (usuario, data) VALUES ('$user', '$data')";
-            $mysqli->query($sql);
             header("Location: /banco/app/pesquisa/operacao.php");
-
+            $sql = "INSERT INTO loglogin (usuario, data) VALUES ('$user', '$data')";
+            $mysqli->query($sql);
         }
     }
     else {

@@ -18,7 +18,7 @@ data datetime
 
 create table efetivo (
 eid  int PRIMARY KEY  auto_increment,
-participantes BIGINT,
+participantes varchar(255),
 participantesEb BIGINT,
 participantesMb BIGINT,
 participantesFab BIGINT,

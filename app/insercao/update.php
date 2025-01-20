@@ -19,15 +19,6 @@ require '../../acoes/bd.php';
 // Pega o ID da URL
 $id = $_GET['id'];
 
-// Conecta ao banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "@160l0nc3t";
-$dbname = "dbmat";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-
 //operação
 
 $operacao = @$_REQUEST['operacao'];
@@ -82,109 +73,49 @@ $outrasInfos = @$_REQUEST['outrasInfos'];
 
 // Executa a consulta SQL
 $query = "SELECT * FROM operacao WHERE opid = '$id'";
-$result = $conn->query($query);
+$result = $mysqli->query($query);
 
 
 $submit= @$_REQUEST['submit'];
 
-$conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
+$tip = "SELECT tipoop FROM operacao WHERE opid = '$id'";
+$res = $mysqli->query($tip);
 
-$sql = "SELECT * FROM operacao WHERE opid = '$id' and operador = '$usuario'";
-
-$result = $mysqli -> query($sql);
-
-$sql = "SELECT * FROM usuario WHERE usuario = '$usuario' and adm = 'Administrador'";
-
-$result2 = $mysqli -> query($sql);
-
-if (mysqli_num_rows($result) < 1 && mysqli_num_rows($result2)<1 ) {
-    header('Location: /banco/app/pesquisa/operacao.php');
+$sql = "SELECT * FROM usuario WHERE usuario = '$usuario'";
+$re = $mysqli -> query($sql);
+while ($user = $re->fetch_assoc()) {
+  while ($tipo = $res->fetch_assoc()) {
+    print_r ($tipo['tipoop']);
+    if ($user['adm'] != "Administrador"){
+      if ($user['funcao'] != $tipo['tipoop']) {
+        header('Location: /banco/app/pesquisa/operacao.php');
+      }
+    }
+  }
 }
 
 if ($submit) {
 
   /* insere os dados das operacoes */
 
-  $sqlOp = "UPDATE operacao SET operacao= :OPERACAO, estado= :ESTADO, missao= :MISSAO, cma= :CMA, rm= :RM, comandoOp=:COMANDOOP, comandoApoio=:COMANDOAPOIO,inicioOp=:INICIOOP,fimOp=:FIMOP, tipoop=:TIPOOP   WHERE opid=:ID";
-  $stmt = $conn->prepare ($sqlOp);
-  $stmt -> bindParam(":OPERACAO", $operacao);
-  $stmt -> bindParam(":ESTADO", $estado);
-  $stmt -> bindParam(":MISSAO", $missao);
-  $stmt -> bindParam(":CMA", $cma);
-  $stmt -> bindParam(":RM", $rm);
-  $stmt -> bindParam(":COMANDOOP", $comandoOp);
-  $stmt -> bindParam(":COMANDOAPOIO", $comandoApoio);
-  $stmt -> bindParam(":INICIOOP", $inicioOp);
-  $stmt -> bindParam(":FIMOP", $fimOp);
-  $stmt -> bindParam(":TIPOOP", $tipoOp);
+  $sqlOp = "UPDATE operacao SET operacao= '$operacao', estado= '$estado', missao= '$missao', cma= '$cma', rm= '$rm', comandoOp='$comandoOp', comandoApoio='$comandoApoio',inicioOp='$inicioOp',fimOp='$fimOp', tipoop='$tipoOp' WHERE opid=$idd";
+  mysqli_query($mysqli,$sqlOp);
 
-  $stmt -> bindParam(":ID", $idd);
-
-  $stmt->execute();
+  $sqlE = "UPDATE efetivo SET participantes= '$participantes', participantesEb= '$participantesEb', participantesMb= '$participantesMb', participantesFab= '$participantesFab', participantesOs= '$participantesOs', participantesGov='$participantesGov', participantesPv='$participantesPv',participantesCv='$participantesCv'  WHERE eid=$idd";
+  mysqli_query($mysqli,$sqlE);
 
 
-  $sqlE = "UPDATE efetivo SET participantes= :PARTICIPANTES, participantesEb= :PARTICIPANTESEB, participantesMb= :PARTICIPANTESMB, participantesFab= :PARTICIPANTESFAB, participantesOs= :PARTICIPANTESOS, participantesGov=:PARTICIPANTESGOV, participantesPv=:PARTICIPANTESPV,participantesCv=:PARTICIPANTESCV  WHERE eid=:ID";
-  
-  $stmt = $conn->prepare ($sqlE);
-  $stmt -> bindParam(":PARTICIPANTES", $participantes);
-  $stmt -> bindParam(":PARTICIPANTESEB", $participantesEb);
-  $stmt -> bindParam(":PARTICIPANTESMB", $participantesMb);
-  $stmt -> bindParam(":PARTICIPANTESFAB", $participantesFab);
-  $stmt -> bindParam(":PARTICIPANTESOS", $participantesOs);
-  $stmt -> bindParam(":PARTICIPANTESGOV", $participantesGov);
-  $stmt -> bindParam(":PARTICIPANTESPV", $participantesPv);
-  $stmt -> bindParam(":PARTICIPANTESCV", $participantesCv);
-
-  $stmt -> bindParam(":ID", $idd);
-
-  $stmt->execute();
+  $sqlT = "UPDATE tipoOp SET tipoOp= '$tipoOp', acaoOuApoio= '$acaoOuApoio', transporte= '$transporte', manutencao= '$manutencao', suprimento= '$suprimento', aviacao='$aviacao', desTransporte='$desTransporte',desManutencao='$desManutencao', desSuprimento ='$desSuprimento', desAviacao= '$desAviacao'  WHERE tid=$idd";
+  mysqli_query($mysqli,$sqlT);
 
 
-  $sqlT = "UPDATE tipoOp SET tipoOp= :TIPOOP, acaoOuApoio= :ACAOOUAPOIO, transporte= :TRANSPORTE, manutencao= :MANUTENCAO, suprimento= :SUPRIMENTO, aviacao=:AVIACAO, desTransporte=:DESTRANSPORTE,desManutencao=:DESMANUTENCAO, desSuprimento =:DESSUPRIMENTO, desAviacao= :DESAVIACAO  WHERE tid=:ID";
-  $stmt = $conn->prepare ($sqlT);
+  $sqlr = "UPDATE recursos SET recebidos= '$recebidos', descentralizados= '$descentralizados', liquidados= '$liquidados', devolvidos= '$devolvidos' WHERE rid=$idd";
+  mysqli_query($mysqli,$sqlr);
 
-  $stmt -> bindParam(":TIPOOP", $tipoOp);
-  $stmt -> bindParam(":ACAOOUAPOIO", $acaoOuApoio);
-  $stmt -> bindParam(":TRANSPORTE", $transporte);
-  $stmt -> bindParam(":MANUTENCAO",$manutencao);
-  $stmt -> bindParam(":SUPRIMENTO",$suprimento);
-  $stmt -> bindParam(":AVIACAO",$aviacao);
-  $stmt -> bindParam(":DESTRANSPORTE", $desTransporte);
-  $stmt -> bindParam(":DESMANUTENCAO",$desManutencao);
-  $stmt -> bindParam(":DESSUPRIMENTO",$desSuprimento);
-  $stmt -> bindParam(":DESAVIACAO",$desAviacao);
-
-  $stmt -> bindParam(":ID", $idd);
-
-  $stmt->execute();
-
-
-  $sqlr = "UPDATE recursos SET recebidos= :RECEBIDOS, descentralizados= :DESCENTRALIZADO, liquidados= :liquidados, devolvidos= :DEVOLVIDOS WHERE rid=:ID";
-  $stmt = $conn->prepare ($sqlr);
-  
-  $stmt -> bindParam(":RECEBIDOS", $recebidos);
-  $stmt -> bindParam(":DESCENTRALIZADO", $descentralizados);
-  $stmt -> bindParam(":liquidados", $liquidados);
-  $stmt -> bindParam(":DEVOLVIDOS", $devolvidos);
-
-  $stmt -> bindParam(":ID", $idd);
-
-  $stmt->execute();
-
-
-  $sqlr = "UPDATE infos SET outrasInfos= :OUTRASINFOS WHERE iid=:ID";
-  $stmt = $conn->prepare ($sqlr);
-  
-  $stmt -> bindParam(":OUTRASINFOS", $outrasInfos);
-
-  $stmt -> bindParam(":ID", $idd);
-
-  $stmt->execute();
-
-
+  $sqlo = "UPDATE infos SET outrasInfos= '$outrasInfos' WHERE iid=$idd";
+  mysqli_query($mysqli,$sqlo);
 
   header("Location: /banco/app/pesquisa/operacao.php");
-
 
 }
 
