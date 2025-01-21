@@ -10,7 +10,7 @@ include_once ("bd.php");
         $pass = $_POST["pass"];
         print_r($user);
 
-        $sql = "SELECT * FROM usuario WHERE usuario = '$user' and senha = '$pass'";
+        $sql = "SELECT * FROM usuario WHERE usuario = BINARY '$user' and senha = BINARY '$pass'";
 
         $result = $mysqli -> query($sql);
 
