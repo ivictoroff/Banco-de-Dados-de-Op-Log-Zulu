@@ -101,12 +101,34 @@ $fimOp = @$_REQUEST['fimOp'];
 
 $participantes = @$_REQUEST['participantes'];
 $participantesEb = @$_REQUEST['participantesEb'];
+if ($participantesEb == null){
+  $participantesEb = 0; 
+}
 $participantesMb = @$_REQUEST['participantesMb'];
+
+if ($participantesMb == null){
+  $participantesMb = 0; 
+}
 $participantesFab = @$_REQUEST['participantesFab'];
+if ($participantesFab == null){
+  $participantesFab = 0; 
+}
 $participantesOs = @$_REQUEST['participantesOs'];
+if ($participantesOs == null){
+  $participantesOs = 0; 
+}
 $participantesGov = @$_REQUEST['participantesGov'];
+if ($participantesGov == null){
+  $participantesGov = 0; 
+}
 $participantesPv = @$_REQUEST['participantesPv'];
+if ($participantesPv == null){
+  $participantesPv = 0; 
+}
 $participantesCv = @$_REQUEST['participantesCv'];
+if ($participantesCv == null){
+  $participantesCv = 0; 
+}
 
 //tipos de operações
 
@@ -125,9 +147,21 @@ $desAviacao = @$_REQUEST['desAviacao'];
 //recursos aprovisionados
 
 $recebidos = @$_REQUEST['recebidos'];
+if ($recebidos == null){
+  $recebidos = 0; 
+}
 $descentralizados = @$_REQUEST['descentralizados'];
+if ($descentralizados == null){
+  $descentralizados = 0; 
+}
 $liquidados = @$_REQUEST['liquidados'];
+if ($liquidados == null){
+  $liquidados = 0; 
+}
 $devolvidos = @$_REQUEST['devolvidos'];
+if ($devolvidos == null){
+  $devolvidos = 0; 
+}
 
 //outras infos
 
@@ -516,7 +550,7 @@ if ($submit) {
               </div>
               <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Recebidos" name="recebidos" />
             </div>
-          <label for="liquidados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Descentralizados:</label>
+          <label for="descentralizados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Descentralizados:</label>
             <div class="relative">
               <div class="absolute text-sm inset-y-0 start-0 top-0.1 flex items-center ps-0 pointer-events-none">
                 <p>R$</p>

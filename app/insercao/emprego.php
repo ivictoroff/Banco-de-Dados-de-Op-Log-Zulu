@@ -101,12 +101,34 @@ $fimOp = @$_REQUEST['fimOp'];
 
 $participantes = @$_REQUEST['participantes'];
 $participantesEb = @$_REQUEST['participantesEb'];
+if ($participantesEb == null){
+  $participantesEb = 0; 
+}
 $participantesMb = @$_REQUEST['participantesMb'];
+
+if ($participantesMb == null){
+  $participantesMb = 0; 
+}
 $participantesFab = @$_REQUEST['participantesFab'];
+if ($participantesFab == null){
+  $participantesFab = 0; 
+}
 $participantesOs = @$_REQUEST['participantesOs'];
+if ($participantesOs == null){
+  $participantesOs = 0; 
+}
 $participantesGov = @$_REQUEST['participantesGov'];
+if ($participantesGov == null){
+  $participantesGov = 0; 
+}
 $participantesPv = @$_REQUEST['participantesPv'];
+if ($participantesPv == null){
+  $participantesPv = 0; 
+}
 $participantesCv = @$_REQUEST['participantesCv'];
+if ($participantesCv == null){
+  $participantesCv = 0; 
+}
 
 //tipos de operações
 
@@ -125,9 +147,21 @@ $desAviacao = @$_REQUEST['desAviacao'];
 //recursos aprovisionados
 
 $recebidos = @$_REQUEST['recebidos'];
+if ($recebidos == null){
+  $recebidos = 0; 
+}
 $descentralizados = @$_REQUEST['descentralizados'];
+if ($descentralizados == null){
+  $descentralizados = 0; 
+}
 $liquidados = @$_REQUEST['liquidados'];
+if ($liquidados == null){
+  $liquidados = 0; 
+}
 $devolvidos = @$_REQUEST['devolvidos'];
+if ($devolvidos == null){
+  $devolvidos = 0; 
+}
 
 //outras infos
 
@@ -445,7 +479,7 @@ if ($submit) {
               <option value="Classe VIII">Classe VIII</option>
               <option value="Classe IX">Classe IX</option>
               <option value="Classe X">Classe X</option>
-              <option value="Mais de uma classe">Mais de uma Classe</option>
+              <option value="Mais de uma Classe">Mais de uma Classe</option>
             </select>
             <label for="apoioDesempenhado" class="block mb-2 text-sm text-gray-900 dark:text-white">Descreva a Ação ou Apoio:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="desTransporte" placeholder="Transporte">
@@ -462,7 +496,7 @@ if ($submit) {
               <option value="Classe VIII">Classe VIII</option>
               <option value="Classe IX">Classe IX</option>
               <option value="Classe X">Classe X</option>
-              <option value="Mais de uma classe">Mais de uma Classe</option>
+              <option value="Mais de uma Classe">Mais de uma Classe</option>
             </select>
           <label for="desManutencao" class="block mb-2 text-sm text-gray-900 dark:text-white">Descreva a Ação ou Apoio:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="desManutencao" placeholder="Manutenção">
@@ -479,7 +513,7 @@ if ($submit) {
               <option value="Classe VIII">Classe VIII</option>
               <option value="Classe IX">Classe IX</option>
               <option value="Classe X">Classe X</option>
-              <option value="Mais de uma classe">Mais de uma Classe</option>
+              <option value="Mais de uma Classe">Mais de uma Classe</option>
             </select>
           <label for="desSuprimento" class="block mb-2 text-sm text-gray-900 dark:text-white">Descreva a Ação ou Apoio:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="desSuprimento" placeholder="Suprimento">
@@ -496,7 +530,7 @@ if ($submit) {
               <option value="Classe VIII">Classe VIII</option>
               <option value="Classe IX">Classe IX</option>
               <option value="Classe X">Classe X</option>
-              <option value="Mais de uma classe">Mais de uma Classe</option>
+              <option value="Mais de uma Classe">Mais de uma Classe</option>
             </select>
           <label for="desAviacao" class="block mb-2 text-sm text-gray-900 dark:text-white">Descreva a Ação ou Apoio:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="desAviacao" placeholder="Aviação">
