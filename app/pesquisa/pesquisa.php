@@ -110,7 +110,7 @@
         if (!empty($_POST['operacao'])||!empty($_POST['estado'])||!empty($_POST['missao'])||!empty($_POST['cma'])||!empty($_POST['rm'])||!empty($_POST['comandoOp'])||!empty($_POST['comandoApoio'])) {
           foreach ($campos as $campo) {
           $query .= " AND $campo LIKE '%".$_POST[$campo]."%'";
-          }
+          } 
         }
     } else {
         // Busca sem datas

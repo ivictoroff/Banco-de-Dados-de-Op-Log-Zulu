@@ -104,6 +104,14 @@ if (mysqli_num_rows($result) < 1) {
                <span class="ms-3">Acessos</span>
             </a>
          </li>
+         <li>
+            <a href="#" onclick="mostrarConteudo(3)" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 15">
+               <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+              </svg>
+               <span class="ms-3">Operações Registradas</span>
+            </a>
+         </li>
       <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
          <li>
             <a href="/banco/acoes/sair.php" class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
@@ -131,7 +139,7 @@ if (mysqli_num_rows($result) < 1) {
         <?php 
         
         $sql_code = "SELECT * 
-            FROM loglogin";
+            FROM loglogin ORDER BY data DESC" ;
         $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
         while($dados = $sql_query->fetch_assoc()) {
           ?>
@@ -279,6 +287,40 @@ if (mysqli_num_rows($result) < 1) {
     </div>
 
 
+  </div>
+
+      <!-- inicio da tabela --> 
+      <div class="conteudo" id="conteudo-3">
+    <div class="sm:ml-64">
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <table  class= "w-full text-center border border-slate-600">
+          <tr class="border border-slate-600">
+            <th class="border border-slate-600">Usuário </th>
+            <th class="border border-slate-600">Nome da Operação</th>
+            <th class="border border-slate-600">Horário da inserção</th>
+          </tr>
+
+        <?php 
+        
+        $sql_code = "SELECT * 
+            FROM logins ORDER BY data DESC";
+        $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+        while($dados = $sql_query->fetch_assoc()) {
+          ?>
+          <tr>
+            <td class="border border-slate-600"><?php echo $dados['usuario'] ?></td>
+            <td class="border border-slate-600"><?php echo $dados['operacao'] ?></td>
+            <td class="border border-slate-600"><?php echo date_format(date_create_from_format('Y-m-d H:i:s', $dados["data"]), 'd/m/Y H:i:s'); ?></td>
+          </tr>
+          <?php
+        }
+
+        ?>
+          
+          </table>
+
+      </div>
+    </div>
   </div>
 
         <!-- script da pesquisa pelo id da query --> 

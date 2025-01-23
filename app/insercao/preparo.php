@@ -209,6 +209,10 @@ if ($submit) {
 
   $mysqli->query($sql);
 
+  $data = date('y-m-d H:i:s');
+  $sql = "INSERT INTO logins (usuario,operacao, data) VALUES ('$usuario','$operacao', '$data')";
+  $mysqli->query($sql);
+
   header("Location: /banco/app/pesquisa/operacao.php");
 }
 
