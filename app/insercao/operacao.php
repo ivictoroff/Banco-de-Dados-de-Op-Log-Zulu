@@ -171,6 +171,12 @@ $outrasInfos = @$_REQUEST['outrasInfos'];
 
 $submit= @$_REQUEST['submit'];
 
+$sql = "SELECT * FROM usuario WHERE usuario = '$usuario'";
+$result = $mysqli -> query($sql);
+while ($dados = $result->fetch_assoc()) {
+  $tipoOp = $dados['funcao'];
+}
+
 if ($submit) {
 
   /* insere os dados das operacoes */
@@ -234,9 +240,6 @@ if ($submit) {
     }
     .conteudo.ativo {
       display: block;
-    }
-    .active {
-      color: #f7b600;
     }
   </style>
 
@@ -352,7 +355,7 @@ if ($submit) {
               <input type="text" placeholder="Nome da Operação" name="operacao" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
             <label for="estado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Estado (UF):</label>
               <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required id="estado" name="estado" placeholder="estados">
-                <option value="null">Selecione o estado</option>
+                <option value="">Selecione o estado</option>
                 <option value="Acre">Acre</option>
                 <option value="Alagoas">Alagoas</option>
                 <option value="Amapá">Amapá</option>
@@ -446,7 +449,7 @@ if ($submit) {
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesPv" placeholder="Participantes de Outras Agências Privadas">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">h. Participantes de Organizações Não-Governamentais:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="number" name="participantesCv" placeholder="Participantes de Organizações Não-Governamentais">
-        </div>
+          </div>
       </div>
     </div>
 
@@ -454,12 +457,9 @@ if ($submit) {
     <div class="conteudo" id="conteudo-3">
       <div class="sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
           <label for="tipoOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Operação:</label>
-            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required id="tipoOp" name="tipoOp">
-              <option value="Preparo">Preparo</option>
-            </select>
-          <label for="acaoOuApoio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Tipo de de Ação ou Apoio:</label>
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $tipoOp ?>" name="tipoOp" disabled>                                  
+            <label for="acaoOuApoio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Tipo de de Ação ou Apoio:</label>
             <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required id="acaoOuApoio" name="acaoOuApoio">
               <option value="">Selecione o tipo de Ação ou Apoio</option>
               <option value="Logística para Operações de Garantia da Soberania">Logística para Operações de Garantia da Soberania</option>
@@ -538,7 +538,6 @@ if ($submit) {
             </select>
           <label for="desAviacao" class="block mb-2 text-sm text-gray-900 dark:text-white">Descreva a Ação ou Apoio:</label>
             <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="desAviacao" placeholder="Aviação">
-            
         </div>
       </div>
     </div>
@@ -575,7 +574,6 @@ if ($submit) {
               </div>
             <input type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Devolvido" name="devolvidos" />
             </div>
-
         </div>
       </div>
     </div>
@@ -586,7 +584,7 @@ if ($submit) {
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <div style="text-align:center;" class="content-center">
           <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Outras informações:</label>
-            <textarea class=" border-2 rounded-lg border-slate-950 w-10/12 h-36" name="outrasInfos" id="" placeholder="outras informações"></textarea>
+            <textarea class=" border-2 rounded-lg border-slate-950 w-10/12 h-36" name="outrasInfos" id="" placeholder="outras informações" required></textarea>
           </div>
         </div>
       </div>
@@ -605,13 +603,60 @@ if ($submit) {
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">d. Outros documentos:</label>
             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="outrasDocumentos" type="file">
           <div class="mt-2">
-              <input type="submit" name="submit" value="SALVAR" class=" flex w-12/6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"/>
+          <input type="submit" name="submit" value="SALVAR" class=" flex w-12/6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"/>
           </div>
         </div>
       </div>  
     </div>
 
   </form>
+
+  <script>
+    const fields = document.querySelectorAll("[required]")
+
+function ValidateField(field) {
+    // logica para verificar se existem erros
+    function verifyErrors() {
+        let foundError = false;
+
+        for(let error in field.validity) {
+            // se não for customError
+            // então verifica se tem erro
+            if (field.validity[error] && !field.validity.valid ) {
+                foundError = error
+            }
+        }
+        return foundError;
+    }
+    return function() {
+
+        const error = verifyErrors()
+
+        if(error) {
+            field.style.borderColor = "red"
+        } else {
+            field.style.borderColor = "Lime "
+        }
+    }
+}
+
+
+function customValidation(event) {
+
+    const field = event.target
+    const validation = ValidateField(field)
+
+    validation()
+
+}
+
+for( field of fields ){
+    field.addEventListener("invalid", event => { 
+        customValidation(event)
+    })
+    field.addEventListener("blur", customValidation)
+}
+</script>
 
   <!-- script da navbar --> 
   <script src="/banco/src/navbar.js"></script>

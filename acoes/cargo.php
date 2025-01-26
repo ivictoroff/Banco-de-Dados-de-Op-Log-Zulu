@@ -8,14 +8,8 @@ $sql = "SELECT * FROM usuario WHERE usuario = '$usuario'";
 $result = $mysqli -> query($sql);
 while ($dados = $result->fetch_assoc()) {
     if ($dados['adm'] == "Administrador" || "Gerente"){
-        if ($dados['funcao'] === 'Emprego') {
-            header('Location: /banco/app/insercao/emprego.php');
-        }
-        if ($dados['funcao'] == 'Preparo') {
-            header('Location: /banco/app/insercao/preparo.php');
-        }
-        if ($dados['funcao'] == 'Transporte') {
-            header('Location: /banco/app/insercao/transporte.php');
+        if ($dados['funcao'] === 'Emprego' || $dados['funcao'] === 'Preparo' || $dados['funcao'] === 'Transporte') {
+            header('Location: /banco/app/insercao/operacao.php');
         }
     }
 }
