@@ -3,29 +3,29 @@ create database dbmat;
 use dbmat;
 
 create table usuario(
-uid  int PRIMARY KEY  auto_increment,
-pg varchar (255),
-usuario varchar (255),
-senha varchar (255),
-adm varchar (255),
-funcao varchar (255)
+    uid  int PRIMARY KEY  auto_increment,
+    pg varchar (255),
+    usuario varchar (255),
+    senha varchar (255),
+    adm varchar (255),
+    funcao varchar (255)
 );
 
 create table loglogin ( 
-usuario varchar (255),
-data datetime 
+    usuario varchar (255),
+    data datetime 
 );
 
 create table efetivo (
-eid  int PRIMARY KEY  auto_increment,
-participantes varchar(255),
-participantesEb BIGINT,
-participantesMb BIGINT,
-participantesFab BIGINT,
-participantesOs BIGINT,
-participantesGov BIGINT,
-participantesPv BIGINT,
-participantesCv BIGINT
+    eid  int PRIMARY KEY  auto_increment,
+    participantes varchar(255),
+    participantesEb BIGINT,
+    participantesMb BIGINT,
+    participantesFab BIGINT,
+    participantesOs BIGINT,
+    participantesGov BIGINT,
+    participantesPv BIGINT,
+    participantesCv BIGINT
 );
 
 create table operacao (
@@ -41,9 +41,9 @@ create table operacao (
 	tipoop varchar (255),
     inicioOp date ,
     fimOp date
-    );
+);
     
-    create table tipoOp (
+create table tipoOp (
 	tid  int PRIMARY KEY  auto_increment,
 	tipoOp varchar (225),
     acaoOuApoio varchar (225),
@@ -55,7 +55,7 @@ create table operacao (
     desManutencao varchar (255) ,
     desSuprimento varchar (255) ,
     desAviacao varchar (255) 
-    );
+);
     
 create table recursos (
 	rid  int PRIMARY KEY  auto_increment,
@@ -68,12 +68,18 @@ create table recursos (
 create table infos (
 	iid  int PRIMARY KEY  auto_increment,
 	outrasInfos varchar(255)
-    );
+);
     
-    create table anexos (
+create table anexos (
     aid int primary key  auto_increment,
     relatorioFinal varchar (255),
     relatorioComando varchar (255) ,
     fotos varchar (255),
     outrosDocumentos varchar (255)
-    );
+);
+create table logins(
+    lid int PRIMARY KEY  auto_increment,
+    usuario varchar(255),
+    operacao varchar(255),
+    data datetime
+);
