@@ -2,14 +2,15 @@
 session_start();
 
 $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
-
+    //SE ADMINISTRADOR EXISTIR
     if (isset($_POST['administrador'])) {
-
+        //UID RECEBE O POST UID
         $uid = $_POST["uid"];
+        //ADM RECEBE "ADMINISTRADOR"
         $adm = "Administrador";
-
+        //ATUALIZA NA TABELA USUARIO O ADM QUE FOR INFORMADO O ID
         $sql = "UPDATE usuario SET adm=:ADM  WHERE uid = :ID";
-
+        
         $stmt = $conn->prepare ($sql);
 
         $stmt -> bindParam(":ADM", $adm);
@@ -18,7 +19,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         $stmt->execute();
 
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
 
     }
     if (isset($_POST['gerente'])) {
@@ -36,7 +37,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         $stmt->execute();
 
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
 
     }
     if (isset($_POST['on'])) {
@@ -54,7 +55,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         $stmt->execute();
 
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
 
     }
     if (isset($_POST['Preparo'])) {
@@ -72,7 +73,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         $stmt->execute();
 
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
 
     }
     if (isset($_POST['Emprego'])) {
@@ -90,7 +91,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         $stmt->execute();
 
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
 
     }
     if (isset($_POST['Transporte'])) {
@@ -108,7 +109,7 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         $stmt->execute();
 
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
 
     }
     if (isset($_POST['Remover'])) {
@@ -126,11 +127,49 @@ $conn = new PDO ("mysql:dbname=dbmat;host=localhost", "root", "@160l0nc3t");
 
         $stmt->execute();
 
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
+
+    }
+    if (isset($_POST['ativar'])) {
+        //UID RECEBE O POST UID
+        $uid = $_POST["uid"];
+        //ADM RECEBE "ADMINISTRADOR"
+        $status = "Ativo";
+        //ATUALIZA NA TABELA USUARIO O ADM QUE FOR INFORMADO O ID
+        $sql = "UPDATE usuario SET status =:STATUS  WHERE uid = :ID";
+        
+        $stmt = $conn->prepare ($sql);
+
+        $stmt -> bindParam(":STATUS", $status);
+
+        $stmt -> bindParam(":ID", $uid);
+
+        $stmt->execute();
+
+        header ("location: /app/adm/adm.php");
+
+    }
+    if (isset($_POST['desativar'])) {
+        //UID RECEBE O POST UID
+        $uid = $_POST["uid"];
+        //ADM RECEBE "ADMINISTRADOR"
+        $status = "Desativado";
+        //ATUALIZA NA TABELA USUARIO O ADM QUE FOR INFORMADO O ID
+        $sql = "UPDATE usuario SET status =:STATUS  WHERE uid = :ID";
+        
+        $stmt = $conn->prepare ($sql);
+
+        $stmt -> bindParam(":STATUS", $status);
+
+        $stmt -> bindParam(":ID", $uid);
+
+        $stmt->execute();
+
+        header ("location: /app/adm/adm.php");
 
     }
     else {
-        header ("location: /banco/app/adm/adm.php");
+        header ("location: /app/adm/adm.php");
     }
 
 ?>
