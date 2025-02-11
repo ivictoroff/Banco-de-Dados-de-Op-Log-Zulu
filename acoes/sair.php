@@ -1,22 +1,11 @@
 <?php 
 
 session_start();
-
+//DESTROI INFORMAÇOES DA SESSAO 
 unset($_SESSION['user']);
 unset($_SESSION['pass']);
-
-header('Location: /banco/index.php');
+//DIRECIONA PARA O INDEX
+header('Location:/index.php');
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
