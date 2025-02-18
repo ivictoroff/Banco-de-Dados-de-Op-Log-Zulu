@@ -126,9 +126,11 @@ if ($submit) {
 <DOCTYPE html>
 <html> 
 <head>
-  
-  <title>colog</title>
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+ 
+  <link rel="shortcut icon" type="imagex/png" href="/img/colog.png">
+  <title>Colog</title>
   
   <style>
     #atual {
@@ -147,12 +149,12 @@ if ($submit) {
   </style>
 
 </head>
-<body>
+<body class="bg-white dark:bg-gray-800">
 
 <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
       <a href="#" class="flex items-center ps-1 mb-1">
-        <img src="/img/colog.png" class="h-3 me-2 sm:h-16" alt="Flowbite Logo" />
+        <img src="/img/colog.png" class="h-10 me-3 sm:h-20 center" alt="Logo" />
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">B D Op Log ZULU</span>
       </a>
       <ul class="space-y-2 font-medium">
@@ -382,14 +384,22 @@ if ($submit) {
     </div>
 
     <div class="conteudo" id="conteudo-5">
-    <div style="text-align:center;" class="content-center">
-      <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Outras informações:</label>
-          <input type="text" name="outrasInfos" value="<?php echo $dados5['outrasInfos']; ?>" class=" border-2 rounded-lg border-slate-950 w-10/12 h-36" name="outrasInfos" id="" placeholder="outras informações"></textarea>
-      </div>
+      <div class="sm:ml-64">
+          <div class="p-4 border-2 border-black-200 border-dashed rounded-lg dark:border-gray-700">
+            <div style="text-align:center;" class="content-center">   
+              <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observações:</label>
+              <input type="text" name="outrasInfos" value="<?php echo $dados5['outrasInfos']; ?>" class="block p-2.5 w-full text-sm text-gray-900 
+            bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
+            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
+            dark:focus:border-blue-500" name="outrasInfos" id="" placeholder="Observações..."></textarea>
+            </div>
+          </div>         
+      </div>          
     </div>
+
     <div class="mt-2">
-          <input type="submit" name="submit" value="SALVAR" class=" flex w-12/6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"/>
-      </div>
+      <input type="submit" name="submit" value="SALVAR" class=" flex w-12/6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"/>
+    </div>
     
   </form>
 

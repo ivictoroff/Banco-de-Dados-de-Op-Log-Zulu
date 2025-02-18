@@ -3,6 +3,7 @@
 // Carregar o Composer
 require './vendor/autoload.php';
 
+
 $array = $_POST['ids'];
 
 if (isset($_POST['teste'])){
@@ -11,7 +12,6 @@ if (isset($_POST['teste'])){
   else{
     header ('location: /banco/app/pesquisa/operacao.php');
   }
-  
   //var_dump($campos);
 
 // Referenciar o namespace Dompdf

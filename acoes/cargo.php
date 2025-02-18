@@ -21,19 +21,22 @@
 <!DOCTYPE html>
   <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+    
     <title>Document</title>
   
   </head>
-  <body>
+  <body class="bg-white dark:bg-gray-800">
   <!--BARRA LATERAL-->
     <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
       <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
         <!--LOGO-->
         <a href="#" class="flex items-center ps-1 mb-1">
-          <img src="/img/colog.png" class="h-10 me-2 sm:h-16" alt="Flowbite Logo" />
+          <img src="/img/colog.png" class="h-10 me-3 sm:h-20 center" alt="Logo" />
           <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">B D Op Log ZULU</span>
         </a>
         <ul class="space-y-2 font-medium">
@@ -103,8 +106,8 @@
     </aside>
 
   <div class="Content sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-          <p> <Strong>Não tem um cargo, contate um Administrador do sistema</p>
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-white-700">
+          <p class="text-gray-800 dark:text-white"> <Strong>Você não possui cargo. Contate um administrador !</p>
       </div>
   </div>
 

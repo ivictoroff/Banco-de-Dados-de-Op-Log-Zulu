@@ -30,14 +30,13 @@ if (mysqli_num_rows($result) < 1) {
 <DOCTYPE html>
 <html> 
 <head>
-
-  <title>Administrador</title>
-  
   <!--<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">-->
   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
-
-  <link rel="shortcut icon" type="imagex/png" href="/img/dmat.png">
+  
+  <title>Administrador</title>
+  <link rel="shortcut icon" type="imagex/png" href="/img/colog.png">
+  
   <style>
     #rodape {
       background-color: #f0f0f0;
@@ -50,13 +49,7 @@ if (mysqli_num_rows($result) < 1) {
     #atual {
       color: #f7b600;
     }
-    td {
-      background-color: #DFDFDF;
-      text-align:center;
-    }
-    tr {
-      background-color: #C3C3C3;
-    }
+  
     .conteudo {
       display: none;
     }
@@ -136,29 +129,33 @@ if (mysqli_num_rows($result) < 1) {
   <!-- inicio da tabela "acessos" --> 
   <div class="conteudo" id="conteudo-1">
     <div class="sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <table  class= "w-full text-center border border-slate-600">
-          <tr class="border border-slate-600">
-            <th class="border border-slate-600">Usuário </th>
-            <th class="border border-slate-600">Horário de Login</th>
-          </t>
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <table  class= "w-full text-center border border-slate-600">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">Usuário </th>
+                <th scope="col" class="px-6 py-3">Horário de Login</th>
+              </tr>
+            </thead>
+            <tbody class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <?php              
+                $sql_code = "SELECT * FROM loglogin ORDER BY data DESC" ;
+                $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+                while($dados = $sql_query->fetch_assoc()) {
+              ?>
 
-        <?php 
-        
-          $sql_code = "SELECT * FROM loglogin ORDER BY data DESC" ;
-          $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-          while($dados = $sql_query->fetch_assoc()) {
-            ?>
-            <tr>
-              <td class="border border-slate-600"><?php echo $dados['usuario'] ?></td>
-              <td class="border border-slate-600"><?php echo date_format(date_create_from_format('Y-m-d H:i:s', $dados["data"]), 'd/m/Y H:i:s'); ?></td>
-            </tr>
-            <?php
-            }
-            ?>
-          
+              <tr class="bg-white text-black border-b upper case dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white">
+                <th scope="row" class="px-6 py-4"><?php echo $dados['usuario'] ?></th>
+                <td class="px-6 py-4"><?php echo date_format(date_create_from_format('Y-m-d H:i:s', $dados["data"]), 'd/m/Y H:i:s'); ?></td>
+              </tr>
+
+              <?php
+              }
+              ?>
+            </tbody>
           </table>
-
+        </div>
       </div>
     </div>
   </div>
@@ -199,58 +196,64 @@ if (mysqli_num_rows($result) < 1) {
     <!-- tela de adm -->
 
     <div class="sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-      <table  class= " border border-slate-600">
-
-      <!-- inicio do cabecalho da tabela -->
-
-      <tr style="margin-right: 150px; " class="w-80 border border-slate-600">
-        <th class="w-80 border border-slate-600">ID</th>
-        <th class="w-80 border border-slate-600">P/G</th>
-        <th class="w-80 border border-slate-600">Nome de guerra</th>
-        <th class="w-80 border border-slate-600">Solicitação</th>
-      </tr>
-      <?php
-          $pesquisa = $mysqli->real_escape_string("on");
-          $sql_code = "SELECT * FROM usuario WHERE adm LIKE '%$pesquisa%'";
-          $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-            
-        if ($sql_query->num_rows == 0) {
-      ?>
-      <tr>
-          <td colspan="5">Nenhuma solicitação pendente...</td>
-      </tr>
-      <?php
-        } 
-        else {
-          while($dados = $sql_query->fetch_assoc()) {
-      ?>
-        <tr class=" border border-slate-600 ">
-        <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['uid']; ?></td>
-        <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['pg']; ?></td>
-        <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['usuario']; ?></td>
-        <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['adm']; ?></td>
-      </tr>
-  <?php
-      }
-    }
-  ?>
-  </table>
-  </div>
-  </div>
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">  
+        <table  class= "p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <!-- inicio do cabecalho da tabela -->
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">        
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <th class="w-80 border border-slate-600">ID</th>
+          <th class="w-80 border border-slate-600">P/G</th>
+          <th class="w-80 border border-slate-600">Nome de guerra</th>
+          <th class="w-80 border border-slate-600">Solicitação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+            $pesquisa = $mysqli->real_escape_string("on");
+            $sql_code = "SELECT * FROM usuario WHERE adm LIKE '%$pesquisa%'";
+            $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+              
+          if ($sql_query->num_rows == 0) {
+          ?>
+          <tr>
+            <td colspan="5" class="bg-gray-700 text-white text-x uppercase dark:text-gray-400 ">Nenhuma solicitação pendente.</td>
+          </tr>
+          <?php
+          } 
+          else {
+            while($dados = $sql_query->fetch_assoc()) {
+          ?>
+          <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['uid']; ?></td>
+            <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['pg']; ?></td>
+            <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['usuario']; ?></td>
+            <td class="w-80 px-6 py-4 border border-slate-600"><?php echo $dados['adm']; ?></td>
+          </tr>
+          <?php
+          }
+          }
+          ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
       <div class="sm:ml-64">
       <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
 
       <form action="">
           <input class="border-2 rounded-lg border-slate-800" name="busca" value="<?php if(isset($_GET['busca'])) echo $_GET['busca']; ?>" placeholder="Digite os termos de pesquisa" type="text">
-          <button class="border-2 rounded-lg border-slate-800" type="submit">Pesquisar</button>
-        </form> <br>
-
+          <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 
+            focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg 
+            dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 " type="submit">
+            Pesquisar
+          </button>
+      </form> <br>
+      
         <table  class= " border border-slate-600">
 
           <!-- inicio do cabecalho da tabela -->
-
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr style="margin-right: 150px;" class=" border border-slate-600">
             <th class="w-80 border border-slate-600">ID</th>
             <th class="w-80 border border-slate-600">Posto/Graduação</th>
@@ -259,6 +262,8 @@ if (mysqli_num_rows($result) < 1) {
             <th class="w-80 border border-slate-600">Função</th>
             <th class="w-80 border border-slate-600">Status</th>
           </tr>
+          </thead>
+          <tbody>
           <?php
               $pesquisa = $mysqli->real_escape_string(@$_GET['busca']);
               $sql_code = "SELECT * 
@@ -274,14 +279,14 @@ if (mysqli_num_rows($result) < 1) {
             if ($sql_query->num_rows == 0) {
           ?>
           <tr>
-              <td colspan="3">Nenhum resultado encontrado...</td>
+              <td class="bg-gray-700 text-white uppercase text-xs dark:text-gray-400"colspan="3">Nenhum resultado encontrado...</td>
           </tr>
           <?php
             } 
             else {
               while($dados = $sql_query->fetch_assoc()) {
           ?>
-          <tr class="border border-slate-600 ">
+          <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <td class="px-6 py-4 border border-slate-600"><?php echo $dados['uid']; ?> </td>
             <td class="px-6 py-4 border border-slate-600"><?php echo $dados['pg']; ?> </td>
             <td class="px-6 py-4 border border-slate-600"><?php echo $dados['usuario']; ?></td>
@@ -301,35 +306,36 @@ if (mysqli_num_rows($result) < 1) {
   </div>
 
       <!-- inicio da tabela --> 
-      <div class="conteudo" id="conteudo-3">
+  <div class="conteudo" id="conteudo-3">
     <div class="sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <table  class= "w-full text-center border border-slate-600">
-          <tr class="border border-slate-600">
-            <th class="border border-slate-600">Usuário </th>
-            <th class="border border-slate-600">Nome da Operação</th>
-            <th class="border border-slate-600">Horário da inserção</th>
-          </tr>
-
-        <?php 
-        
-        $sql_code = "SELECT * 
-            FROM logins ORDER BY data DESC";
-        $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-        while($dados = $sql_query->fetch_assoc()) {
-          ?>
-          <tr>
-            <td class="border border-slate-600"><?php echo $dados['usuario'] ?></td>
-            <td class="border border-slate-600"><?php echo $dados['operacao'] ?></td>
-            <td class="border border-slate-600"><?php echo date_format(date_create_from_format('Y-m-d H:i:s', $dados["data"]), 'd/m/Y H:i:s'); ?></td>
-          </tr>
-          <?php
-        }
-
-        ?>
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">        
+          <table  class= "w-full text-center border border-slate-600">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">  
+            <tr>
+              <th scope="col" class="px-6 py-3">Usuário </th>
+              <th scope="col" class="px-6 py-3">Nome da Operação</th>
+              <th scope="col" class="px-6 py-3">Horário da inserção</th>
+            </tr>
+          </thead>
+          <tbody class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <?php 
           
-          </table>
+          $sql_code = "SELECT * 
+              FROM logins ORDER BY data DESC";
+          $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+          while($dados = $sql_query->fetch_assoc()) {
+            ?>
+          <tr class="bg-white text-black border-b upper case dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white">
+            <th scope="row" class="px-6 py-4"><?php echo $dados['usuario'] ?></th>
+            <td class="px-6 py-4"><?php echo $dados['operacao'] ?></td>
+            <td class="px-6 py-4"><?php echo date_format(date_create_from_format('Y-m-d H:i:s', $dados["data"]), 'd/m/Y H:i:s'); ?></td>
+          </tr>
+            <?php
+          }
 
+          ?>
+          </tbody>    
+        </table>
       </div>
     </div>
   </div>

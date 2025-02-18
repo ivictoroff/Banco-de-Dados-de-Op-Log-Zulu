@@ -226,17 +226,13 @@ if ($submit) {
 ?>
 
 
-<DOCTYPE html>
-<html> 
+
+<DOCTYPE html> 
 <head>
-  <title>Inserção</title>
- 
   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
-   <!--
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="shortcut icon" href="../../img/dmat.ico" type="favicon.ico">
-  -->
+  <link rel="shortcut icon" type="imagex/png" href="/img/colog.png">
+  <title>Inserção</title>
   <style>
     #atual {
       color: #f7b600;
@@ -427,7 +423,12 @@ if ($submit) {
               <input id="input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="comandoOp" placeholder="Comando da Operação">
             <label for="comandoApoiado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">h. Organização apoiada:</label>
               <input id="input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="text" name="comandoApoiado" placeholder="Organização Apoiada">
-            <label for="ini" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">i. Início da Operação:</label>
+            <label for
+            
+            
+            
+            
+            ="ini" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">i. Início da Operação:</label>
               <input id="input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="date" id="ini" name="inicioOp">
             <label for="fimOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">j. Término da Operação:</label>
               <input id="input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required type="date" id="fim" name="fimOp">
@@ -554,9 +555,9 @@ if ($submit) {
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <label for="recebidos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a. Recebidos:</label>
             <div class="relative">
-          <!--<div class="absolute text-sm text-sm inset-y-0 start-0 top-0 flex items-center ps-0 pointer-events-none">
-                  <p>R$</p>
-              </div>-->
+          <div class="absolute text-sm text-sm inset-y-0 start-0 top-0 flex items-center ps-0 pointer-events-none">
+                  <p class="dark:text-white">R$</p>
+              </div>
               <input id="input" type="number" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-0 p-4  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="       Recebidos" name="recebidos" />
             </div>
           <label for="descentralizados" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">b. Descentralizados:</label>
@@ -581,10 +582,21 @@ if ($submit) {
     <!-- outras informacoes --> 
     <div class="conteudo" id="conteudo-5">
       <div class="sm:ml-64">
-        <div class="p-4 border-2 border-black-200 border-dashed rounded-lg dark:border-gray-700">
+        
+      
+      <div class="p-4 border-2 border-black-200 border-dashed rounded-lg dark:border-gray-700">
           <div style="text-align:center;" class="content-center">
-            <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Outras informações:</label>
-            <textarea id="input" class=" border-2 rounded-lg border-slate-950 w-full h-36 " name="outrasInfos" id="" placeholder="" required></textarea>
+            <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observações:</label>
+            <textarea id="input" rows="4" class="block p-2.5 w-full text-sm text-gray-900 
+            bg-gray-
+            50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
+            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
+            dark:focus:border-blue-500" placeholder="Observações..."></textarea>
+
+            <!--
+              <label for="operacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Outras informações:</label>
+              <textarea id="input" class=" border-2 rounded-lg border-slate-950 w-full h-36 " name="outrasInfos" id="" placeholder="" required></textarea>
+            -->
           </div>
         </div>
       </div>
@@ -662,4 +674,4 @@ for( field of fields ){
   <script src="/src/navbar.js"></script>
 
 </body>
-</html>  
+</DOCTYPEhtml>  
