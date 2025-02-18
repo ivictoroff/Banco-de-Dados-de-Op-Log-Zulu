@@ -12,7 +12,8 @@
   }
 
   // Conecta ao Banco de dados
-  require '/acoes/bd.php';
+  require 'C:/xampp/htdocs/acoes/bd.php';
+
 
 ?>
 
@@ -21,9 +22,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
- <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
- <title>Pesquisa</title>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+
+  <link rel="shortcut icon" type="imagex/png" href="/img/colog.png">  
+  <title>Pesquisa</title>
   <style>
     a.disabled {
       pointer-events: none;
@@ -32,12 +35,12 @@
     }
   </style>
 </head>
-<body>
+<body class="bg-white dark:bg-gray-800">
   <!--SIDE BAR -->
-<aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar"> 
+  <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar"> 
   <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
       <a href="#" class="flex items-center ps-1 mb-1">
-        <img src="/img/colog.png" class="h-10 me-2 sm:h-16" alt="Flowbite Logo" />
+        <img src="/img/colog.png" class="h-10 me-3 sm:h-20 center" alt="Logo" />
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">B D Op Log ZULU</span>
       </a>
       <ul class="space-y-2 font-medium">
@@ -92,6 +95,7 @@
   
 </body>
 </html>
+  <!--aba de pesquisa-->
 <div class="Content sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
       <?php
@@ -194,184 +198,343 @@
         }
 
         // Fecha a conexão
-        echo '1. Resumo' ;
+       
         ?>
-
-        <table class="w-full text-center">
-          <tr class="">
-            <th class=" border border-slate-600"> <?php echo "Total de operações: " . count($ids) ; ?></th>
-            <th class=" border border-slate-600"> <?php echo "Recursos Liquidados: " . $recursosLiquidados ; ?> </th>
-          </tr>
-          <tr>
-            <td class="border border-slate-600"> <?php echo "Efetivo empregado: " . $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros . "<br>"; ?>
-            <?php echo "Exército: " . $efetivoEx . "<br>"; ?>
-            <?php echo "Marinha: " . $efetivoMb . "<br>"; ?>
-            <?php echo "Força áerea: " . $efetivoFab . "<br>"; ?>
-            <?php echo "Outras forças: " . $efetivoOutros . "<br>"; ?></td>
-            <td class="border border-slate-600"><?php echo "Recursos Recebidos: " . $recursosRecebidos . "<br>";
-              echo "Recursos Devolvidos: " . $recursosDevolvidos . "<br>";
-              echo "Recursos Descentralizados: " . $recursosDescentralizados . "<br>";
-            ?></td>
-          </tr>
-        </table>
-        <?php
-
-        echo '<br>' . '2. Operações Relacionadas' . "<br>";
-
-        ?>
-
-        <table  class= "w-full text-center border border-slate-600">
-
-        <!-- inicio do cabecalho da tabela -->
-
-        <tr style="margin-right: 150px;" class=" border border-slate-600 ">
-          <th class="border border-slate-600">Operação</th>
-          <th class="border border-slate-600">Missão</th>
-          <th class="border border-slate-600">Estado</th>
-          <th class="border border-slate-600">Comando Militar de Área</th>
-          <th class="border border-slate-600">Região Militar</th>
-          <th class="border border-slate-600">Comando da Operação</th>
-          <th class="border border-slate-600">Comando Apoiado</th>
-          <th class="border border-slate-600">Inicio da Operação</th>
-          <th class="border border-slate-600">Fim da Operação</th> 
-          <th class="border border-slate-600">Completo</th>
-          <th class="border border-slate-600">Editar</th>
-        </tr>
-        <?php
-        foreach ($ids as $id){
-          $pesquisa = $mysqli->real_escape_string($id);
-          $sql_code = "SELECT * 
-            FROM operacao 
-            WHERE opid LIKE '%$pesquisa%'";
-          $sql_code2 = "SELECT * 
-            FROM efetivo 
-            WHERE eid LIKE '%$pesquisa%'";
-          $sql_code3 = "SELECT * 
-            FROM tipoOp 
-            WHERE tid LIKE '%$pesquisa%'";
-          $sql_code4 = "SELECT * 
-            FROM recursos 
-            WHERE rid LIKE '%$pesquisa%'";
-          $sql_code5 = "SELECT * 
-            FROM infos
-            WHERE iid LIKE '%$pesquisa%'";
-          $sql_code6 = "SELECT * 
-            FROM anexos
-            WHERE aid LIKE '%$pesquisa%'";
-          $sql_code7 = "SELECT * 
-            FROM usuario 
-            WHERE usuario ='$usuario' and adm ='administrador'";
+        <h1 class="block mb-2 font-size: 16px font-medium text-gray-900 dark:text-white" style="font-size: 36px;"> 1. Resumo:<h1>
         
-          $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
-          $sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
-          $sql_query3 = $mysqli->query($sql_code3) or die("ERRO ao consultar! " . $mysqli->error); 
-          $sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
-          $sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
-          $sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
-          while($dados = $sql_query->fetch_assoc()) {
-            while ($dados2 = $sql_query2->fetch_assoc()) {
-              while ($dados3 = $sql_query3->fetch_assoc()) {
-                while ($dados4 = $sql_query4->fetch_assoc()) {
-                  while ($dados5 = $sql_query5->fetch_assoc()) {
-                    while ($dados6 = $sql_query6->fetch_assoc()) {
-                    ?>
+<!--inicio tabela-->
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <!--tabela-->
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <!--colunas-->
+        <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>              
+                <th scope="col" class="px-6 py-3">
+                    <?php echo "TOTAL OPERAÇÕES: ";?>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <?php echo count($ids);?>
+                </th>  
+            </tr>
+        </thead>
+        <!--linhas-->
+        <tbody>
+            <!--linha 1-->
+            <tr class="bg-white text-xs border-b uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <!--titulo-->
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                    <?php echo "Efetivo empregado: "; ?>
+                </th>  
+                <!--valores-->     
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <?php 
+                  $efetivoTotal = $efetivoEx+ $efetivoMb + $efetivoFab +$efetivoOutros ;
+                  $efetivoFormatado = number_format($efetivoTotal,0,",","." );
+                  echo  $efetivoFormatado;?>
+                </th>
+            </tr>
+            
+            <!--2 linha-->
+            <tr class="bg-white text-xs border-b uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <!--titulo-->
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                  <?php echo "Exécito: "; ?>
+              </th>  
+              <!--valores-->     
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <?php 
+                $efetivoFormatado = number_format($efetivoEx,0,",","." );
+                echo  $efetivoFormatado;?>
+              </th>  
+            </tr>
+            <!--3 linha-->
+            <tr class="bg-white border-b text-xs uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+               <!--titulo-->
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                  <?php echo "Marinha: "; ?>
+              </th>  
+              <!--valores-->     
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <?php 
+                $efetivoFormatado = number_format($efetivoMb,0,",","." );
+                echo  $efetivoFormatado;?>
+              </th> 
+              
+            </tr>
+            <!--4 linha-->
+            <tr class="bg-white border-b text-xs uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+               <!--titulo-->
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                  <?php echo "Força Áerea: "; ?>
+              </th>  
+              <!--valores-->     
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <?php 
+                $efetivoFormatado = number_format($efetivoFab,0,",","." );
+                echo  $efetivoFormatado;?>
+              </th> 
+            </tr>
+            <!--5 linha-->
+            <tr class="bg-white border-b text-xs uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <!--titulo-->
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                  <?php echo "Outras Forças: "; ?>
+              </th>  
+              <!--valores-->     
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <?php 
+                $efetivoFormatado = number_format($efetivoOutros,0,",","." );
+                echo  $efetivoFormatado;?>
+              </th>   
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--INICIO 2 TABELA-->
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <!--tabela-->
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <!--colunas-->
+        <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>              
+                <th scope="col" class="px-6 py-3">
+                    <?php echo "Recursos Liquidados: ";?>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  <?php 
+                  $recursosFormatado = number_format($recursosLiquidados,0,",","." );
+                  echo  $recursosFormatado;?>
+                </th>  
+            </tr>
+        </thead>
+        <!--linhas-->
+        <tbody>
+            <!--linha 1-->
+            <tr class="bg-white text-xs border-b uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <!--titulo-->
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                    <?php echo "RECURSOS RECEBIDOS: "; ?>
+                </th>  
+                <!--valores-->     
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <?php 
+                  $efetivoFormatado = number_format($recursosRecebidos,0,",","." );
+                  echo  $efetivoFormatado;?>
+                </th>
+            </tr>
+            
+            <!--2 linha-->
+            <tr class="bg-white text-xs border-b uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <!--titulo-->
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                  <?php echo "RECURSOS DEVOLVIDOS: "; ?>
+              </th>  
+              <!--valores-->     
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <?php 
+                $efetivoFormatado = number_format($recursosDevolvidos,0,",","." );
+                echo  $efetivoFormatado;?>
+              </th>  
+            </tr>
+            <!--3 linha-->
+            <tr class="bg-white border-b text-xs uppercase dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+               <!--titulo-->
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                  <?php echo "Recursos Descentralizados: "; ?>
+              </th>  
+              <!--valores-->     
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <?php 
+                $efetivoFormatado = number_format( $recursosDescentralizados,0,",","." );
+                echo  $efetivoFormatado;?>
+              </th> 
+        
+            </tr>
+           
+        </tbody>
+    </table>
+</div>
 
-                    <form action="/src/pdf/gerar_pdf.php" method="post">
-                    <tr class="border border-slate-600">
-                      <?php
-                      foreach ($ids as $chave => $valor) { ?>
-                        <input type="hidden" name="ids[<?= $chave ?>]" value="<?= $valor ?>">
-                      <?php } ?>
-                      <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['missao']; ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['estado']; ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['cma']; ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['rm']; ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
-                      <td class="px-6 py-4 border border-slate-600 "><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
-                      <td class="px-6 py-4"><a style="cursor: pointer; " class="" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                        </svg> </a> </td>
-                    </tr>
-                  <?php
-                    }
-                  }
-                }
+<h1 class="block mb-2 font-size: 16px font-medium text-gray-900 dark:text-white" style="font-size: 36px;"> 2. Operações Relacionadas:<h1>
+
+<!--inicio tabela de pesquisa-->
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <!--inicio tabela de pesquisa-->
+  <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+  <!-- inicio do cabecalho da tabela -->
+    <tr class="uppercase">
+      <th scope="col" class="px-6 py-3">
+      Operação
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Missão
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Estado
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Comando Militar de Área
+      </th>
+      
+      <th scope="col" class="px-6 py-3">
+      Região Militar
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Comando da Operação
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Comando Apoiado
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Inicio da Operação
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Fim da Operação
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Completo
+      </th>
+      <th scope="col" class="px-6 py-3">
+      Editar
+      </th>
+    </tr>
+  <?php
+    foreach ($ids as $id){
+    $pesquisa = $mysqli->real_escape_string($id);
+        $sql_code = "SELECT * 
+          FROM operacao 
+          WHERE opid LIKE '%$pesquisa%'";
+        $sql_code2 = "SELECT * 
+          FROM efetivo 
+          WHERE eid LIKE '%$pesquisa%'";
+        $sql_code3 = "SELECT * 
+          FROM tipoOp 
+          WHERE tid LIKE '%$pesquisa%'";
+        $sql_code4 = "SELECT * 
+          FROM recursos 
+          WHERE rid LIKE '%$pesquisa%'";
+        $sql_code5 = "SELECT * 
+          FROM infos
+          WHERE iid LIKE '%$pesquisa%'";
+        $sql_code6 = "SELECT * 
+          FROM anexos
+          WHERE aid LIKE '%$pesquisa%'";
+        $sql_code7 = "SELECT * 
+          FROM usuario 
+          WHERE usuario ='$usuario' and adm ='administrador'";
+
+        $sql_query = $mysqli->query($sql_code) or die("ERRO ao consultar! " . $mysqli->error); 
+        $sql_query2 = $mysqli->query($sql_code2) or die("ERRO ao consultar! " . $mysqli->error); 
+        $sql_query3 = $mysqli->query($sql_code3) or die("ERRO ao consultar! " . $mysqli->error); 
+        $sql_query4 = $mysqli->query($sql_code4) or die("ERRO ao consultar! " . $mysqli->error); 
+        $sql_query5 = $mysqli->query($sql_code5) or die("ERRO ao consultar! " . $mysqli->error); 
+        $sql_query6 = $mysqli->query($sql_code6) or die("ERRO ao consultar! " . $mysqli->error); 
+        while($dados = $sql_query->fetch_assoc()) {
+          while ($dados2 = $sql_query2->fetch_assoc()) {
+            while ($dados3 = $sql_query3->fetch_assoc()) {
+              while ($dados4 = $sql_query4->fetch_assoc()) {
+                while ($dados5 = $sql_query5->fetch_assoc()) {
+                  while ($dados6 = $sql_query6->fetch_assoc()) {
+    ?>
+
+    <form action="/src/pdf/gerar_pdf.php" method="post">
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+        <?php
+          foreach ($ids as $chave => $valor) { 
+        ?>
+        <input type="hidden" name="ids[<?= $chave ?>]" value="<?= $valor ?>">
+        <?php } ?>
+
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $dados['operacao']; ?></th>
+          <td class="px-6 py-4"><?php echo $dados['missao']; ?></td>
+          <td class="px-6 py-4"><?php echo $dados['estado']; ?></td>
+          <td class="px-6 py-4"><?php echo $dados['cma']; ?></td>
+          <td class="px-6 py-4"><?php echo $dados['rm']; ?></td>
+          <td class="px-6 py-4"><?php echo $dados['comandoOp']; ?></td>
+          <td class="px-6 py-4"><?php echo $dados['comandoApoio']; ?></td>
+          <td class="px-6 py-4"><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
+          <td class="px-6 py-4"><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
+          <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
+          <td class="px-6 py-4"><a style="cursor: pointer; " class="" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+            </svg> </a> </td>
+      </tr>
+            <?php
               }
             }
           }
         }
+      }
+    }
+  }
 
-        $mysqli->close();
-        ?>
-        <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Gerar PDF</button>
-         
-          <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 inline-flex items-center focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-1 text-center me-1 mb-1 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" type="button"> Selecione os campos <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-          </svg>
-          </button>
+          $mysqli->close();
+          ?>
+          <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Gerar PDF</button>
+          
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 inline-flex items-center focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-1 text-center me-1 mb-1 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" type="button"> Selecione os campos <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+            </button>
 
-          <!-- Dropdown menu -->
-          <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-              <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center ps-3">
-                  <input id="operacao" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="operacao">
-                      <label for="operacao" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Operação</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center ps-3">
-                  <input id="efetivo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="efetivo">
-                      <label for="efetivo" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Efetivo</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center ps-3">
-                  <input id="tipoop" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="tipoop">
-                      <label for="tipoop" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipos de Operações</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center ps-3">
-                  <input id="recurso" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="recurso">
-                      <label for="recurso" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Recursos</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center ps-3">
-                  <input id="resumo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="resumo">
-                      <label for="resumo" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Resumo</label>
-                  </div>
-              </li>
-              </ul>
-          </div>
+            <!-- Dropdown menu -->
+            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                    <input id="operacao" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="operacao">
+                        <label for="operacao" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Operação</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                    <input id="efetivo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="efetivo">
+                        <label for="efetivo" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Efetivo</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                    <input id="tipoop" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="tipoop">
+                        <label for="tipoop" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipos de Operações</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                    <input id="recurso" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="recurso">
+                        <label for="recurso" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Recursos</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                    <input id="resumo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="teste[]" value="resumo">
+                        <label for="resumo" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Resumo</label>
+                    </div>
+                </li>
+                </ul>
+            </div>
 
-        </form>
-        <?php
-        }else {
-          echo "Nenhum resultado encontrado.";
+          </form>
+          <?php
+          }else {
+            echo "Nenhum resultado encontrado.";
+          }
+          ?>
+
+          <script src="/src/pdf.js"></script>
+
+          
+          <!-- script da pesquisa pelo id da query --> 
+
+          <script>
+        function abrirPesquisa(id) {
+          window.open('/app/pesquisa/completo.php?id=' + id, '_blank');
         }
-        ?>
+        function abrirEdicao(id) {
+          window.open('/app/insercao/update.php?id=' + id, '_blank');
+        }
 
-        <script src="/src/pdf.js"></script>
-
-        
-        <!-- script da pesquisa pelo id da query --> 
-
-        <script>
-      function abrirPesquisa(id) {
-        window.open('/app/pesquisa/completo.php?id=' + id, '_blank');
-      }
-      function abrirEdicao(id) {
-        window.open('/app/insercao/update.php?id=' + id, '_blank');
-      }
-
-    </script>
-    </div>
+      </script>
+      </table>
 </div>

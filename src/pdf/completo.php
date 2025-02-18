@@ -37,8 +37,8 @@ include_once '../../acoes/bd.php';
 <table>
     <tr style="margin-right: 150px;" class="border border-slate-600">
       <th class="border border-slate-600">Operação</th>
-      <th class=" border border-slate-600">Missão</th>
       <th class=" border border-slate-600">Estado</th>
+      <th class=" border border-slate-600">Missão</th>
       <th class=" border border-slate-600">Comando Militar de Área</th>
       <th class=" border border-slate-600">Região Militar</th>
       <th class=" border border-slate-600">Comando da Operação</th>
@@ -113,7 +113,7 @@ include_once '../../acoes/bd.php';
       <th class=" border border-slate-600 bg-blend-darken">Participantes de outras Âgencias Governamentais</th>
       <th class=" border border-slate-600 bg-blend-darken">Participantes de outras Âgencias Privadas</th>
       <th class=" border border-slate-600 bg-blend-darken">Participantes de Organizações Não-Governamentais</th>
-      <th class=" border border-slate-600 bg-blend-darken">total de Participantes</th>
+      <th class=" border border-slate-600 bg-blend-darken">Total de Participantes</th>
     </tr>
     <tr>
       <td class="px-6 py-4 border border-slate-600 "><?php echo $dados2['participantes']; ?></td>
@@ -136,7 +136,7 @@ include_once '../../acoes/bd.php';
     </tr>
     <tr style="margin-right: 150px;">
       <th class="border border-slate-600 bg-blend-darken">Transporte</th>
-      <th class="border border-slate-600 bg-blend-darken">manutenção</th>
+      <th class="border border-slate-600 bg-blend-darken">Manutenção</th>
       <th class="border border-slate-600 bg-blend-darken">Suprimento</th>
       <th class="border border-slate-600 bg-blend-darken">Aviação</th>
     </tr>

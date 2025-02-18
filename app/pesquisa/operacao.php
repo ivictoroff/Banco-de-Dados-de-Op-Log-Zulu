@@ -23,7 +23,8 @@ else {
     <!--<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />-->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
-
+    
+    <link rel="shortcut icon" type="imagex/png" href="/img/colog.png">
     <title>Pesquisa</title>
     <style>
     #rodape {
@@ -37,13 +38,7 @@ else {
     #atual {
       color: #f7b600;
     }
-    td {
-      background-color: #DFDFDF;
-      text-align:center;
-    }
-    tr {
-      background-color: #C3C3C3;
-    }
+   
     .conteudo {
       display: none;
     }
@@ -53,68 +48,6 @@ else {
   </style> 
 </head>
 <body class="bg-white dark:bg-gray-800">
-
-
-
-
-<!--
-<nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-        
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Banco de Dados Op Log ZULU</span>
-    </a>
-    <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
-        </li>
-        <li>
-            <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Dropdown <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-  </svg></button>
-             Dropdown menu 
-            <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                  </li>
-                </ul>
-                <div class="py-1">
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-                </div>
-            </div>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-            -->
-
-
-
-
   <!--BARRA LATERAL-->
 <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
   <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
@@ -170,9 +103,6 @@ else {
             </a>
          </li>
          <li>
-            <br>
-            <br>           
-
             <a href="/acoes/sair.php" class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 16">
                 <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
@@ -228,7 +158,7 @@ else {
               </select>
 
             <label for="missao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">d. Missão:</label>
-              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="missao" placeholder="missão">
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="missao" placeholder="Missão">
               
             <label for="cma" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">e. Comando Militar de Área:</label>
               <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="cma" name="cma" placeholder="comando militar de area">
@@ -261,7 +191,7 @@ else {
               </select>
 
             <label for="ComandoOp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">g. Comando da Operação:</label>
-              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="comandoOp" placeholder="comando da operação">
+              <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="comandoOp" placeholder="Comando da operação">
             
             <label for="comandoApoiado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">h. Organização apoiada:</label>
               <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="comandoApoio" placeholder="Organização apoiada">
@@ -289,27 +219,29 @@ else {
   <!-- script da navbar --> 
   <script src="/src/navbar.js"></script>
 
+
   <!-- inicio da tabela --> 
   <div class="conteudo" id="conteudo-2">
     <div class="sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <table  class= "w-full text-center border border-slate-600">
-
+      <div class="relative overflow-x-auto">
+        <table  class= "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <!-- inicio do cabecalho da tabela -->
-
-          <tr style="margin-right: 150px;" class=" border border-slate-600">
-            <th class="border border-slate-600">Operação</th>
-            <th class="border border-slate-600">Missão</th>
-            <th class="border border-slate-600">Estado</th>
-            <th class="border border-slate-600">Comando Militar de Área</th>
-            <th class="border border-slate-600">Região Militar</th>
-            <th class="border border-slate-600">Comando da Operação</th>
-            <th class="border border-slate-600">Comando Apoiado</th>
-            <th class="border border-slate-600">Inicio da Operação</th>
-            <th class="border border-slate-600">Fim da Operação</th> 
-            <th class="border border-slate-600">Completo</th>
-            <th class="border border-slate-600">Editar</th>
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3">Operação</th>
+            <th scope="col" class="px-6 py-3">Missão</th>
+            <th scope="col" class="px-6 py-3">Estado</th>
+            <th scope="col" class="px-6 py-3">Comando Militar de Área</th>
+            <th scope="col" class="px-6 py-3">Região Militar</th>
+            <th scope="col" class="px-6 py-3">Comando da Operação</th>
+            <th scope="col" class="px-6 py-3">Comando Apoiado</th>
+            <th scope="col" class="px-6 py-3">Inicio da Operação</th>
+            <th scope="col" class="px-6 py-3">Fim da Operação</th> 
+            <th scope="col" class="px-6 py-3">Completo</th>
+            <th scope="col" class="px-6 py-3">Editar</th>
           </tr>
+          </thead>
+          <tbody>
           <?php
               $pesquisa = $mysqli->real_escape_string($usuario);
               $sql_code = "SELECT * 
@@ -329,16 +261,16 @@ else {
               while($dados = $sql_query->fetch_assoc()) {
           ?>
           <form action="#" method="post">
-          <tr class=" border border-slate-600 ">
-            <td class="px-6 py-4 border border-slate-600"><?php echo $dados['operacao']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['missao']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['estado']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['cma']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['rm']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoOp']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo $dados['comandoApoio']; ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
-            <td class="px-6 py-4 border border-slate-600 "><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
+          <tr class=" bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 ">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $dados['operacao']; ?></th>
+            <td class="px-6 py-4"><?php echo $dados['missao']; ?></td>
+            <td class="px-6 py-4"><?php echo $dados['estado']; ?></td>
+            <td class="px-6 py-4"><?php echo $dados['cma']; ?></td>
+            <td class="px-6 py-4"><?php echo $dados['rm']; ?></td>
+            <td class="px-6 py-4"><?php echo $dados['comandoOp']; ?></td>
+            <td class="px-6 py-4"><?php echo $dados['comandoApoio']; ?></td>
+            <td class="px-6 py-4"><?php echo date_format(date_create_from_format('Y-m-d', $dados["inicioOp"]), 'd/m/Y'); ?></td>
+            <td class="px-6 py-4"><?php echo date_format(date_create_from_format('Y-m-d', $dados["fimOp"]), 'd/m/Y'); ?></td>
             <td class="px-6 py-4"><a style="cursor: pointer;" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirPesquisa(<?php echo $dados['opid']; ?>)" > Abrir </a> </td>
             <td class="px-6 py-4"><a style="cursor: pointer; " class="content-center font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="abrirEdicao(<?php echo $dados['opid']; ?>)" > Editar </a> </td>
           </tr>
@@ -347,7 +279,7 @@ else {
             }
           ?>
           </form>
-        </table>
+        </tbody>
       </div>
     </div>
   </div>
